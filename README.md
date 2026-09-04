@@ -33,14 +33,26 @@ https://claude.ai/code/artifact/5311e2fe-2b68-449e-857b-2321f3fe6ea6
 
 GitHub Pages serves this repo from the `main` branch, root folder. `index.html` must stay at the repository root under that exact name for the site to resolve.
 
+### Search indexing
+
+`robots.txt` currently blocks all crawlers. The `github.io` address is a staging
+URL, and letting it be indexed would put a near-duplicate of the Cupco marketing
+page into search results, competing with `cupco.com.au`.
+
+This is deliberate and temporary — see the switchover checklist below.
+
 ### Custom domain (not yet active)
 
-The site is intended to live at `new.cupco.com.au`. Two things are needed to switch it over:
+The site is intended to live at `new.cupco.com.au`. To switch it over, in this order:
 
 1. Add a DNS `CNAME` record for `new` pointing at `laithjammal.github.io`, at whoever manages `cupco.com.au` DNS.
-2. Add a `CNAME` file at the repository root containing exactly `new.cupco.com.au`.
+2. Wait for it to resolve.
+3. Add a `CNAME` file at the repository root containing exactly `new.cupco.com.au`.
+4. **Remove or relax `robots.txt`**, or the live site will stay invisible to search engines.
 
-Do them in that order. If the `CNAME` file is present before DNS resolves, GitHub redirects the `github.io` URL to the custom domain and the site becomes unreachable at both addresses until the record propagates.
+Order matters for steps 1–3: if the `CNAME` file is present before DNS resolves, GitHub redirects the `github.io` URL to the custom domain and the site becomes unreachable at both addresses until the record propagates.
+
+Step 4 is the easy one to forget. A launched site that nobody can find on Google is a silent failure — it looks fine to anyone who visits directly.
 
 ## Notes
 

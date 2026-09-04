@@ -1,0 +1,12 @@
+# TEMPORARY — preview deployment only.
+#
+# This site is currently served from laithjammal.github.io/cupco-website,
+# which is a staging URL, not the canonical home for this page. Allowing it
+# to be indexed would put a near-duplicate of the Cupco marketing page into
+# Google's index, competing with cupco.com.au.
+#
+# REMOVE OR REPLACE THIS FILE when the site moves to new.cupco.com.au,
+# otherwise the real site will stay invisible to search engines.
+
+User-agent: *
+Disallow: /
