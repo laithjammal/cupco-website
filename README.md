@@ -32,13 +32,15 @@ Form controls are raised to 16px under 720px wide. iOS Safari zooms the viewport
 
 Below 720px the layout diverges from desktop in a few deliberate ways, all confined to a single media query at the end of the stylesheet:
 
-- **Hero cups.** The hero photo is 2192x941. Cover-cropping it over the full hero height leaves a slice roughly 14% of the image wide — far too narrow to contain the three cups, which span about 37%. Rather than fight that, phones get `.hero-cups`: a crop of the same photo placed in the flow under the CTAs. The full-bleed photo stays as background atmosphere.
+- **Hero cups.** `.hero-cups` carries a crop of the hero photo centred on the three cups. On phones it sits absolutely behind `.hero-copy`, heavily blurred and at low opacity, as a wash rather than a distinct image. It is scaled slightly past its box so the blur's soft edge falls outside, and clipped so it cannot bleed past the hero.
 - **Wall comparison.** The source is one wide image with both cups side by side, so its labels are unreadable at this width. `.wall-compare-stack` carries the two halves split either side of the "VS" badge and stacks them, roughly doubling their rendered size. Desktop still uses the single original.
 - **Feature strip.** "Sydney Made" is fifth of five in a two-column grid, so it spans the full row instead of orphaning.
 - **Process steps and stats** are centred two-by-two. Their icons are `display:block`, so centring needs auto margins, not `text-align`.
 - **The black cup illustration** (`.power-illustration`) is hidden.
 
-Two sections had their padding moved off inline `style` attributes into the stylesheet. Inline styles outrank every selector, so per-breakpoint adjustment was otherwise impossible without `!important`. Desktop values are unchanged.
+The closing headline is capped at 1.4rem on phones — the largest size that still breaks over two even lines at 360px, the narrowest common width. At 1.45rem it drops to three ragged lines.
+
+Four sections had their padding moved off inline `style` attributes into the stylesheet. Inline styles outrank every selector, so per-breakpoint adjustment was otherwise impossible without `!important`. Desktop values are unchanged.
 
 ## Structure
 

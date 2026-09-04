@@ -135,6 +135,8 @@
   /* Moved off inline style attributes so breakpoints can override them. */
   #why-cupco{padding-bottom:48px;}
   #process{padding-top:48px;padding-bottom:56px;}
+  #sizes{padding-top:20px;padding-bottom:56px;}
+  #products{padding-top:56px;padding-bottom:60px;}
 
   .eyebrow{
     display:flex;align-items:center;gap:9px;font-size:.78rem;font-weight:700;letter-spacing:.14em;
@@ -593,11 +595,40 @@
        the full hero height crops to a slice far too narrow to contain them,
        so anchor the photo to the bottom at a height whose aspect ratio can
        actually hold the group, and centre the crop on it. */
-    /* The photo stays full-bleed atmosphere; the cups themselves are carried
-       by .hero-cups below, because at this width a cover-crop of a 2192x941
-       image over the full hero height is far too narrow to hold the group. */
-    .hero-cups{ display:block; margin-top:30px; }
-    .hero-inner{ padding-bottom:36px; }
+    /* The cups sit behind the hero copy as a soft wash rather than a distinct
+       image. Scaled up so the blur's soft edge falls outside the box, and
+       clipped so it cannot bleed past the hero. */
+    .hero-cups{
+      display:block; position:absolute; inset:0;
+      z-index:0; overflow:hidden; pointer-events:none;
+    }
+    .hero-cups img{
+      width:100%; height:100%;
+      object-fit:cover; object-position:58% 50%;
+      transform:scale(1.12);
+      filter:blur(26px);
+      opacity:.34;
+    }
+    .hero-copy{ position:relative; z-index:1; }
+    .hero-inner{ padding-bottom:64px; }
+
+    /* "Sydney Made" now spans the row, so centre it within that row. */
+    .feature-grid > .feature-item:nth-child(5){ justify-content:center; text-align:center; }
+
+    /* Close the gap between the wall comparison and "The power of the cup". */
+    .wall-compare-stack{ margin-bottom:10px; }
+    #sizes{ padding-bottom:22px; }
+    #products{ padding-top:26px; }
+
+    /* Close the gap between the testimonials and the closing CTA, and give the
+       closing headline a less ragged wrap: the stock line-height of 1.0 is too
+       tight once it breaks over several lines. */
+    .testimonial-section{ padding-bottom:22px; }
+    .final-cta{ padding-top:26px; }
+    /* 1.4rem is the largest size that still breaks over two even lines at
+       360px, the narrowest common phone; 1.45rem drops to three there. */
+    .final-cta h2{ font-size:1.4rem; line-height:1.16; max-width:none; }
+    .final-cta p{ font-size:1rem; line-height:1.55; text-wrap:pretty; margin-top:12px; }
 
     /* "Sydney Made" is the fifth of five in a two-column grid, so it orphans
        on a row of its own. Let it span the full width instead. */
@@ -884,7 +915,7 @@
 </section>
 
 <!-- SIZES & WALL TYPES -->
-<section id="sizes" style="padding-top:20px;padding-bottom:56px;">
+<section id="sizes">
   <div class="wrap">
     <div class="section-head" style="margin:0 auto 44px auto;text-align:center;max-width:640px;">
       <h2>Any Size. Any Design.</h2>
@@ -920,7 +951,7 @@
 </section>
 
 <!-- POWER OF THE CUP -->
-<section id="products" style="background:var(--bg-1);padding-top:56px;padding-bottom:60px;position:relative;overflow:hidden;">
+<section id="products" style="background:var(--bg-1);position:relative;overflow:hidden;">
   <svg class="bg-cup" data-speed="0.55" data-rot="-5" aria-hidden="true" style="top:460px;right:1%;" width="90" height="112" viewBox="0 0 24 30" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 6h16l-2 20a2 2 0 0 1-2 1.8H8a2 2 0 0 1-2-1.8L4 6Z"/><ellipse cx="12" cy="6" rx="8" ry="2"/></svg>
   <div class="wrap">
     <div class="power-grid">
