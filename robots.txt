@@ -1,12 +1,19 @@
-# TEMPORARY — preview deployment only.
+# Ad landing page for new.cupco.com.au.
 #
-# This site is currently served from laithjammal.github.io/cupco-website,
-# which is a staging URL, not the canonical home for this page. Allowing it
-# to be indexed would put a near-duplicate of the Cupco marketing page into
-# Google's index, competing with cupco.com.au.
+# Crawling is ALLOWED on purpose. The page carries a <meta name="robots"
+# content="noindex"> tag to keep it out of organic search results so it does
+# not compete with cupco.com.au. Google can only obey that tag if it is
+# allowed to fetch the page and read it — blocking crawlers here would hide
+# the noindex and let the bare URL get indexed anyway.
 #
-# REMOVE OR REPLACE THIS FILE when the site moves to new.cupco.com.au,
-# otherwise the real site will stay invisible to search engines.
+# AdsBot-Google is named explicitly so Google Ads can always reach the page
+# for landing-page quality checks.
 
 User-agent: *
-Disallow: /
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
