@@ -4,13 +4,11 @@ Standalone landing page for **Cupco**, a Sydney-based custom paper cup manufactu
 
 ## Live page
 
-Currently published at:
+Published via GitHub Pages on a custom domain:
 
-https://laithjammal.github.io/cupco-website/
+**https://new.cupco.com.au**
 
-Intended home once DNS is in place:
-
-**https://new.cupco.com.au** — see [Custom domain](#custom-domain-not-yet-active).
+`laithjammal.github.io/cupco-website` redirects here.
 
 The page also exists as a Claude Artifact, which is where design edits happen:
 
@@ -18,7 +16,7 @@ https://claude.ai/code/artifact/5311e2fe-2b68-449e-857b-2321f3fe6ea6
 
 ## About this repo
 
-`index.html` is a single self-contained HTML file (inline CSS and JS, no build step, images base64-embedded — hence ~2.5 MB). No build tools, no dependencies. Open it directly in a browser to preview.
+`index.html` is a single self-contained HTML file (inline CSS and JS, no build step, images base64-embedded — hence ~2.8 MB). No build tools, no dependencies. Open it directly in a browser to preview.
 
 ## Mobile
 
@@ -115,20 +113,13 @@ Those two are not in conflict — they are the only combination that works. Goog
 
 Google Ads is unaffected regardless: `AdsBot-Google` ignores `User-agent: *` rules by design, so landing-page quality checks always get through.
 
-### Custom domain (not yet active)
+### Custom domain
 
-Target: `new.cupco.com.au`. DNS for `cupco.com.au` is managed by **Wix** (`ns2.wixdns.net`, `ns3.wixdns.net`), so the record is added in the Wix dashboard, not at a registrar.
+The site serves from `new.cupco.com.au`, pinned by the `CNAME` file at the repository root. DNS for `cupco.com.au` is managed by **Wix** (`ns2.wixdns.net`, `ns3.wixdns.net`); the record is a `CNAME` on host `new` pointing at `laithjammal.github.io`.
 
-In this order:
+Deleting or renaming the `CNAME` file reverts the site to `laithjammal.github.io/cupco-website`.
 
-1. In Wix: **Domains → cupco.com.au → DNS Records**, add a `CNAME` — host `new`, value `laithjammal.github.io`.
-2. Wait for it to resolve (usually minutes; allow a few hours).
-3. Add a `CNAME` file at the repository root containing exactly `new.cupco.com.au`.
-4. In the repo's **Settings → Pages**, confirm the custom domain is detected and tick **Enforce HTTPS** once the certificate is issued.
-
-Order matters. If the `CNAME` file lands before DNS resolves, GitHub redirects the `github.io` URL to the custom domain and the site is unreachable at both addresses until the record propagates.
-
-The indexing setup above needs no changes at switchover — `robots.txt` becomes domain-root and stays correct.
+Because the site now sits at a domain root, `robots.txt` is the effective crawl control rather than inert — which is exactly why it allows crawling. See Search indexing above.
 
 ## Testing
 
