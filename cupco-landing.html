@@ -1,0 +1,1098 @@
+<title>Cupco Cup Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&display=swap">
+<style>
+/* ============ tokens: kraft board + flexo ink ============ */
+:root{
+  --paper:#F1EFE9; --surface:#FBFAF6; --surface-2:#E6E3DA; --rule:#D6D2C6; --rule-2:#BEB9A9;
+  --ink:#15170F; --ink-2:#4E5145; --ink-3:#807F71;
+  --kraft:#C9A87C; --kraft-dk:#B08F63; --on-kraft:#1B1C12;
+  --accent:#C8391A; --accent-ink:#B0300F; --accent-soft:#F7E3DC; --accent-line:#E9BFB2;
+  --green:#17452F; --green-soft:#DEE8E1;
+  --band-bg:#15170F; --band-fg:#F1EFE9;
+  --sample-bg:#17452F; --sample-fg:#F2F7F3;
+  --shadow:0 1px 2px rgba(21,23,15,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#131410; --surface:#1B1D16; --surface-2:#23261D; --rule:#33362A; --rule-2:#474B3C;
+    --ink:#EEECE2; --ink-2:#B4B3A5; --ink-3:#84836F;
+    --kraft:#BE9C70; --kraft-dk:#9C7C52; --on-kraft:#17180F;
+    --accent:#FF6A45; --accent-ink:#FF835F; --accent-soft:#3A190F; --accent-line:#5E2A19;
+    --green:#7FBFA0; --green-soft:#14261C;
+    --band-bg:#24271C; --band-fg:#F1EFE9;
+    --sample-bg:#193F2C; --sample-fg:#EFF5F1;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131410; --surface:#1B1D16; --surface-2:#23261D; --rule:#33362A; --rule-2:#474B3C;
+  --ink:#EEECE2; --ink-2:#B4B3A5; --ink-3:#84836F;
+  --kraft:#BE9C70; --kraft-dk:#9C7C52; --on-kraft:#17180F;
+  --accent:#FF6A45; --accent-ink:#FF835F; --accent-soft:#3A190F; --accent-line:#5E2A19;
+  --green:#7FBFA0; --green-soft:#14261C;
+  --band-bg:#24271C; --band-fg:#F1EFE9;
+  --sample-bg:#193F2C; --sample-fg:#EFF5F1;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Archivo,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  padding-bottom:0;
+}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+.narrow{max-width:660px}
+
+h1,h2,h3{
+  font-family:Fraunces,Georgia,serif; margin:0; text-wrap:balance;
+  font-variation-settings:'SOFT' 30,'WONK' 1; letter-spacing:-.015em;
+}
+h1{font-size:clamp(2.5rem,6.4vw,4.15rem); font-weight:800; line-height:.98}
+h2{font-size:clamp(1.85rem,4vw,2.75rem); font-weight:700; line-height:1.05}
+h3{font-size:1.22rem; font-weight:700; line-height:1.22}
+p{margin:0 0 1em}
+a{color:var(--accent-ink)}
+.mono{font-family:"DM Mono",ui-monospace,Menlo,monospace}
+.eyebrow{
+  font-family:"DM Mono",monospace; font-size:.7rem; font-weight:500; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 10px;
+}
+.lede{font-size:1.16rem; line-height:1.5; color:var(--ink-2)}
+
+/* ============ buttons ============ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:Archivo,sans-serif; font-size:1rem; font-weight:600; letter-spacing:-.005em;
+  padding:14px 24px; min-height:48px; border:2px solid transparent; border-radius:2px;
+  cursor:pointer; text-decoration:none; white-space:nowrap;
+  transition:transform .12s ease, background .15s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent); color:#FFF6F2; border-color:var(--accent)}
+.btn-primary:hover{background:var(--accent-ink); border-color:var(--accent-ink)}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink); color:var(--paper)}
+.btn-onkraft{background:var(--on-kraft); color:var(--kraft); border-color:var(--on-kraft)}
+.btn-onkraft:hover{background:#000}
+.btn-kraftghost{background:transparent; color:var(--on-kraft); border-color:var(--on-kraft)}
+.btn-kraftghost:hover{background:rgba(27,28,18,.09)}
+.btn-sm{padding:9px 16px; min-height:40px; font-size:.9rem}
+.btn-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+
+/* ============ draft bar ============ */
+#draftbar{
+  background:var(--band-bg); color:var(--band-fg); font-family:"DM Mono",monospace;
+  font-size:.72rem; letter-spacing:.02em; padding:9px 0;
+}
+#draftbar .wrap{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+#draftbar b{color:var(--kraft); font-weight:500}
+#draftbar button{
+  background:none; border:1px solid rgba(241,239,233,.4); color:inherit; font:inherit;
+  padding:3px 10px; cursor:pointer; border-radius:2px;
+}
+
+/* ============ header ============ */
+header.site{
+  position:sticky; top:0; z-index:60; background:var(--paper);
+  border-bottom:1px solid var(--rule);
+}
+header.site .wrap{display:flex; align-items:center; gap:18px; height:66px}
+.logo{
+  font-family:Fraunces,serif; font-weight:900; font-size:1.5rem; letter-spacing:-.03em;
+  font-variation-settings:'SOFT' 0,'WONK' 0; text-decoration:none; color:var(--ink);
+}
+.logo span{color:var(--accent-ink)}
+header.site nav{margin-left:auto; display:flex; align-items:center; gap:10px}
+.h-tel{
+  font-family:"DM Mono",monospace; font-size:.92rem; color:var(--ink); text-decoration:none;
+  padding:9px 12px; white-space:nowrap;
+}
+.h-tel:hover{color:var(--accent-ink)}
+@media(max-width:640px){ .h-tel span.lbl{display:none} }
+@media(max-width:430px){ header.site nav .btn{display:none} .h-tel{margin-left:auto} }
+
+/* ============ hero ============ */
+.hero{background:var(--kraft); color:var(--on-kraft); padding:56px 0 60px; overflow:hidden}
+.hero h1{color:var(--on-kraft)}
+.hero-grid{display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center}
+@media(max-width:900px){ .hero-grid{grid-template-columns:1fr; gap:34px} }
+.hero .eyebrow{color:rgba(27,28,18,.62)}
+.hero .sub{font-size:1.15rem; line-height:1.5; color:rgba(27,28,18,.82); max-width:42ch; margin:16px 0 24px}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; list-style:none; padding:0}
+.chips li{
+  font-family:"DM Mono",monospace; font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+  border:1px solid rgba(27,28,18,.35); padding:5px 10px; border-radius:2px;
+}
+
+/* ---- cup builder ---- */
+.builder{
+  background:rgba(255,252,246,.5); border:1px solid rgba(27,28,18,.22); padding:20px;
+  display:grid; grid-template-columns:1fr 168px; gap:20px; align-items:start; border-radius:3px;
+}
+@media(max-width:520px){ .builder{grid-template-columns:1fr} .builder-note{grid-column:1/-1} }
+.builder .b-lab{
+  font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.13em; text-transform:uppercase;
+  color:rgba(27,28,18,.62); display:block; margin-bottom:7px;
+}
+#cupname{
+  width:100%; font-family:Archivo,sans-serif; font-size:1rem; font-weight:600; color:var(--on-kraft);
+  background:rgba(255,253,248,.85); border:1px solid rgba(27,28,18,.3); border-radius:2px;
+  padding:11px 12px; min-height:46px;
+}
+#cupname::placeholder{color:rgba(27,28,18,.42); font-weight:400}
+.swatches{display:flex; gap:7px; flex-wrap:wrap; margin-top:16px}
+.sw{
+  width:32px; height:32px; border-radius:50%; border:2px solid rgba(27,28,18,.25);
+  cursor:pointer; padding:0; transition:transform .12s ease;
+}
+.sw:hover{transform:scale(1.08)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--kraft),0 0 0 4px var(--on-kraft); border-color:transparent}
+.cupwrap{display:flex; justify-content:center}
+#cupsvg{width:100%; max-width:168px; height:auto; display:block}
+.builder-note{
+  grid-column:1; align-self:end; font-family:"DM Mono",monospace; font-size:.68rem; letter-spacing:.04em;
+  color:rgba(27,28,18,.6); border-top:1px solid rgba(27,28,18,.18); padding-top:12px; margin:0;
+}
+
+/* ============ trust strip ============ */
+.trust{background:var(--band-bg); color:var(--band-fg); padding:16px 0}
+.trust .wrap{
+  display:flex; flex-wrap:wrap; gap:10px 34px; justify-content:center;
+  font-family:"DM Mono",monospace; font-size:.74rem; letter-spacing:.09em; text-transform:uppercase;
+}
+.trust b{color:var(--kraft); font-weight:500}
+
+/* ============ sections ============ */
+section{padding:74px 0}
+section.tint{background:var(--surface)}
+section.line{border-top:1px solid var(--rule)}
+.sec-intro{max-width:60ch; margin-bottom:34px}
+.sec-intro p:last-child{margin-bottom:0}
+
+/* ============ price ============ */
+.pricebox{border:2px solid var(--ink); background:var(--surface)}
+.pricebox-head{
+  background:var(--band-bg); color:var(--band-fg); padding:13px 20px;
+  display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:baseline;
+}
+.pricebox-head h3{color:var(--band-fg); font-size:1.06rem}
+.pricebox-head span{font-family:"DM Mono",monospace; font-size:.72rem; letter-spacing:.08em; color:var(--kraft)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse; width:100%; min-width:560px}
+th,td{text-align:left; padding:13px 20px; border-bottom:1px solid var(--rule)}
+thead th{
+  font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; background:var(--surface-2); white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+td.per{font-family:"DM Mono",monospace; font-variant-numeric:tabular-nums; font-weight:500; color:var(--accent-ink); white-space:nowrap}
+.tbc{border-bottom:1px dotted var(--accent); cursor:help}
+.tbc::after{content:"*"; color:var(--accent); font-size:.85em; vertical-align:super}
+.pricefoot{padding:15px 20px; background:var(--surface-2); font-size:.92rem; color:var(--ink-2)}
+.pricefoot p{margin:0 0 6px}
+.pricefoot p:last-child{margin:0}
+.compare{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); margin-top:22px;
+}
+.compare div{background:var(--surface); padding:15px 17px}
+.compare .n{
+  font-family:"DM Mono",monospace; font-size:1.4rem; font-variant-numeric:tabular-nums;
+  display:block; margin-bottom:2px;
+}
+.compare .who{font-size:.82rem; color:var(--ink-3)}
+.compare .us .n{color:var(--accent-ink); font-weight:500}
+.compare .us{background:var(--accent-soft)}
+
+/* ============ pain ============ */
+.pains{display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule)}
+.pain{background:var(--surface); padding:22px 24px; display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:center}
+@media(max-width:700px){ .pain{grid-template-columns:1fr; gap:12px} }
+.pain q{
+  font-family:Fraunces,serif; font-size:1.22rem; line-height:1.3; font-weight:600;
+  font-variation-settings:'SOFT' 40,'WONK' 1; quotes:'"' '"'; color:var(--ink);
+}
+.pain .fix{font-size:.98rem; color:var(--ink-2); border-left:3px solid var(--accent); padding-left:16px}
+.pain .fix b{color:var(--ink); font-weight:600}
+
+/* ============ pillars ============ */
+.pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+@media(max-width:940px){ .pillars{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:600px){ .pillars{grid-template-columns:1fr} }
+.pillar{background:var(--surface); padding:24px}
+.pillar .pnum{font-family:"DM Mono",monospace; font-size:.68rem; letter-spacing:.1em; color:var(--accent-ink); display:block; margin-bottom:12px}
+.pillar h3{margin-bottom:7px}
+.pillar p{margin:0; font-size:.95rem; color:var(--ink-2)}
+
+/* ============ process ============ */
+.steps{list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+@media(max-width:900px){ .steps{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:520px){ .steps{grid-template-columns:1fr} }
+.steps li{background:var(--surface); padding:24px}
+.steps .snum{
+  font-family:Fraunces,serif; font-size:2.1rem; font-weight:800; line-height:1;
+  font-variation-settings:'SOFT' 0,'WONK' 1; color:var(--kraft-dk); display:block; margin-bottom:12px;
+}
+.steps h3{font-size:1.08rem; margin-bottom:6px}
+.steps p{margin:0; font-size:.93rem; color:var(--ink-2)}
+.datebar{
+  margin-top:22px; border:2px solid var(--accent); background:var(--accent-soft);
+  padding:20px 24px; display:flex; gap:18px; align-items:center; flex-wrap:wrap;
+}
+.datebar .dlab{font-family:"DM Mono",monospace; font-size:.7rem; letter-spacing:.13em; text-transform:uppercase; color:var(--accent-ink); display:block; margin-bottom:4px}
+.datebar .dval{font-family:Fraunces,serif; font-size:1.5rem; font-weight:700; line-height:1.15; font-variation-settings:'SOFT' 30,'WONK' 1}
+.datebar .btn{margin-left:auto}
+@media(max-width:640px){ .datebar .btn{margin-left:0; width:100%} }
+
+/* ============ sample band ============ */
+.sample{background:var(--sample-bg); color:var(--sample-fg)}
+.sample h2{color:inherit}
+.sample .sgrid{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center}
+@media(max-width:820px){ .sample .sgrid{grid-template-columns:1fr; gap:28px} }
+.sample p{color:inherit; opacity:.86}
+.sample .eyebrow{color:inherit; opacity:.62}
+
+/* ============ forms ============ */
+.form-card{background:var(--surface); border:1px solid var(--rule); padding:26px; box-shadow:var(--shadow)}
+.sample .form-card{background:rgba(255,255,255,.96); border-color:rgba(0,0,0,.15); color:#15170F}
+.sample .form-card label{color:#3E4239}
+.sample .form-card input{background:#FFF; border-color:#C8CCC4; color:#15170F}
+.fields{display:grid; gap:14px}
+.f2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media(max-width:520px){ .f2{grid-template-columns:1fr} }
+label{
+  display:block; font-family:"DM Mono",monospace; font-size:.68rem; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:6px;
+}
+label .opt{text-transform:none; letter-spacing:0; color:var(--ink-3); font-size:.85em}
+input[type=text],input[type=tel],input[type=email],textarea{
+  width:100%; font-family:Archivo,sans-serif; font-size:1rem; color:var(--ink);
+  background:var(--paper); border:1px solid var(--rule-2); border-radius:2px;
+  padding:12px 13px; min-height:48px;
+}
+textarea{min-height:88px; resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+input[aria-invalid="true"]{border-color:var(--accent); background:var(--accent-soft)}
+.err{
+  display:none; font-family:"DM Mono",monospace; font-size:.72rem; color:var(--accent-ink);
+  margin-top:5px; letter-spacing:.02em;
+}
+input[aria-invalid="true"] ~ .err{display:block}
+.hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.chiprow{display:flex; flex-wrap:wrap; gap:7px}
+.chip{
+  font-family:"DM Mono",monospace; font-size:.76rem; letter-spacing:.04em; padding:8px 13px;
+  min-height:38px; background:transparent; color:var(--ink-2); border:1px solid var(--rule-2);
+  border-radius:2px; cursor:pointer;
+}
+.chip:hover{border-color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.sample .chip[aria-pressed="true"]{background:#15170F; color:#FFF}
+.form-note{
+  font-family:"DM Mono",monospace; font-size:.72rem; letter-spacing:.03em; color:var(--ink-2);
+  text-align:center; margin:12px 0 0;
+}
+.sample .form-note{color:#5A5F55}
+.thanks{display:none; text-align:center; padding:10px 0}
+.thanks h3{margin-bottom:8px}
+.thanks .tick{
+  width:44px; height:44px; border-radius:50%; background:var(--green); color:var(--surface);
+  display:grid; place-items:center; margin:0 auto 14px; font-size:1.35rem;
+}
+.sample .thanks .tick{background:#17452F; color:#FFF}
+.thanks p{font-size:.95rem; color:var(--ink-2)}
+.sample .thanks p{color:#3E4239}
+.thanks .next{
+  text-align:left; background:var(--surface-2); padding:14px 16px; margin-top:16px;
+  font-size:.9rem; border-left:3px solid var(--accent);
+}
+.sample .thanks .next{background:#EDEFEA}
+form.done .fields,form.done .chiprow,form.done .btn,form.done .form-note,form.done .fgroup{display:none}
+form.done .thanks{display:block}
+
+/* ============ proof ============ */
+.quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+@media(max-width:820px){ .quotes{grid-template-columns:1fr} }
+.quote{background:var(--surface); padding:26px 24px; display:flex; flex-direction:column; gap:16px}
+.quote blockquote{
+  margin:0; font-family:Fraunces,serif; font-size:1.14rem; line-height:1.38; font-weight:600;
+  font-variation-settings:'SOFT' 40,'WONK' 1;
+}
+.quote figcaption{margin-top:auto; display:flex; align-items:center; gap:11px; font-size:.88rem}
+.qav{
+  width:36px; height:36px; border-radius:50%; background:var(--kraft); color:var(--on-kraft);
+  display:grid; place-items:center; font-family:"DM Mono",monospace; font-size:.8rem; flex:0 0 auto;
+}
+.qwho b{display:block; font-weight:600}
+.qwho span{color:var(--ink-3); font-size:.85em}
+
+/* ============ specs ============ */
+.specgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+@media(max-width:1000px){ .specgrid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:520px){ .specgrid{grid-template-columns:1fr} }
+.spec{background:var(--surface); padding:20px 22px}
+.spec dt{font-family:"DM Mono",monospace; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px}
+.spec dd{margin:0; font-size:.96rem}
+.spec dd b{font-weight:600}
+
+/* ============ guarantee ============ */
+.guarantee{background:var(--band-bg); color:var(--band-fg); padding:74px 0}
+.guarantee h2{color:var(--band-fg)}
+.guarantee p{color:rgba(241,239,233,.76)}
+.guarantee .eyebrow{color:var(--kraft)}
+.gseal{
+  border:2px solid var(--kraft); color:var(--kraft); padding:22px; text-align:center;
+  font-family:"DM Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; line-height:1.9;
+}
+.gseal b{display:block; font-family:Fraunces,serif; font-size:1.7rem; letter-spacing:-.02em; text-transform:none; font-weight:700; font-variation-settings:'SOFT' 30,'WONK' 1; margin:6px 0}
+.ggrid{display:grid; grid-template-columns:1.4fr .6fr; gap:44px; align-items:center}
+@media(max-width:760px){ .ggrid{grid-template-columns:1fr; gap:28px} }
+
+/* ============ faq ============ */
+.faq{border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{
+  cursor:pointer; padding:18px 40px 18px 0; position:relative; list-style:none;
+  font-family:Fraunces,serif; font-size:1.1rem; font-weight:600; font-variation-settings:'SOFT' 30,'WONK' 1;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+"; position:absolute; right:6px; top:50%; transform:translateY(-50%);
+  font-family:"DM Mono",monospace; font-size:1.3rem; color:var(--accent-ink); font-weight:400;
+}
+.faq details[open] summary::after{content:"\2013"}
+.faq summary:hover{color:var(--accent-ink)}
+.faq .a{padding:0 0 20px; font-size:.98rem; color:var(--ink-2); max-width:66ch}
+.faq .a p:last-child{margin-bottom:0}
+
+/* ============ close ============ */
+.ways{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-bottom:34px}
+@media(max-width:760px){ .ways{grid-template-columns:1fr} }
+.way{background:var(--surface); padding:24px; display:flex; flex-direction:column; gap:10px}
+.way h3{font-size:1.05rem}
+.way p{margin:0; font-size:.92rem; color:var(--ink-2); flex:1}
+.way .btn{width:100%}
+.closegrid{display:grid; grid-template-columns:.9fr 1.1fr; gap:44px; align-items:start}
+@media(max-width:860px){ .closegrid{grid-template-columns:1fr; gap:30px} }
+
+/* ============ footer ============ */
+footer.site{background:var(--surface); border-top:1px solid var(--rule); padding:40px 0 34px}
+.fgrid{display:flex; flex-wrap:wrap; gap:26px 44px; justify-content:space-between; align-items:flex-start}
+footer.site .lk{display:flex; flex-direction:column; gap:7px; font-size:.9rem}
+footer.site a{color:var(--ink-2); text-decoration:none}
+footer.site a:hover{color:var(--accent-ink); text-decoration:underline}
+.fbot{
+  margin-top:28px; padding-top:18px; border-top:1px solid var(--rule);
+  font-family:"DM Mono",monospace; font-size:.7rem; letter-spacing:.05em; color:var(--ink-3);
+  display:flex; flex-wrap:wrap; gap:8px 24px;
+}
+
+/* ============ mobile bar ============ */
+#mbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:70; display:none;
+  background:var(--surface); border-top:1px solid var(--rule-2); padding:9px 12px;
+  gap:9px; box-shadow:0 -2px 12px rgba(0,0,0,.09);
+}
+#mbar .btn{flex:1; padding:12px 8px; min-height:46px; font-size:.94rem}
+@media(max-width:760px){
+  #mbar{display:flex}
+  body{padding-bottom:70px}
+}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media(prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important; scroll-behavior:auto!important} }
+html{scroll-behavior:smooth; scroll-padding-top:76px}
+</style>
+
+<div id="draftbar"><div class="wrap">
+  <span><b>DRAFT BUILD</b> &nbsp;Figures marked <b>*</b> are placeholders awaiting real numbers from Cupco. Forms are not yet connected to an inbox.</span>
+  <button type="button" onclick="this.closest('#draftbar').remove()">Hide</button>
+</div></div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#top">CUP<span>CO</span></a>
+    <nav>
+      <a class="h-tel" href="tel:+61416888639" data-ev="phone_click"><span class="lbl">Call </span>0416 888 639</a>
+      <a class="btn btn-primary btn-sm" href="#quote">Get my price</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Custom paper cups &middot; Made in Sydney</p>
+      <h1>Your cups. Your brand.<br>One box at a time.</h1>
+      <p class="sub">Custom-printed coffee cups from 1,000. Artwork help included, proof before we print, on your counter in ten days.</p>
+      <div class="btn-row">
+        <a class="btn btn-onkraft" href="#quote">Get my price</a>
+        <a class="btn btn-kraftghost" href="tel:+61416888639" data-ev="phone_click">Call 0416 888 639</a>
+      </div>
+      <ul class="chips">
+        <li>Aussie made</li><li>1 box minimum</li><li>10 day turnaround</li>
+      </ul>
+    </div>
+
+    <div class="builder">
+      <div>
+        <label class="b-lab" for="cupname">See your name on it</label>
+        <input id="cupname" type="text" maxlength="18" placeholder="Your cafe name" autocomplete="organization" spellcheck="false">
+        <span class="b-lab" style="margin-top:16px" id="swlab">Print colour</span>
+        <div class="swatches" role="group" aria-labelledby="swlab">
+          <button type="button" class="sw" data-c="#1A1B15" style="background:#1A1B15" aria-pressed="true" aria-label="Ink black"></button>
+          <button type="button" class="sw" data-c="#17452F" style="background:#17452F" aria-pressed="false" aria-label="Deep green"></button>
+          <button type="button" class="sw" data-c="#C8391A" style="background:#C8391A" aria-pressed="false" aria-label="Flexo red"></button>
+          <button type="button" class="sw" data-c="#1B4E6B" style="background:#1B4E6B" aria-pressed="false" aria-label="Ocean blue"></button>
+          <button type="button" class="sw" data-c="#5E2A4E" style="background:#5E2A4E" aria-pressed="false" aria-label="Plum"></button>
+          <button type="button" class="sw" data-c="#EFE9DC" style="background:#EFE9DC" aria-pressed="false" aria-label="Off white"></button>
+        </div>
+      </div>
+
+      <div class="cupwrap">
+        <svg id="cupsvg" viewBox="0 0 260 400" role="img" aria-labelledby="cuptitle">
+          <title id="cuptitle">Preview of a printed takeaway cup</title>
+          <defs>
+            <clipPath id="bodyclip">
+              <path d="M46,96 H214 L196,356 a12,12 0 0 1 -12,11 H76 a12,12 0 0 1 -12,-11 Z"/>
+            </clipPath>
+          </defs>
+          <!-- cup body: kraft board -->
+          <path d="M46,96 H214 L196,356 a12,12 0 0 1 -12,11 H76 a12,12 0 0 1 -12,-11 Z" fill="#D8BE97"/>
+          <!-- printed wrap -->
+          <g clip-path="url(#bodyclip)">
+            <rect id="printband" x="40" y="128" width="180" height="196" fill="#1A1B15"/>
+          </g>
+          <!-- board shading -->
+          <g clip-path="url(#bodyclip)" opacity=".14">
+            <rect x="46" y="90" width="34" height="284" fill="#FFF"/>
+            <rect x="180" y="90" width="36" height="284" fill="#000"/>
+          </g>
+          <!-- printed text -->
+          <text id="cuptext" x="130" y="222" text-anchor="middle" fill="#FFFDF8"
+                font-family="Fraunces,Georgia,serif" font-weight="800" font-size="30" letter-spacing="-0.5">YOUR CAFE</text>
+          <text id="cupsub" x="130" y="252" text-anchor="middle" fill="#FFFDF8" opacity=".72"
+                font-family="DM Mono,monospace" font-size="9.5" letter-spacing="3.2">SYDNEY</text>
+          <!-- lid -->
+          <path d="M32,72 H228 L222,98 a6,6 0 0 1 -6,5 H44 a6,6 0 0 1 -6,-5 Z" fill="#26281D"/>
+          <ellipse cx="130" cy="72" rx="98" ry="13" fill="#33362A"/>
+          <ellipse cx="130" cy="70" rx="80" ry="9" fill="#1E2017"/>
+          <path d="M104,62 h52 a5,5 0 0 1 5,5 v3 h-62 v-3 a5,5 0 0 1 5,-5 Z" fill="#33362A"/>
+        </svg>
+      </div>
+
+      <p class="builder-note">Type your name, pick a colour &mdash; that&rsquo;s roughly how the proof arrives. Real artwork gets redrawn properly by our design team.</p>
+    </div>
+  </div>
+</section>
+
+<div class="trust"><div class="wrap">
+  <span>Printed in <b>Sydney</b></span>
+  <span><b class="tbc" title="Confirm with Cupco">120+</b> cafes supplied</span>
+  <span>ABN <b class="tbc" title="Confirm with Cupco">00 000 000 000</b></span>
+  <span>Proof before print</span>
+</div></div>
+
+<!-- ============ PRICE ============ -->
+<section id="price">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">01 &mdash; What it costs</p>
+      <h2>Here&rsquo;s the price. No enquiry required.</h2>
+      <p class="lede">Most cup printers make you hand over your phone number to find out a number. We&rsquo;d rather you could work out whether this fits your week before you talk to anyone.</p>
+    </div>
+
+    <div class="pricebox">
+      <div class="pricebox-head">
+        <h3>One box &middot; 1,000 cups &middot; full-colour print</h3>
+        <span>All prices ex GST</span>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Cup</th><th>Wall</th><th>Per box of 1,000</th><th>Per cup</th><th>Lid to match</th></tr></thead>
+          <tbody>
+            <tr><td>8oz &mdash; small</td><td>Single</td><td class="num"><span class="tbc" title="Placeholder — awaiting real pricing">$485</span></td><td class="per"><span class="tbc" title="Placeholder">$0.49</span></td><td class="num">$44.30</td></tr>
+            <tr><td>12oz &mdash; regular</td><td>Single</td><td class="num"><span class="tbc" title="Placeholder">$525</span></td><td class="per"><span class="tbc" title="Placeholder">$0.53</span></td><td class="num">$44.30</td></tr>
+            <tr><td>16oz &mdash; large</td><td>Single</td><td class="num"><span class="tbc" title="Placeholder">$565</span></td><td class="per"><span class="tbc" title="Placeholder">$0.57</span></td><td class="num">$44.30</td></tr>
+            <tr><td>12oz &mdash; regular</td><td>Double</td><td class="num"><span class="tbc" title="Placeholder">$640</span></td><td class="per"><span class="tbc" title="Placeholder">$0.64</span></td><td class="num">$44.30</td></tr>
+            <tr><td>Blank stock &mdash; no print</td><td>Single</td><td class="num">$60.00</td><td class="per">$0.06</td><td class="num">$44.30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pricefoot">
+        <p><b>Freight:</b> <span class="tbc" title="Confirm with Cupco">Free to metro Sydney. $35 flat to NSW regional, $60 interstate.</span></p>
+        <p><b>Artwork setup is included.</b> There is no plate fee, no colour surcharge and no charge for revisions to your proof.</p>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="us"><span class="n"><span class="tbc" title="Placeholder">$0.49</span></span><span class="who">Cupco &mdash; 8oz, per cup</span></div>
+      <div><span class="n">$0.85</span><span class="who">Cuppy &mdash; from $425 / 500</span></div>
+      <div><span class="n">$0.94</span><span class="who">Custom Coffee Cups &mdash; from $467.50 / 500</span></div>
+    </div>
+    <p class="form-note" style="text-align:left; margin-top:12px">Competitor entry prices as published 1 September 2026. Lower minimums cost more per cup &mdash; a 500-cup run spreads the same setup over half the cups.</p>
+
+    <div class="btn-row" style="margin-top:28px">
+      <a class="btn btn-primary" href="#quote">Get my exact price</a>
+      <a class="btn btn-ghost" href="#sample">Send me a free sample</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN ============ -->
+<section class="tint line" id="why-not">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">02 &mdash; Sound familiar?</p>
+      <h2>You&rsquo;ve wanted branded cups for a year. Something stopped you.</h2>
+    </div>
+    <div class="pains">
+      <div class="pain">
+        <q>The minimum was five thousand cups. Where would I even put them?</q>
+        <p class="fix"><b>Ours is one box.</b> A thousand cups, twenty sleeves of fifty. It stacks under the bench and it&rsquo;s gone in a fortnight.</p>
+      </div>
+      <div class="pain">
+        <q>That&rsquo;s money I&rsquo;d rather put into a grinder.</q>
+        <p class="fix"><b>One box, one invoice.</b> The price is on this page. You&rsquo;re not tying up thousands in stock you&rsquo;ll be storing until winter.</p>
+      </div>
+      <div class="pain">
+        <q>My logo is a JPEG someone made for me in 2019.</q>
+        <p class="fix"><b>Send it anyway.</b> A photo of your sign works. Our design team redraws it for print &mdash; included, not an extra.</p>
+      </div>
+      <div class="pain">
+        <q>I asked three places for a quote. One came back. Eventually.</q>
+        <p class="fix"><b>Within 24 hours, from a person.</b> That&rsquo;s the whole promise. If you&rsquo;d rather not wait, the number&rsquo;s at the top of this page.</p>
+      </div>
+      <div class="pain">
+        <q>What if the colour comes out wrong on the whole run?</q>
+        <p class="fix"><b>It can&rsquo;t.</b> You see a proof of your exact cup and nothing goes on press until you&rsquo;ve approved it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="line">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">03 &mdash; Why Cupco</p>
+      <h2>Six reasons, in the order that matters.</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><span class="pnum">01</span><h3>Priced per cup, not per pitch</h3><p>The number is on the page above. Compare it to anyone. We think it holds up, which is why we&rsquo;re not hiding it behind a form.</p></div>
+      <div class="pillar"><span class="pnum">02</span><h3>Made here, in Sydney</h3><p>Not imported and rebadged. Printed locally, which is why ten days is a real number and not a shipping estimate.</p></div>
+      <div class="pillar"><span class="pnum">03</span><h3>Ten days, start to counter</h3><p>From the moment you approve the proof. No rush fee, because that&rsquo;s just the normal turnaround.</p></div>
+      <div class="pillar"><span class="pnum">04</span><h3>Your design, properly drawn</h3><p>Send whatever you have. We redraw it to print standard, place it on the cup, and show you before anything happens.</p></div>
+      <div class="pillar"><span class="pnum">05</span><h3>Cups that hold up</h3><p>Board that doesn&rsquo;t go soft, a seam that doesn&rsquo;t leak, lids that actually seat. Order a sample and check it on your own machine.</p></div>
+      <div class="pillar"><span class="pnum">06</span><h3>One box is a real order</h3><p>Not a trial, not a favour. A thousand cups is a normal order here and it gets the same run and the same attention as ten thousand.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="tint line" id="how">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">04 &mdash; How it works</p>
+      <h2>Four steps, ten days.</h2>
+    </div>
+    <ol class="steps">
+      <li><span class="snum">1</span><h3>Send your logo</h3><p>Any format. A PDF, an Illustrator file, a JPEG, or a photo of the sign above your door. We&rsquo;ll work with it.</p></li>
+      <li><span class="snum">2</span><h3>We draw the proof</h3><p>Our design team redraws your artwork for print and shows you the cup, at size, in your colours. Back to you inside 24 hours.</p></li>
+      <li><span class="snum">3</span><h3>You approve it</h3><p>Change it as often as you like. Move it, resize it, try another colour. Nothing goes on press until you say the word.</p></li>
+      <li><span class="snum">4</span><h3>We print and deliver</h3><p>Ten days from your approval, boxed and delivered to the shop. Reorders after that are a one-line email.</p></li>
+    </ol>
+
+    <div class="datebar">
+      <div>
+        <span class="dlab">Approve your proof today and your cups arrive</span>
+        <span class="dval" id="etadate">in about ten business days</span>
+      </div>
+      <a class="btn btn-primary" href="#quote">Start today</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE ============ -->
+<section class="sample" id="sample">
+  <div class="wrap sgrid">
+    <div>
+      <p class="eyebrow">05 &mdash; Before you commit</p>
+      <h2>Hold one before you buy a thousand.</h2>
+      <p class="lede" style="color:inherit; opacity:.88">A free sample pack, posted the same day. Every size, single and double wall, with lids &mdash; so you can feel the board, check the seam and make sure they seat properly in your own machine.</p>
+      <p style="opacity:.75; font-size:.95rem; margin-bottom:0">No sales call attached. If you want a quote afterwards, you know where we are.</p>
+    </div>
+
+    <form class="form-card" id="sampleform" novalidate>
+      <div class="fields">
+        <div>
+          <label for="s-name">Your name</label>
+          <input id="s-name" name="name" type="text" autocomplete="name" required>
+          <span class="err">Please tell us who to address it to.</span>
+        </div>
+        <div>
+          <label for="s-biz">Cafe or business name</label>
+          <input id="s-biz" name="business" type="text" autocomplete="organization" required>
+          <span class="err">We need this for the delivery label.</span>
+        </div>
+        <div>
+          <label for="s-addr">Where should we post it?</label>
+          <input id="s-addr" name="address" type="text" autocomplete="street-address" required>
+          <span class="err">A street address, so Australia Post can find you.</span>
+        </div>
+        <div class="hp"><label for="s-hp">Leave this empty</label><input id="s-hp" name="company_url" type="text" tabindex="-1" autocomplete="off"></div>
+      </div>
+      <button class="btn btn-primary" type="submit" style="width:100%; margin-top:16px">Post me a sample pack</button>
+      <p class="form-note">Free, no obligation, out the door today.</p>
+
+      <div class="thanks" role="status">
+        <div class="tick" aria-hidden="true">&#10003;</div>
+        <h3>On its way.</h3>
+        <p>Your sample pack goes out with today&rsquo;s post.</p>
+        <div class="next"><b>While you wait:</b> if you already know what you need, call <a href="tel:+61416888639" data-ev="phone_click">0416 888 639</a> and we&rsquo;ll have a price to you before the cups land.</div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ PROOF ============ -->
+<section class="line" id="proof">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">06 &mdash; From cafes like yours</p>
+      <h2>What people say once the box turns up.</h2>
+    </div>
+    <div class="quotes">
+      <figure class="quote">
+        <blockquote>Cupco made the whole process easy. Fast turnaround, great quality, and exactly what we ordered.</blockquote>
+        <figcaption><span class="qav" aria-hidden="true">AM</span><span class="qwho"><b>Adam M.</b><span class="tbc" title="Business name and suburb to be confirmed">Cafe name, suburb</span></span></figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>The cups look premium and the pricing actually made sense for a small cafe like ours.</blockquote>
+        <figcaption><span class="qav" aria-hidden="true">KP</span><span class="qwho"><b>Kelly P.</b><span class="tbc" title="Business name and suburb to be confirmed">Cafe name, suburb</span></span></figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>Fast turnaround, great service and surprisingly well priced. We didn&rsquo;t need to look elsewhere.</blockquote>
+        <figcaption><span class="qav" aria-hidden="true">KY</span><span class="qwho"><b>Kevin Y.</b><span class="tbc" title="Business name and suburb to be confirmed">Cafe name, suburb</span></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECS ============ -->
+<section class="tint line" id="specs">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">07 &mdash; The cups themselves</p>
+      <h2>What you&rsquo;re actually buying.</h2>
+    </div>
+    <dl class="specgrid">
+      <div class="spec"><dt>Sizes</dt><dd><b class="tbc" title="Confirm range with Cupco">8oz, 12oz, 16oz</b><br>Mix sizes across an order, one box each.</dd></div>
+      <div class="spec"><dt>Wall</dt><dd><b class="tbc" title="Confirm double-wall availability">Single and double wall.</b><br>Double wall for takeaway-heavy shops &mdash; no sleeve needed.</dd></div>
+      <div class="spec"><dt>Board</dt><dd><b class="tbc" title="Confirm GSM">Virgin fibre, food-grade.</b><br>Holds its shape to the last mouthful.</dd></div>
+      <div class="spec"><dt>Lining</dt><dd><b class="tbc" title="Confirm PE / PLA / aqueous and any AS 4736 or AS 5810 certification">To be confirmed</b><br>Lining type and any compostability certification.</dd></div>
+      <div class="spec"><dt>Print</dt><dd><b>Full colour, no surcharge.</b><br>Print to the rim if your design calls for it.</dd></div>
+      <div class="spec"><dt>Lids</dt><dd><b>PS lids, black or white.</b><br>$44.30 per 1,000. Sized to match every cup we print.</dd></div>
+      <div class="spec"><dt>Packing</dt><dd><b>50 per sleeve, 20 sleeves per box.</b><br>1,000 cups to a carton, sealed.</dd></div>
+      <div class="spec"><dt>Made</dt><dd><b>Sydney, Australia.</b><br>Printed and packed locally, not imported.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ GUARANTEE ============ -->
+<section class="guarantee">
+  <div class="wrap ggrid">
+    <div>
+      <p class="eyebrow">08 &mdash; Our promise</p>
+      <h2>We don&rsquo;t print until you say yes.</h2>
+      <p>You&rsquo;ll see a proof of your exact cup &mdash; your colours, your logo, at the size it will actually appear &mdash; before a single one goes on press. Move it, shrink it, change the colour, start again. There&rsquo;s no revision limit and no charge for any of it.</p>
+      <p style="margin-bottom:0">The press doesn&rsquo;t start until you&rsquo;re happy with what you&rsquo;re looking at. That&rsquo;s the deal, and it&rsquo;s the reason nobody has ever opened a box from us and been surprised.</p>
+    </div>
+    <div class="gseal">
+      Proof first
+      <b>Then press</b>
+      Never the other way round
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="line" id="faq">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">09 &mdash; Questions</p>
+      <h2>The things people ask before ordering.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>What does delivery cost?</summary><div class="a"><p class="tbc" title="Confirm freight structure with Cupco">Free to metro Sydney. $35 flat anywhere in regional NSW, $60 interstate. It&rsquo;s quoted with your price, so there&rsquo;s nothing added at the end.</p></div></details>
+      <details><summary>My logo isn&rsquo;t a proper print file. Is that a problem?</summary><div class="a"><p>No. Send whatever you have &mdash; a JPEG off your website, a PNG with a transparent background, or a photo of your signage. Our design team redraws it at print resolution and shows you the result before anything is printed. There&rsquo;s no artwork fee.</p></div></details>
+      <details><summary>Can I really order just 1,000?</summary><div class="a"><p>Yes, and it&rsquo;s our most common order. One box is a full order here, not a sample run or a favour. It gets the same press, the same board and the same ten-day turnaround as a twenty-thousand cup job.</p></div></details>
+      <details><summary>How fast can you go if I&rsquo;m opening soon?</summary><div class="a"><p>Ten business days from proof approval is standard, and there&rsquo;s no rush fee attached to it. If your fit-out date is tighter than that, call us before you order &mdash; <span class="tbc" title="Confirm whether a rush option exists and what it costs">we can sometimes move a job up the schedule</span>.</p></div></details>
+      <details><summary>Are the cups recyclable or compostable?</summary><div class="a"><p class="tbc" title="This answer must be written by Cupco — state the lining type and any AS 4736 / AS 5810 certification held, or say plainly that the cups are not certified compostable">Lining type and certification to be confirmed. This answer needs to state exactly what the cups are lined with and which standards, if any, they are certified to.</p></div></details>
+      <details><summary>Can I mix sizes in one order?</summary><div class="a"><p>Yes. Each size is its own box of 1,000 and its own print setup, so a 12oz and 16oz order is two boxes. Artwork is adapted to each size at no extra cost.</p></div></details>
+      <details><summary>How do I reorder?</summary><div class="a"><p>Email or call and say &ldquo;same again&rdquo;. Your artwork stays on file, so there&rsquo;s no proof round the second time &mdash; it goes straight to print and you have cups ten days later.</p></div></details>
+      <details><summary>How do I pay, and are prices GST inclusive?</summary><div class="a"><p>Prices on this page are ex GST. <span class="tbc" title="Confirm payment methods and whether terms are offered">Payment is on invoice before the run goes to print. Card and bank transfer both fine.</span></p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="tint line" id="quote">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="eyebrow">10 &mdash; Three ways to start</p>
+      <h2>Pick whichever one suits your morning.</h2>
+    </div>
+
+    <div class="ways">
+      <div class="way">
+        <h3>Call us</h3>
+        <p>Fastest. You&rsquo;ll get a price on the phone and can ask everything this page didn&rsquo;t answer.</p>
+        <a class="btn btn-ghost" href="tel:+61416888639" data-ev="phone_click">0416 888 639</a>
+      </div>
+      <div class="way">
+        <h3>Email your artwork</h3>
+        <p>Best if you&rsquo;ve already got a logo file ready to attach and want it looked at properly.</p>
+        <a class="btn btn-ghost" href="mailto:Info@cupco.com.au?subject=Custom%20cup%20quote" data-ev="email_click">Info@cupco.com.au</a>
+      </div>
+      <div class="way">
+        <h3>Fill in the form</h3>
+        <p>Thirty seconds, and a written quote lands in your inbox inside 24 hours.</p>
+        <a class="btn btn-primary" href="#quoteform">Get my price</a>
+      </div>
+    </div>
+
+    <div class="closegrid">
+      <div>
+        <h3 style="margin-bottom:12px">What happens after you send it</h3>
+        <ol class="steps" style="display:block; border:0; background:none">
+          <li style="padding:0 0 14px; background:none"><h3 style="font-size:1rem">We come back within 24 hours</h3><p>With a real price for your sizes, not a brochure.</p></li>
+          <li style="padding:14px 0; background:none; border-top:1px solid var(--rule)"><h3 style="font-size:1rem">You send artwork when you&rsquo;re ready</h3><p>No deposit, no commitment at the quote stage.</p></li>
+          <li style="padding:14px 0 0; background:none; border-top:1px solid var(--rule)"><h3 style="font-size:1rem">Proof, approval, then press</h3><p>Cups on your counter ten days after you approve.</p></li>
+        </ol>
+      </div>
+
+      <form class="form-card" id="quoteform" novalidate>
+        <div class="fgroup" style="margin-bottom:18px">
+          <span class="b-lab" id="sizelab" style="display:block; font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px">Which size?</span>
+          <div class="chiprow" role="group" aria-labelledby="sizelab" id="sizechips">
+            <button type="button" class="chip" aria-pressed="false">8oz</button>
+            <button type="button" class="chip" aria-pressed="false">12oz</button>
+            <button type="button" class="chip" aria-pressed="false">16oz</button>
+            <button type="button" class="chip" aria-pressed="false">Not sure yet</button>
+          </div>
+        </div>
+        <div class="fgroup" style="margin-bottom:18px">
+          <span id="qtylab" style="display:block; font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px">Roughly how many?</span>
+          <div class="chiprow" role="group" aria-labelledby="qtylab" id="qtychips">
+            <button type="button" class="chip" aria-pressed="false">1 box (1,000)</button>
+            <button type="button" class="chip" aria-pressed="false">2&ndash;5 boxes</button>
+            <button type="button" class="chip" aria-pressed="false">5+ boxes</button>
+          </div>
+        </div>
+
+        <div class="fields">
+          <div>
+            <label for="q-name">Your name</label>
+            <input id="q-name" name="name" type="text" autocomplete="name" required>
+            <span class="err">Please add your name.</span>
+          </div>
+          <div class="f2">
+            <div>
+              <label for="q-phone">Best number to reach you</label>
+              <input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
+              <span class="err">We need a number to call you back on.</span>
+            </div>
+            <div>
+              <label for="q-email">Email</label>
+              <input id="q-email" name="email" type="email" inputmode="email" autocomplete="email" required>
+              <span class="err">Please check this email address.</span>
+            </div>
+          </div>
+          <div>
+            <label for="q-biz">Cafe or business name</label>
+            <input id="q-biz" name="business" type="text" autocomplete="organization" required>
+            <span class="err">Please add your business name.</span>
+          </div>
+          <div>
+            <label for="q-msg">Anything else? <span class="opt">Optional</span></label>
+            <textarea id="q-msg" name="message" rows="2" placeholder="Opening date, colours, questions&hellip;"></textarea>
+          </div>
+          <div class="hp"><label for="q-hp">Leave this empty</label><input id="q-hp" name="company_url" type="text" tabindex="-1" autocomplete="off"></div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" style="width:100%; margin-top:18px">Get my price</button>
+        <p class="form-note">We&rsquo;ll come back within 24 hours. No obligation.</p>
+
+        <div class="thanks" role="status">
+          <div class="tick" aria-hidden="true">&#10003;</div>
+          <h3>Got it &mdash; thank you.</h3>
+          <p>Your quote is being put together now.</p>
+          <div class="next"><b>What happens next:</b> a written price lands in your inbox within 24 hours. If you&rsquo;d rather not wait, call <a href="tel:+61416888639" data-ev="phone_click">0416 888 639</a> and we&rsquo;ll do it on the spot.<br><br>Want to feel the cups first? <a href="#sample">Ask for a free sample pack</a> &mdash; it goes out today.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div style="max-width:30ch">
+        <a class="logo" href="#top">CUP<span>CO</span></a>
+        <p style="font-size:.9rem; color:var(--ink-2); margin:10px 0 0">Australian-made custom printed paper cups for cafes. One box at a time, from Sydney.</p>
+      </div>
+      <div class="lk">
+        <b style="font-size:.72rem; font-family:'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)">Get in touch</b>
+        <a href="tel:+61416888639" data-ev="phone_click">0416 888 639</a>
+        <a href="mailto:Info@cupco.com.au" data-ev="email_click">Info@cupco.com.au</a>
+        <span style="color:var(--ink-2)">Sydney, NSW</span>
+      </div>
+      <div class="lk">
+        <b style="font-size:.72rem; font-family:'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)">This page</b>
+        <a href="#price">Prices</a><a href="#how">How it works</a><a href="#sample">Free samples</a><a href="#faq">Questions</a>
+      </div>
+      <div class="lk">
+        <b style="font-size:.72rem; font-family:'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)">The fine print</b>
+        <span class="tbc" title="These pages currently contain Wix placeholder text on the live site and must be written before launch" style="color:var(--ink-2)">Shipping policy</span>
+        <span class="tbc" title="Currently Wix placeholder text — must be written" style="color:var(--ink-2)">Refund policy</span>
+        <span class="tbc" title="Currently Wix placeholder text — must be written" style="color:var(--ink-2)">Terms &amp; privacy</span>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>&copy; 2026 Cupco Pty Ltd</span>
+      <span>ABN <span class="tbc" title="Confirm with Cupco">00 000 000 000</span></span>
+      <span>All prices ex GST</span>
+    </div>
+  </div>
+</footer>
+
+<div id="mbar">
+  <a class="btn btn-ghost" href="tel:+61416888639" data-ev="phone_click">Call us</a>
+  <a class="btn btn-primary" href="#quoteform">Get my price</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- analytics shim: real events, ready for GTM ---------- */
+  window.dataLayer = window.dataLayer || [];
+  function track(name, detail){
+    window.dataLayer.push(Object.assign({event:name, ts:Date.now()}, detail||{}));
+  }
+  document.addEventListener("click", function(e){
+    var el = e.target.closest("[data-ev]");
+    if(el) track(el.getAttribute("data-ev"), {href: el.getAttribute("href")});
+  });
+
+  /* ---------- cup builder ---------- */
+  var nameIn  = document.getElementById("cupname"),
+      band    = document.getElementById("printband"),
+      cupText = document.getElementById("cuptext"),
+      cupSub  = document.getElementById("cupsub"),
+      swatches= Array.prototype.slice.call(document.querySelectorAll(".sw"));
+
+  // relative luminance -> pick legible ink for the printed text
+  function readableOn(hex){
+    var r=parseInt(hex.substr(1,2),16)/255,
+        g=parseInt(hex.substr(3,2),16)/255,
+        b=parseInt(hex.substr(5,2),16)/255;
+    function lin(c){ return c<=0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); }
+    var L = 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
+    return L > 0.45 ? "#1A1B15" : "#FFFDF8";
+  }
+
+  // the cup tapers, so the printable width at the wordmark's baseline is ~148px
+  var PRINT_W = 148;
+  function drawName(raw){
+    var v = (raw || "").trim().toUpperCase() || "YOUR CAFE";
+    cupText.textContent = v;
+    // measure and step down until the wordmark sits inside the cup body
+    var size = 30;
+    cupText.setAttribute("font-size", size);
+    while(size > 9 && cupText.getComputedTextLength() > PRINT_W){
+      size -= 1;
+      cupText.setAttribute("font-size", size);
+    }
+  }
+
+  function paint(hex){
+    band.setAttribute("fill", hex);
+    var ink = readableOn(hex);
+    cupText.setAttribute("fill", ink);
+    cupSub.setAttribute("fill", ink);
+    swatches.forEach(function(s){
+      s.setAttribute("aria-pressed", String(s.dataset.c.toLowerCase() === hex.toLowerCase()));
+    });
+  }
+
+  var save = {
+    get: function(){ try { return JSON.parse(localStorage.getItem("cupco.cup") || "{}"); } catch(e){ return {}; } },
+    set: function(o){ try { localStorage.setItem("cupco.cup", JSON.stringify(o)); } catch(e){} }
+  };
+
+  if(nameIn && band){
+    var stored = save.get();
+    if(stored.name){ nameIn.value = stored.name; }
+    drawName(stored.name || "");
+    paint(stored.colour || "#1A1B15");
+
+    nameIn.addEventListener("input", function(){
+      drawName(nameIn.value);
+      var s = save.get(); s.name = nameIn.value; save.set(s);
+    });
+    nameIn.addEventListener("change", function(){
+      if(nameIn.value.trim()) track("cup_named");
+    });
+
+    swatches.forEach(function(s){
+      s.addEventListener("click", function(){
+        paint(s.dataset.c);
+        var o = save.get(); o.colour = s.dataset.c; save.set(o);
+        track("cup_colour", {colour: s.dataset.c});
+      });
+    });
+  }
+
+  /* ---------- live delivery date: 10 business days out ---------- */
+  var eta = document.getElementById("etadate");
+  if(eta){
+    var d = new Date(), added = 0;
+    while(added < 10){
+      d.setDate(d.getDate() + 1);
+      var day = d.getDay();
+      if(day !== 0 && day !== 6) added++;
+    }
+    eta.textContent = d.toLocaleDateString("en-AU", {weekday:"long", day:"numeric", month:"long"});
+  }
+
+  /* ---------- chip groups ---------- */
+  ["sizechips","qtychips"].forEach(function(id){
+    var group = document.getElementById(id);
+    if(!group) return;
+    group.addEventListener("click", function(e){
+      var chip = e.target.closest(".chip");
+      if(!chip) return;
+      Array.prototype.forEach.call(group.querySelectorAll(".chip"), function(c){
+        c.setAttribute("aria-pressed", String(c === chip));
+      });
+      track("quote_option", {group: id, value: chip.textContent.trim()});
+    });
+  });
+
+  /* ---------- forms ---------- */
+  function fieldValid(f){
+    var v = f.value.trim();
+    if(!v) return false;
+    if(f.type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    if(f.type === "tel")   return v.replace(/[^0-9]/g, "").length >= 8;
+    return v.length > 1;
+  }
+
+  function wire(formId, eventName, label){
+    var form = document.getElementById(formId);
+    if(!form) return;
+    var required = Array.prototype.slice.call(form.querySelectorAll("[required]"));
+
+    required.forEach(function(f){
+      f.addEventListener("blur", function(){
+        if(f.value.trim()) f.setAttribute("aria-invalid", String(!fieldValid(f)));
+      });
+      f.addEventListener("input", function(){
+        if(f.getAttribute("aria-invalid") === "true" && fieldValid(f)) f.removeAttribute("aria-invalid");
+      });
+    });
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+      // honeypot: a filled hidden field means a bot. Fake success, send nothing.
+      var hp = form.querySelector('input[name="company_url"]');
+      if(hp && hp.value){ form.classList.add("done"); return; }
+
+      var bad = required.filter(function(f){ return !fieldValid(f); });
+      bad.forEach(function(f){ f.setAttribute("aria-invalid", "true"); });
+      if(bad.length){
+        bad[0].focus();
+        track(eventName + "_error", {fields: bad.length});
+        return;
+      }
+
+      var payload = {};
+      Array.prototype.forEach.call(form.elements, function(f){
+        if(f.name && f.name !== "company_url" && f.value) payload[f.name] = f.value;
+      });
+      var chosen = form.querySelectorAll('.chip[aria-pressed="true"]');
+      if(chosen.length){
+        payload.options = Array.prototype.map.call(chosen, function(c){ return c.textContent.trim(); }).join(" / ");
+      }
+      if(nameIn && nameIn.value.trim()) payload.cup_preview = nameIn.value.trim();
+
+      /* TODO(handover): POST `payload` to Cupco's CRM or form endpoint here,
+         and mirror it to SMS so the 24-hour promise doesn't depend on an inbox. */
+      track(eventName, {form: label, fields: Object.keys(payload).length});
+
+      form.classList.add("done");
+      var t = form.querySelector(".thanks");
+      if(t){ t.setAttribute("tabindex", "-1"); t.focus(); }
+    });
+  }
+
+  wire("quoteform",  "quote_submit",  "main quote");
+  wire("sampleform", "sample_submit", "sample pack");
+
+  // prefill business name from the cup builder when someone reaches the form
+  var qBiz = document.getElementById("q-biz");
+  if(qBiz && nameIn){
+    document.addEventListener("click", function(e){
+      var a = e.target.closest('a[href="#quoteform"], a[href="#quote"]');
+      if(a && nameIn.value.trim() && !qBiz.value) qBiz.value = nameIn.value.trim();
+    });
+  }
+
+  /* ---------- scroll depth + price-block view ---------- */
+  var seen = {};
+  function once(k, fn){ if(!seen[k]){ seen[k] = 1; fn(); } }
+
+  if("IntersectionObserver" in window){
+    // watch the table, not the whole section: a section taller than the
+    // viewport can never reach a percentage threshold. The negative margin
+    // means this only fires once the table is properly in view, not grazing it.
+    var price = document.querySelector("#price .pricebox");
+    if(price){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting) once("price_view", function(){
+            track("price_view");
+            io.disconnect();
+          });
+        });
+      }, {rootMargin: "-25% 0px -25% 0px"});
+      io.observe(price);
+    }
+  }
+
+  var ticking = false;
+  window.addEventListener("scroll", function(){
+    if(ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function(){
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      if(pct >= 50) once("s50", function(){ track("scroll_50"); });
+      if(pct >= 90) once("s90", function(){ track("scroll_90"); });
+      ticking = false;
+    });
+  }, {passive: true});
+})();
+</script>

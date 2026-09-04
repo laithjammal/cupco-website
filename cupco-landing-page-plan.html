@@ -1,0 +1,710 @@
+<title>Cupco Conversion Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ---------- tokens: uncoated stock + process ink ---------- */
+:root{
+  --paper:#F1F0EA; --surface:#FBFAF6; --surface-2:#E7E6DD; --surface-3:#DEDDD3;
+  --ink:#1A1D19; --ink-2:#4C504A; --ink-3:#7E827A;
+  --rule:#D3D2C7; --rule-2:#BFBEB2;
+  --accent:#C81B52; --accent-ink:#C81B52; --accent-soft:#F9E4EB; --accent-line:#EFC3D2;
+  --cyan:#1C6975; --cyan-soft:#DDEDEF;
+  --amber:#9A6413; --amber-soft:#F6E9D4;
+  --shadow:0 1px 0 rgba(26,29,25,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141613; --surface:#1B1E19; --surface-2:#22261F; --surface-3:#2B2F28;
+    --ink:#EDEDE4; --ink-2:#B2B5AB; --ink-3:#80847B;
+    --rule:#31352D; --rule-2:#434840;
+    --accent:#FF5A85; --accent-ink:#FF7D9E; --accent-soft:#38141F; --accent-line:#5C2233;
+    --cyan:#63C0CC; --cyan-soft:#12302F;
+    --amber:#D9A253; --amber-soft:#33260F;
+    --shadow:0 1px 0 rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141613; --surface:#1B1E19; --surface-2:#22261F; --surface-3:#2B2F28;
+  --ink:#EDEDE4; --ink-2:#B2B5AB; --ink-3:#80847B;
+  --rule:#31352D; --rule-2:#434840;
+  --accent:#FF5A85; --accent-ink:#FF7D9E; --accent-soft:#38141F; --accent-line:#5C2233;
+  --cyan:#63C0CC; --cyan-soft:#12302F;
+  --amber:#D9A253; --amber-soft:#33260F;
+  --shadow:0 1px 0 rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px; line-height:1.62; margin:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1140px; margin:0 auto; padding:0 28px}
+.prose{max-width:68ch}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif; text-wrap:balance; margin:0}
+h1{font-size:clamp(2.6rem,6.2vw,4.4rem); font-weight:800; line-height:.96; letter-spacing:-.025em}
+h2{font-size:clamp(1.7rem,3.3vw,2.3rem); font-weight:700; line-height:1.08; letter-spacing:-.018em}
+h3{font-size:1.18rem; font-weight:700; line-height:1.25; letter-spacing:-.008em}
+h4{font-size:.98rem; font-weight:700; letter-spacing:-.004em}
+p{margin:0 0 1.05em}
+a{color:var(--accent-ink)}
+strong{font-weight:600; color:var(--ink)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+.lede{font-size:1.2rem; line-height:1.5; color:var(--ink-2)}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:2px solid var(--ink); background:var(--surface)}
+.masthead-inner{padding:56px 0 40px; display:flex; flex-direction:column; gap:30px}
+.jobline{
+  display:flex; flex-wrap:wrap; gap:8px 26px; align-items:baseline;
+  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.jobline b{color:var(--ink); font-weight:600}
+h1 .tint{color:var(--accent-ink)}
+.masthead .lede{max-width:56ch}
+.specstrip{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  border-top:1px solid var(--rule); border-left:1px solid var(--rule);
+}
+.specstrip div{
+  border-right:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  padding:13px 15px;
+}
+.specstrip .k{font-family:"IBM Plex Mono",monospace; font-size:.63rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:3px}
+.specstrip .v{font-family:"Bricolage Grotesque",sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:-.01em}
+
+/* ---------- sections w/ numbered rail ---------- */
+section{padding:66px 0; border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex; gap:22px; align-items:flex-start; margin-bottom:30px}
+.sec-num{
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:600;
+  color:var(--accent-ink); padding-top:.55em; flex:0 0 auto; letter-spacing:.06em;
+}
+.sec-head .eyebrow{margin-bottom:7px}
+
+/* ---------- generic bits ---------- */
+.card{background:var(--surface); border:1px solid var(--rule); padding:20px 22px; box-shadow:var(--shadow)}
+.grid{display:grid; gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(238px,1fr))}
+.tag{
+  display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.62rem;
+  font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  padding:3px 8px; border:1px solid var(--rule-2); color:var(--ink-2);
+}
+.tag.hot{background:var(--accent-soft); border-color:var(--accent-line); color:var(--accent-ink)}
+.tag.ok{background:var(--cyan-soft); border-color:var(--cyan); color:var(--cyan)}
+.tag.mid{background:var(--amber-soft); border-color:var(--amber); color:var(--amber)}
+
+/* ---------- tables ---------- */
+.scroll{overflow-x:auto; border:1px solid var(--rule); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:620px; font-size:.9rem}
+th,td{text-align:left; padding:11px 15px; border-bottom:1px solid var(--rule); vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:.63rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:600;
+  background:var(--surface-2); border-bottom:1px solid var(--rule-2); white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.us td{background:var(--accent-soft)}
+tr.us td:first-child{font-weight:600; box-shadow:inset 3px 0 0 var(--accent)}
+
+/* ---------- leak list ---------- */
+.leak{display:flex; gap:16px; padding:15px 0; border-bottom:1px solid var(--rule); align-items:flex-start}
+.leak:last-child{border-bottom:0}
+.leak-n{
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:600;
+  color:var(--ink-3); flex:0 0 26px; padding-top:.2em; font-variant-numeric:tabular-nums;
+}
+.leak-b{flex:1; min-width:0}
+.leak-b p{margin:5px 0 0; font-size:.94rem; color:var(--ink-2)}
+.leak-t{display:flex; gap:10px; align-items:baseline; flex-wrap:wrap}
+
+/* ---------- pain → answer ---------- */
+.pa{border:1px solid var(--rule); background:var(--surface); display:grid; grid-template-columns:1fr 1fr}
+.pa > div{padding:15px 18px; border-bottom:1px solid var(--rule)}
+.pa > div:nth-child(odd){border-right:1px solid var(--rule)}
+.pa > div:nth-last-child(-n+2){border-bottom:0}
+.pa .said{font-style:italic; color:var(--ink-2); font-size:.95rem}
+.pa .ans{font-family:"Bricolage Grotesque",sans-serif; font-weight:500; font-size:.94rem; background:var(--surface-2)}
+.pa-head{
+  font-family:"IBM Plex Mono",monospace!important; font-size:.63rem!important; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); background:var(--surface-2)!important;
+  font-style:normal!important; font-weight:600!important; padding:9px 18px!important;
+}
+
+/* ---------- wireframe ---------- */
+.wf{display:flex; flex-direction:column; gap:5px; margin-top:8px}
+.wf-row{
+  display:grid; grid-template-columns:34px 1.25fr 1.35fr auto; gap:0;
+  border:1px solid var(--rule); background:var(--surface); align-items:stretch;
+}
+.wf-row > *{padding:12px 14px}
+.wf-i{
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem; font-weight:600; color:var(--ink-3);
+  background:var(--surface-2); border-right:1px solid var(--rule); display:flex;
+  align-items:center; justify-content:center; padding:12px 0; font-variant-numeric:tabular-nums;
+}
+.wf-name{border-right:1px solid var(--rule)}
+.wf-name h4{margin-bottom:3px}
+.wf-name span{font-family:"IBM Plex Mono",monospace; font-size:.63rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3)}
+.wf-job{font-size:.9rem; color:var(--ink-2); border-right:1px solid var(--rule)}
+.wf-cta{display:flex; align-items:center; justify-content:flex-end; min-width:96px}
+.wf-row.key{border-color:var(--accent); border-width:2px}
+.wf-row.key .wf-i{background:var(--accent-soft); color:var(--accent-ink); border-right-color:var(--accent-line)}
+@media (max-width:760px){
+  .wf-row{grid-template-columns:30px 1fr}
+  .wf-name,.wf-job{border-right:0}
+  .wf-i{grid-row:1/4}
+  .wf-cta{justify-content:flex-start; padding-top:0}
+  .wf-job{padding-top:0}
+}
+
+/* ---------- copy blocks ---------- */
+.copy{border-left:3px solid var(--accent); background:var(--surface); padding:16px 20px; margin:14px 0}
+.copy .eyebrow{margin-bottom:9px}
+.copy .h{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.5rem; line-height:1.1; letter-spacing:-.02em; margin-bottom:7px}
+.copy .s{color:var(--ink-2); margin:0}
+.copy .alt{margin:11px 0 0; padding-top:11px; border-top:1px dashed var(--rule-2); font-size:.9rem; color:var(--ink-3)}
+
+/* ---------- lists ---------- */
+ul.clean{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px}
+ul.clean li{padding-left:20px; position:relative; font-size:.96rem}
+ul.clean li::before{
+  content:""; position:absolute; left:0; top:.62em; width:7px; height:7px;
+  background:var(--accent); 
+}
+ul.clean.q li::before{background:var(--cyan)}
+ol.steps{list-style:none; padding:0; margin:0; counter-reset:s; display:flex; flex-direction:column; gap:0}
+ol.steps li{
+  counter-increment:s; display:flex; gap:16px; padding:14px 0;
+  border-bottom:1px solid var(--rule);
+}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero); font-family:"IBM Plex Mono",monospace;
+  font-size:.72rem; font-weight:600; color:var(--accent-ink); flex:0 0 24px; padding-top:.25em;
+}
+ol.steps p{margin:4px 0 0; font-size:.93rem; color:var(--ink-2)}
+
+/* ---------- callout ---------- */
+.callout{border:2px solid var(--ink); background:var(--surface); padding:24px 26px; margin:22px 0}
+.callout h3{margin-bottom:9px}
+.callout p:last-child{margin-bottom:0}
+.callout.q{border-color:var(--cyan)}
+
+/* ---------- footer ---------- */
+footer{border-top:2px solid var(--ink); background:var(--surface); padding:34px 0 46px; margin-top:0}
+footer .jobline{color:var(--ink-3)}
+.srcs{font-size:.83rem; color:var(--ink-3); margin-top:14px; line-height:1.75}
+.srcs a{color:var(--ink-2); text-decoration-color:var(--rule-2)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="jobline">
+      <span>Job <b>CUP-LP-01</b></span>
+      <span>Client <b>Cupco Pty Ltd</b></span>
+      <span>Stage <b>Strategy &amp; structure</b></span>
+      <span>Date <b>1 Sep 2026</b></span>
+    </div>
+    <h1>Stop making cafés<br>enquire <span class="tint">blind.</span></h1>
+    <p class="lede">A conversion plan for a Cupco landing page. The current site does one thing wrong that outweighs everything else — it never says what a box of branded cups costs. Fix that, finish the trust story, and give people three ways to say yes.</p>
+    <div class="specstrip">
+      <div><span class="k">Goal</span><span class="v">Form · Phone · Email</span></div>
+      <div><span class="k">Audience</span><span class="v">Indie café owners</span></div>
+      <div><span class="k">Sections</span><span class="v">13</span></div>
+      <div><span class="k">Primary CTA</span><span class="v">Get my price</span></div>
+      <div><span class="k">Status</span><span class="v">Awaiting stimulus</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- 01 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <div><p class="eyebrow">The business</p><h2>What Cupco actually sells</h2></div>
+  </div>
+  <div class="prose">
+    <p>Cupco manufactures custom-printed paper coffee cups in Sydney and sells them to small hospitality businesses. The site is a four-page Wix build: a homepage, a shop with four blank-stock SKUs, and policy pages. Everything custom happens by enquiry.</p>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:11px">The offer as it stands</p>
+      <ul class="clean">
+        <li><strong>1 box minimum</strong> — one carton, 1,000 cups (50/bag, 20 bags/carton)</li>
+        <li><strong>10-day lead time</strong>, framed on the hero as “Ready Next Week”</li>
+        <li><strong>Australian made</strong>, Sydney</li>
+        <li><strong>Artwork support</strong> — “our design team works with you to bring your unique brand to life”</li>
+        <li><strong>Quote within 24 hours</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:11px">Published prices (blank stock only)</p>
+      <div class="scroll" style="border:0">
+        <table style="min-width:0">
+          <tbody>
+            <tr><td>Single wall paper cup, white — 1,000pc</td><td class="num">$60.00</td></tr>
+            <tr><td>Single wall paper cup, black — 1,000pc</td><td class="num">$60.00</td></tr>
+            <tr><td>PS lid, white — 1,000pc</td><td class="num">$44.30</td></tr>
+            <tr><td>PS lid, black — 1,000pc</td><td class="num">$44.30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin:12px 0 0; font-size:.9rem; color:var(--ink-2)">No custom-print price is published anywhere on the site.</p>
+    </div>
+  </div>
+  <div class="callout">
+    <h3>The six pillars Cupco already claims</h3>
+    <p style="margin-bottom:0">Your Design · Low Order Quantities · 10 Day Lead-time · Premium Quality · Aussie Made · Unbeatable Price. These are the right six territories. Five of them are keepers. One of them — <em>Low Order Quantities</em> — is the weakest card in the deck, and section 03 explains why.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <div><p class="eyebrow">Audit</p><h2>Where the current site leaks</h2></div>
+  </div>
+  <div class="prose">
+    <p>Ranked by how much conversion each one costs. The first three are the ones that matter; the rest are cumulative friction.</p>
+  </div>
+  <div style="margin-top:20px">
+    <div class="leak"><span class="leak-n">01</span><div class="leak-b">
+      <div class="leak-t"><h4>No custom price. Anywhere.</h4><span class="tag hot">Critical</span></div>
+      <p>Every competitor publishes a “from $X” figure. Cupco asks a café owner to hand over their phone number to learn a number the market already advertises. This is the single biggest drop-off on the page, and fixing it is the whole thesis of the new page.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">02</span><div class="leak-b">
+      <div class="leak-t"><h4>The process section is unfinished</h4><span class="tag hot">Critical</span></div>
+      <p>“Our Process” renders step 1 — <em>Design</em> — and then stops. There is no step 2, 3 or 4. A visitor deciding whether to trust a stranger with $500 is looking at an abandoned page.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">03</span><div class="leak-b">
+      <div class="leak-t"><h4>Policy pages are unedited Wix placeholder text</h4><span class="tag hot">Critical</span></div>
+      <p>The shipping policy currently reads “a Shipping Policy often addresses these types of issues…”. Freight cost and delivery time are precisely the two unknowns this buyer is anxious about, and the page that should answer them is boilerplate. Same for refunds.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">04</span><div class="leak-b">
+      <div class="leak-t"><h4>The search snippet promises eco, the page delivers none</h4><span class="tag mid">High</span></div>
+      <p>The meta description says Cupco makes cups “that are environmentally friendly.” There is not one word about materials, lining, compostability or certification on the page. People who click that promise bounce.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">05</span><div class="leak-b">
+      <div class="leak-t"><h4>No sizes, no wall types, no lid compatibility</h4><span class="tag mid">High</span></div>
+      <p>8oz / 12oz / 16oz, single vs double wall, which lid fits which cup. A café owner cannot picture the order, so they can’t place it.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">06</span><div class="leak-b">
+      <div class="leak-t"><h4>Thin social proof</h4><span class="tag mid">High</span></div>
+      <p>Three testimonials, first name and initial only. No business names, no cup photos, no Google rating, no ABN, no count of cafés served. A rival leads with “Rated 4.8 stars on Google” and shows its ABN in the footer.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">07</span><div class="leak-b">
+      <div class="leak-t"><h4>No sample offer</h4><span class="tag mid">High</span></div>
+      <p>The lowest-friction yes in this category, and Cupco has nothing. Competitors ship sample packs within 24 hours and make it a headline CTA. A sample request is a qualified lead with a delivery address attached.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">08</span><div class="leak-b">
+      <div class="leak-t"><h4>One conversion path only</h4><span class="tag">Medium</span></div>
+      <p>The form is the only real ask. The phone number sits in the header and the footer but is never a button, never sticky on mobile, and never repeated beside a reason to call. Email is display text, not a link.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">09</span><div class="leak-b">
+      <div class="leak-t"><h4>No risk reversal</h4><span class="tag">Medium</span></div>
+      <p>Nothing tells the buyer what happens if the print colour comes out wrong. The obvious, free, honest guarantee — <em>we don’t print until you approve the proof</em> — is missing.</p>
+    </div></div>
+    <div class="leak"><span class="leak-n">10</span><div class="leak-b">
+      <div class="leak-t"><h4>Typo in a testimonial</h4><span class="tag">Minor</span></div>
+      <p>“Fast turnaround, great service and surprisingly <strong>welly</strong> priced.” On a page whose job is to signal that this manufacturer is careful with detail.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <div><p class="eyebrow">Market</p><h2>Where the real edge is — and it isn’t minimums</h2></div>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Supplier</th><th>Minimum</th><th>Entry price</th><th>Cost per cup</th><th>Lead time</th></tr></thead>
+      <tbody>
+        <tr><td>Cuppy</td><td class="num">500</td><td class="num">from $425 +GST</td><td class="num">≈ $0.85</td><td class="num">7–10 business days</td></tr>
+        <tr><td>Custom Coffee Cups <span class="mono" style="color:var(--ink-3);font-size:.8em">(Space Print)</span></td><td class="num">500</td><td class="num">from $467.50</td><td class="num">≈ $0.94</td><td class="num">10 days · rush 5–7 @ $150</td></tr>
+        <tr><td>My Paper Cups</td><td class="num">500</td><td class="num">not published</td><td class="num">—</td><td class="num">2–10 days</td></tr>
+        <tr><td>Gorilla Print</td><td class="num">1,000</td><td class="num">not published</td><td class="num">—</td><td class="num">10–15 working days</td></tr>
+        <tr class="us"><td>Cupco</td><td class="num">1,000 <span style="color:var(--ink-3)">(1 box)</span></td><td class="num">not published</td><td class="num">—</td><td class="num">10 days</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:24px">
+    <h3 style="margin-bottom:10px">The uncomfortable finding</h3>
+    <p><strong>“Low Order Quantities” is Cupco’s weakest claim, not its strongest.</strong> Rivals go down to 500, and some of the wider market advertises 250. A café owner who shops around will find a lower minimum within two clicks. Leading with it invites the one comparison Cupco loses.</p>
+    <h3 style="margin:26px 0 10px">The reframe</h3>
+    <p>At 1,000 cups the competition sits around <strong>$0.85–$0.94 per cup</strong>. Cupco’s blank stock at $60 per 1,000 suggests real cost headroom. If a printed box lands anywhere near <strong>$0.45–$0.55 per cup</strong>, the story writes itself — and it is a story nobody else in this market is telling, because they’re all anchored on a 500-unit price that looks small and reads expensive per cup.</p>
+    <p>So the box stops being an apology for a minimum and becomes the proposition: <strong>one box is all you have to store, and all you have to pay for.</strong> Same fact, opposite framing. It moves Cupco off the axis it loses on and onto the one it wins.</p>
+  </div>
+  <div class="callout">
+    <h3>Positioning line for the page</h3>
+    <p style="margin-bottom:0">Lead with <strong>price per cup</strong>, back it with <strong>Australian made</strong>, and use <strong>one box</strong> as the practical proof that it fits a small café — not as the headline benefit.</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <div><p class="eyebrow">Audience</p><h2>Who we’re talking to, and what’s in their head</h2></div>
+  </div>
+  <div class="grid g3" style="margin-bottom:26px">
+    <div class="card"><span class="tag hot">Primary</span><h3 style="margin:11px 0 6px">The independent café</h3><p style="margin:0;font-size:.93rem;color:var(--ink-2)">One to three sites, Sydney and NSW. Currently buying plain cups from a wholesaler and has wanted branded ones for a year. Owner-operator, decides alone, buys on their phone between services.</p></div>
+    <div class="card"><span class="tag mid">Highest intent</span><h3 style="margin:11px 0 6px">The café about to open</h3><p style="margin:0;font-size:.93rem;color:var(--ink-2)">Has a fit-out date and a logo already drawn. Deadline-driven, price-insensitive, converts fastest, and cares about one number above all others: how many days.</p></div>
+    <div class="card"><span class="tag ok">Volume</span><h3 style="margin:11px 0 6px">Roasters, trucks, venues, offices</h3><p style="margin:0;font-size:.93rem;color:var(--ink-2)">Roasters buying cups for wholesale accounts, food trucks, event caterers, offices doing a branded run. Bigger repeat orders, longer cycle. Serve them in the FAQ, don’t design the hero for them.</p></div>
+  </div>
+  <p class="eyebrow" style="margin-bottom:10px">Objection → the answer the page has to carry</p>
+  <div class="pa">
+    <div class="pa-head">What they think</div>
+    <div class="pa-head">What the page must say back</div>
+    <div class="said">“Five thousand cups won’t fit in my storeroom.”</div>
+    <div class="ans">One box. 1,000 cups. It stacks under the bench.</div>
+    <div class="said">“That’s cash I need for a grinder.”</div>
+    <div class="ans">The price, on the page, with the per-cup figure next to it.</div>
+    <div class="said">“My logo is a JPEG someone made in 2019.”</div>
+    <div class="ans">Send what you’ve got. We redraw it for print, included.</div>
+    <div class="said">“We open in three weeks.”</div>
+    <div class="ans">Ten days. Order Monday, on your counter a week Thursday.</div>
+    <div class="said">“Will the colour actually match my brand?”</div>
+    <div class="ans">You see a proof. Nothing prints until you approve it.</div>
+    <div class="said">“Is it really Australian made?”</div>
+    <div class="ans">Printed in Sydney. Here’s the factory, here’s the ABN.</div>
+    <div class="said">“Do I need compostable? My landlord asked.”</div>
+    <div class="ans">A plain answer on lining, and any certification held.</div>
+    <div class="said">“Will they leak or feel cheap?”</div>
+    <div class="ans">Board weight, double-wall option, and a free sample pack.</div>
+    <div class="said">“I enquired somewhere once and never heard back.”</div>
+    <div class="ans">A quote in 24 hours, from a person, whose number is right here.</div>
+    <div class="said">“What’s freight going to cost me?”</div>
+    <div class="ans">Published rates, or included — but never left unanswered.</div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <div><p class="eyebrow">The offer</p><h2>Sharpened</h2></div>
+  </div>
+  <div class="prose">
+    <p><strong>Core promise:</strong> Your brand on your cups, one box at a time, printed in Sydney, on your counter in ten days.</p>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:12px">Conversion paths, in priority order</p>
+      <ol class="steps">
+        <li><div><h4>Get my price</h4><p>The form. Primary CTA everywhere on the page. Never labelled “Submit”.</p></div></li>
+        <li><div><h4>Call 0416 888 639</h4><p>Click-to-call, sticky on mobile. This buyer converts by phone more than any web form predicts.</p></div></li>
+        <li><div><h4>Send a free sample pack</h4><p>The micro-conversion. Cups in hand, posted same day. Lowest-friction yes on the page and a qualified lead with an address.</p></div></li>
+        <li><div><h4>Email Info@cupco.com.au</h4><p>A real mailto link for the people who’d rather attach their artwork than fill anything in.</p></div></li>
+      </ol>
+    </div>
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:12px">Risk reversal — the three promises</p>
+      <ul class="clean">
+        <li><strong>Proof before print.</strong> Nothing goes on press until you’ve seen it and said yes. Costs Cupco nothing, removes the biggest fear.</li>
+        <li><strong>A quote in 24 hours.</strong> Already claimed on the site. Put it beside the button, not in a corner.</li>
+        <li><strong>Artwork setup included.</strong> Turns “I don’t have print-ready files” from a blocker into a reason to choose Cupco.</li>
+      </ul>
+      <p style="margin:16px 0 0; font-size:.9rem; color:var(--ink-3); border-top:1px dashed var(--rule-2); padding-top:12px">Every one of these is free to offer and already true. None require a new business decision — only that Cupco is willing to put them in writing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <div><p class="eyebrow">Architecture</p><h2>The page, top to bottom</h2></div>
+  </div>
+  <div class="prose">
+    <p>Thirteen sections. The order is deliberate: the price block sits unusually high — third — because it is the reason someone stays. Sections outlined in <span style="color:var(--accent-ink);font-weight:600">magenta</span> are the ones that don’t exist on the current site and carry most of the lift.</p>
+  </div>
+  <div class="wf">
+    <div class="wf-row"><div class="wf-i">01</div><div class="wf-name"><h4>Sticky header</h4><span>Persistent</span></div><div class="wf-job">Logo, phone as a tappable button, and “Get my price”. Collapses to phone + CTA on mobile.</div><div class="wf-cta"><span class="tag hot">Call</span></div></div>
+
+    <div class="wf-row"><div class="wf-i">02</div><div class="wf-name"><h4>Hero</h4><span>Thesis</span></div><div class="wf-job">Headline, one line of sub, three proof chips, dual CTA. Real cups with real café logos — not stock photography of a generic cup.</div><div class="wf-cta"><span class="tag hot">Form</span></div></div>
+
+    <div class="wf-row"><div class="wf-i">03</div><div class="wf-name"><h4>Trust bar</h4><span>Reassure</span></div><div class="wf-job">Australian made · cafés served · Google rating · ABN. One thin strip, immediately under the fold line.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row key"><div class="wf-i">04</div><div class="wf-name"><h4>What it costs</h4><span>New — the lever</span></div><div class="wf-job">The price table. Size, wall type, box price, per-cup figure, freight. The one section that separates this page from the current site.</div><div class="wf-cta"><span class="tag hot">Form</span></div></div>
+
+    <div class="wf-row key"><div class="wf-i">05</div><div class="wf-name"><h4>Sound familiar?</h4><span>New — agitate</span></div><div class="wf-job">Three or four of the objections from section 04, in the owner’s own words, each answered in a line.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row"><div class="wf-i">06</div><div class="wf-name"><h4>Why Cupco</h4><span>Rewrite</span></div><div class="wf-job">The existing six pillars, rewritten from features into outcomes. Reordered so price and Australian-made lead, minimums come last.</div><div class="wf-cta"><span class="tag hot">Form</span></div></div>
+
+    <div class="wf-row key"><div class="wf-i">07</div><div class="wf-name"><h4>How it works</h4><span>Finish it</span></div><div class="wf-job">Four steps with real timings, ending on a dated delivery rather than a vague one. Completes the section that currently stops at step one.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row key"><div class="wf-i">08</div><div class="wf-name"><h4>Free sample pack</h4><span>New — micro-conversion</span></div><div class="wf-job">Its own band, its own short form: name, business, address. The easiest yes on the page, placed right after the process explains what they’d be buying.</div><div class="wf-cta"><span class="tag hot">Form</span></div></div>
+
+    <div class="wf-row"><div class="wf-i">09</div><div class="wf-name"><h4>Proof</h4><span>Upgrade</span></div><div class="wf-job">The three testimonials with business names, suburbs and a photo of that café’s actual cup. Google reviews embedded if a profile exists.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row key"><div class="wf-i">10</div><div class="wf-name"><h4>Cups &amp; specs</h4><span>New</span></div><div class="wf-job">Sizes, single vs double wall, matching lids, board weight, lining, eco credentials. Answers the questions that currently force an email.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row key"><div class="wf-i">11</div><div class="wf-name"><h4>Proof before print</h4><span>New — risk reversal</span></div><div class="wf-job">One short, confident band. The guarantee stated plainly, immediately before the FAQ.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row"><div class="wf-i">12</div><div class="wf-name"><h4>Questions</h4><span>Objections</span></div><div class="wf-job">Eight FAQs, each one a purchase blocker: freight, artwork files, reorders, storage, GST, rush jobs, eco, payment terms.</div><div class="wf-cta"></div></div>
+
+    <div class="wf-row"><div class="wf-i">13</div><div class="wf-name"><h4>Three ways to start</h4><span>Close</span></div><div class="wf-job">Form, phone and email side by side, each with a reason to pick it. Then a footer that actually carries ABN, address and real policy links.</div><div class="wf-cta"><span class="tag hot">All</span></div></div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">07</span>
+    <div><p class="eyebrow">Copy direction</p><h2>Draft lines for the load-bearing sections</h2></div>
+  </div>
+  <div class="prose"><p>Written to be replaced, not preserved — but they set the register: plainspoken, specific, no packaging-industry adjectives. Every claim here is one Cupco can already make.</p></div>
+
+  <div class="copy">
+    <p class="eyebrow">02 · Hero</p>
+    <p class="h">Your cups. Your brand. One box at a time.</p>
+    <p class="s">Custom-printed paper cups from 1,000. Made in Sydney, artwork help included, on your counter in ten days.</p>
+    <p class="s" style="margin-top:9px"><span class="tag">Aussie made</span> <span class="tag">1 box minimum</span> <span class="tag">10 day turnaround</span></p>
+    <p class="alt"><strong>Alt A —</strong> “Branded coffee cups, made in Sydney. From one box.”<br><strong>Alt B —</strong> “The cups your customers carry down the street should have your name on them.”</p>
+  </div>
+
+  <div class="copy">
+    <p class="eyebrow">04 · What it costs</p>
+    <p class="h">Here’s the price. No enquiry required.</p>
+    <p class="s">A table of size × wall type × box price, with the per-cup figure in its own column and freight stated underneath. If the number can’t be fixed, publish a genuine “from” and say what moves it.</p>
+    <p class="alt">This section is the entire reason the page beats the current site. If Cupco will only publish one number, make it the per-cup figure for an 8oz single-wall box — it is the one that wins the comparison.</p>
+  </div>
+
+  <div class="copy">
+    <p class="eyebrow">05 · Sound familiar?</p>
+    <p class="h">You’ve wanted branded cups for a year. Something’s stopped you.</p>
+    <p class="s">“The minimum was five thousand.” — Ours is one box. · “The quote never came.” — Yours comes in 24 hours. · “My logo isn’t a print file.” — Send it anyway, we’ll fix it.</p>
+  </div>
+
+  <div class="copy">
+    <p class="eyebrow">07 · How it works</p>
+    <p class="h">Four steps, ten days.</p>
+    <p class="s"><strong>1. Send your logo</strong> — any format, even a photo of your sign. <strong>2. We draw the proof</strong> — back to you within 24 hours. <strong>3. You approve it</strong> — nothing prints until you do. <strong>4. We print and deliver</strong> — ten days from approval, to your door.</p>
+    <p class="alt">If the build allows it, make step four dynamic: “Approve today and your cups arrive by <em>Thursday 11 September</em>.” A real date outperforms a duration.</p>
+  </div>
+
+  <div class="copy">
+    <p class="eyebrow">08 · Sample pack</p>
+    <p class="h">Hold one before you buy a thousand.</p>
+    <p class="s">Free sample pack, posted the same day. Every size, both wall types, so you can feel the board and check the lid fit on your own machine.</p>
+  </div>
+
+  <div class="copy">
+    <p class="eyebrow">11 · Guarantee</p>
+    <p class="h">We don’t print until you say yes.</p>
+    <p class="s">You’ll see a proof of your exact cup — your colours, your logo, at size — before a single one goes on press. Change it as many times as you need. The press doesn’t start until you’re happy.</p>
+  </div>
+</section>
+
+<!-- 08 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">08</span>
+    <div><p class="eyebrow">Lead capture</p><h2>The form</h2></div>
+  </div>
+  <div class="prose">
+    <p>The current form asks for first name, last name, phone, email, business name and a message — six fields for someone who just wants a price. Every field is a chance to leave.</p>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:12px">Recommended structure</p>
+      <ul class="clean">
+        <li><strong>Two chip rows above the fields</strong> — cup size and rough quantity, tappable, nothing typed. They’re a commitment device: choosing gets people invested before they’ve given up anything.</li>
+        <li><strong>Name</strong> — one field, not two</li>
+        <li><strong>Best number to reach you</strong> — the priority field, phone keypad on mobile</li>
+        <li><strong>Email</strong></li>
+        <li><strong>Business name</strong> — qualifies the lead at no cost</li>
+        <li><strong>Anything else?</strong> — optional, clearly marked, collapsed by default</li>
+      </ul>
+    </div>
+    <div class="card">
+      <p class="eyebrow" style="margin-bottom:12px">Details that move the number</p>
+      <ul class="clean q">
+        <li>Button reads <strong>“Get my price”</strong>, never “Submit”</li>
+        <li>Under the button: <strong>“We’ll come back within 24 hours. No obligation.”</strong></li>
+        <li>Inline validation on blur, never a wall of red on submit</li>
+        <li>No captcha — use a honeypot field instead</li>
+        <li>The thank-you state does work: what happens next, the phone number for anyone impatient, and the sample-pack offer as a second yes</li>
+        <li>Route submissions to a phone as well as an inbox. A 24-hour promise fails if it’s waiting on someone opening a laptop.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout q">
+    <h3>The sample form is separate, and shorter</h3>
+    <p style="margin-bottom:0">Name, business, delivery address. Three fields. It converts people who aren’t ready to talk about money yet — and it puts a Cupco cup in the hand of someone who is about to compare it with a competitor’s.</p>
+  </div>
+</section>
+
+<!-- 09 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">09</span>
+    <div><p class="eyebrow">Mechanics</p><h2>Rules the build has to hold to</h2></div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-bottom:11px">Mobile is the page</h3>
+      <ul class="clean">
+        <li>Above the fold: headline, one line of sub, primary CTA, phone. Nothing else competes.</li>
+        <li>A sticky bottom bar carrying <em>Call</em> and <em>Get my price</em> from first scroll to last.</li>
+        <li>Tap targets 44px minimum. Owner-operators are doing this one-handed during service.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:11px">CTA discipline</h3>
+      <ul class="clean">
+        <li>The primary CTA repeats roughly every one and a half screens.</li>
+        <li>It uses the same three words every time. Varied CTA labels read as a different offer each time.</li>
+        <li>Trust sits next to the button — the 24-hour promise, the proof guarantee — not in a distant section.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:11px">Speed</h3>
+      <ul class="clean">
+        <li>Target LCP under 2.5s on 4G. The current homepage ships over 1.1MB of HTML before a single image.</li>
+        <li>Cup photography compressed hard and lazy-loaded below the fold; hero image preloaded.</li>
+        <li>If this page runs on Wix, budget for that ceiling. If it can be a standalone build, take it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:11px">Fix the foundations at the same time</h3>
+      <ul class="clean">
+        <li>Write real shipping and refund policies. They’re linked from the footer and they’re currently placeholder text.</li>
+        <li>Correct the “welly priced” testimonial.</li>
+        <li>Match the meta description to the page, or add the eco content it promises.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">10</span>
+    <div><p class="eyebrow">Measurement</p><h2>How we’ll know it worked</h2></div>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Event</th><th>Fires when</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">quote_submit</td><td>Main form submitted</td><td>The primary conversion</td></tr>
+        <tr><td class="mono">phone_click</td><td>Any tel: link tapped</td><td>Invisible without this. Likely a large share of real leads.</td></tr>
+        <tr><td class="mono">sample_submit</td><td>Sample form submitted</td><td>The micro-conversion, and a leading indicator of quotes</td></tr>
+        <tr><td class="mono">email_click</td><td>mailto: tapped</td><td>Third path, usually under-counted</td></tr>
+        <tr><td class="mono">price_view</td><td>Price table 50% in viewport</td><td>Tests whether the price block is the lever we think it is</td></tr>
+        <tr><td class="mono">scroll_50 / scroll_90</td><td>Depth thresholds</td><td>Shows where the page loses people</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose" style="margin-top:22px">
+    <p><strong>Targets.</strong> For warm paid traffic to a page this specific, 4–8% of visitors becoming leads is a reasonable band; below 2% means the offer or the price isn’t landing. Track quote-to-order separately — a page that lifts leads while dropping order rate is attracting the wrong traffic, not converting better.</p>
+    <p><strong>Use a call-tracking number.</strong> Without one, every phone lead is attributed to nothing, and the page will look like it’s underperforming while the phone rings.</p>
+  </div>
+</section>
+
+<!-- 11 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">11</span>
+    <div><p class="eyebrow">Blockers</p><h2>What I need from Cupco before final copy</h2></div>
+  </div>
+  <div class="prose"><p>Structure and mechanics don’t depend on these. Final copy does — and the first one is the whole plan.</p></div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <span class="tag hot">Blocking</span>
+      <h3 style="margin:11px 0 8px">Pricing</h3>
+      <ul class="clean">
+        <li>Price per 1,000 for each size and wall type</li>
+        <li>Freight — included, zoned, or flat?</li>
+        <li>Is there a second-box or reorder discount?</li>
+        <li>If no fixed price is possible, what’s the honest “from”, and what moves it?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag mid">Needed</span>
+      <h3 style="margin:11px 0 8px">Product facts</h3>
+      <ul class="clean">
+        <li>Sizes actually offered — 8, 12, 16oz?</li>
+        <li>Single wall only, or double wall too?</li>
+        <li>Lining: PE, PLA, or aqueous?</li>
+        <li>Any certification — AS 4736, AS 5810, Seedling?</li>
+        <li>Which lids fit which cups</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag mid">Needed</span>
+      <h3 style="margin:11px 0 8px">Proof assets</h3>
+      <ul class="clean">
+        <li>ABN</li>
+        <li>Real customer names, businesses and suburbs — with permission</li>
+        <li>Photos of actual printed cups on actual counters</li>
+        <li>Is there a Google Business Profile with reviews to link?</li>
+        <li>Roughly how many cafés has Cupco printed for?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag ok">Confirm</span>
+      <h3 style="margin:11px 0 8px">Operational commitments</h3>
+      <ul class="clean">
+        <li>Can the 24-hour quote promise be held, including weekends?</li>
+        <li>Can sample packs go out same-day?</li>
+        <li>Is a rush option available, and what does it cost?</li>
+        <li>Who answers 0416 888 639, and between what hours?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">12</span>
+    <div><p class="eyebrow">Next</p><h2>Where this stops and you start</h2></div>
+  </div>
+  <div class="prose">
+    <p>This plan deliberately says nothing about how the page should look. Colour, type, imagery, motion and layout treatment are all open, waiting on the stimulus you’re bringing.</p>
+    <p>What’s fixed is the skeleton underneath: <strong>thirteen sections in that order</strong>, <strong>three conversion paths</strong>, <strong>price high on the page</strong>, and <strong>the free sample pack as the second yes</strong>. Any visual direction can be draped over that frame without weakening it.</p>
+    <p style="margin-bottom:0">Send the stimulus and I’ll build the page against it — copy in place, forms wired, events instrumented, both themes handled.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="jobline">
+      <span>Cupco Pty Ltd · Sydney</span>
+      <span>0416 888 639</span>
+      <span>Info@cupco.com.au</span>
+      <span><b>CUP-LP-01</b></span>
+    </div>
+    <p class="srcs">
+      Researched from <a href="https://www.cupco.com.au/">cupco.com.au</a> (homepage, shop, product and policy pages, sitemap and meta) and benchmarked against
+      <a href="https://cuppy.com.au/">Cuppy</a>,
+      <a href="https://customcoffeecups.com.au/">Custom Coffee Cups</a>,
+      <a href="https://mypapercups.com.au/">My Paper Cups</a> and
+      <a href="https://gorillaprint.com.au/catering/paper-cups/">Gorilla Print</a>.
+      Competitor pricing and lead times as published on 1 September 2026 and subject to change.
+    </p>
+  </div>
+</footer>
