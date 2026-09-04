@@ -30,7 +30,11 @@ Form controls are raised to 16px under 720px wide. iOS Safari zooms the viewport
 
 Below 720px the layout diverges from desktop in a few deliberate ways, all confined to a single media query at the end of the stylesheet:
 
-- **Hero cups.** `.hero-cups` carries a crop of the hero photo centred on the three cups. On phones it sits absolutely behind `.hero-copy`, heavily blurred and at low opacity, as a wash rather than a distinct image. It is scaled slightly past its box so the blur's soft edge falls outside, and clipped so it cannot bleed past the hero.
+- **Hero cups.** `.hero-cups` carries a crop of the hero photo centred on the three cups. On phones it sits absolutely behind `.hero-copy`, blurred and semi-transparent, with the full-bleed `.hero-photo-bg` hidden — that photo is a narrow crop of the same shot and layering the two muddied both.
+
+  It uses `object-fit: contain`, not `cover`, so the whole photo stays in frame; `cover` crops to fill the box, which is why only part of it ever showed. No transform either, since scaling pushes the edges back out of view.
+
+  Blur and opacity are a contrast trade-off, measured against the sub-copy background with the text hidden: 18px/0.55 gives a median contrast of 4.58:1, against 3.85:1 at 14px/0.70 and 3.17:1 at 24px/0.85. Raising the image's presence costs legibility, so change both together and re-measure.
 - **Wall comparison.** The source is one wide image with both cups side by side, so its labels are unreadable at this width. `.wall-compare-stack` carries the two halves split either side of the "VS" badge and stacks them, roughly doubling their rendered size. Desktop still uses the single original.
 - **Feature strip.** "Sydney Made" is fifth of five in a two-column grid, so it spans the full row instead of orphaning.
 - **Process steps and stats** are centred two-by-two. Their icons are `display:block`, so centring needs auto margins, not `text-align`.

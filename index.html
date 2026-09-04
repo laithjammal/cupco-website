@@ -604,11 +604,17 @@
     }
     .hero-cups img{
       width:100%; height:100%;
-      object-fit:cover; object-position:58% 50%;
-      transform:scale(1.12);
-      filter:blur(26px);
-      opacity:.34;
+      /* contain, not cover: the whole photo stays in frame behind the copy.
+         cover crops it to fill the box, which is why only part ever showed.
+         No transform either — scaling pushes the edges back out of view. */
+      object-fit:contain; object-position:50% 50%;
+      transform:none;
+      filter:blur(18px);
+      opacity:.55;
     }
+    /* The full-bleed photo is a narrow crop of the same shot, and layering the
+       two muddied both. Phones show the cups wash alone. */
+    .hero-photo-bg{ display:none; }
     .hero-copy{ position:relative; z-index:1; }
     .hero-inner{ padding-bottom:64px; }
 
