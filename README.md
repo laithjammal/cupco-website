@@ -60,6 +60,24 @@ Behaviour:
 - Formspree requires the destination address to be **confirmed** before it delivers anything.
 - Spam: Formspree supports a `_gotcha` honeypot field, not currently implemented.
 
+### Diagnosing a form that falls back to email
+
+The fallback is silent by design — a visitor should never see an error — so the
+console carries the diagnosis instead. On load the page logs which delivery path
+is active, and a failed submission logs why it fell back.
+
+The most common cause is a **stale cached page**: GitHub Pages serves with
+`cache-control: max-age=600`, so a tab opened before a deploy keeps the old
+behaviour for up to ten minutes. A quick visual check without opening DevTools:
+the note under the submit button reads *"Submitting opens a pre-filled email..."*
+on the `mailto:` version and *"We usually reply within one business day..."* once
+an endpoint is active.
+
+Note that Formspree answers `200 {"ok":true}` even when the destination address
+has not been confirmed. The page reports success and nothing is delivered, so a
+successful-looking submission is not proof that mail is arriving — confirm the
+address, then verify a real submission lands in the inbox.
+
 ## Deployment
 
 GitHub Pages serves this repo from the `main` branch, root folder. `index.html` must stay at the repository root under that exact name.

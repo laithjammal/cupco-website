@@ -1583,6 +1583,9 @@
   // page — the custom success panel below depends on staying on this page.
   // Set to '' to fall back to the mailto: flow.
   var FORM_ENDPOINT = 'https://formspree.io/f/xwlkqlrv';
+  if (window.console && console.info) {
+    console.info('[cupco] Quote delivery:', FORM_ENDPOINT ? 'endpoint (' + FORM_ENDPOINT + ')' : 'mailto: fallback');
+  }
 
   // ADS_CONVERSION_ID: the send_to value from your Google Ads conversion
   // action, e.g. 'AW-123456789/AbC-D_efGhIjKlMnOp'. Requires the Google tag
@@ -1744,10 +1747,16 @@
       body: data,
       headers: { 'Accept': 'application/json' }
     }).then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (!res.ok) throw new Error('endpoint returned HTTP ' + res.status);
       reportConversion();
       finish(false);
-    }).catch(function () {
+    }).catch(function (err) {
+      // The visitor still gets a working path, but a silent fallback hides
+      // real outages — a form that quietly stops reporting conversions looks
+      // identical to one nobody is filling in. Leave a trace in the console.
+      if (window.console && console.warn) {
+        console.warn('[cupco] Quote form fell back to email. Reason:', err && err.message ? err.message : err);
+      }
       sendViaEmail();
     });
   });
