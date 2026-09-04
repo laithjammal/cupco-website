@@ -1,0 +1,37 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+secrets.yml
+credentials.json
+
+# API keys / tokens in common config spots
+.npmrc
+.netrc
+*.token
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Local scratch (screenshots, debug scripts, working drafts) — not part of the deployed site
+*.png
+*.jpg
+*.jpeg
+!assets/**
+verify_*.py
+shot*.py
+check_*.py
+*_check.py
+preview*.html
+cupco_readable*.txt
+*.json
+!package.json
