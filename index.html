@@ -1,4 +1,5 @@
 <title>Custom Printed Paper Cups Sydney | Cupco</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- TEMPORARY: staging deployment. Remove this tag when the site goes live
      on new.cupco.com.au, or the real site will never appear in search. -->
 <meta name="robots" content="noindex, nofollow">
@@ -562,6 +563,18 @@
   .hero-ctas .btn-primary:hover,.hero-ctas .btn-primary:focus-visible{animation-play-state:paused;}
   @keyframes ctaGlow{0%,100%{box-shadow:0 0 0 0 rgba(157,192,251,.55);}50%{box-shadow:0 0 0 10px rgba(157,192,251,0);}}
   @media (prefers-reduced-motion: reduce){ .hero-ctas .btn-primary{animation:none;} }
+
+  /* iOS Safari zooms the viewport when a focused control's text is under 16px,
+     and does not zoom back out — every field tap would jog the layout. Raise
+     the controls to 16px on small screens only; the desktop sizing is unchanged. */
+  @media (max-width: 720px) {
+    #quoteForm input[type="text"],
+    #quoteForm input[type="tel"],
+    #quoteForm input[type="email"],
+    #quoteForm textarea {
+      font-size: 16px;
+    }
+  }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

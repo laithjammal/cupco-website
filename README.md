@@ -20,6 +20,16 @@ https://claude.ai/code/artifact/5311e2fe-2b68-449e-857b-2321f3fe6ea6
 
 `index.html` is a single self-contained HTML file (inline CSS and JS, no build step, images base64-embedded — hence ~2.5 MB). No build tools, no dependencies. Open it directly in a browser to preview.
 
+## Mobile
+
+The page ships a `<meta name="viewport" content="width=device-width, initial-scale=1">` tag. **Do not lose it.**
+
+The CSS carries 37 responsive breakpoints, but without that tag a mobile browser assumes a 980px viewport and scales the whole page down — on a 375px phone that renders everything at roughly 38% size, and not one breakpoint fires. The design looks broken while the CSS is perfectly fine.
+
+This matters here because `index.html` is exported from a Claude Artifact, and the artifact host supplies its own viewport tag in the page wrapper. A fresh export will not include one. **Re-add it after any re-export.**
+
+Form controls are raised to 16px under 720px wide. iOS Safari zooms the viewport when a focused control's text is smaller than that and does not zoom back out, so every field tap would jog the layout. Desktop sizing is unchanged.
+
 ## Structure
 
 - Hero section with quote CTA
