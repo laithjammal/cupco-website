@@ -39,6 +39,7 @@ Below 720px the layout diverges from desktop in a few deliberate ways, all confi
 - **Feature strip.** "Sydney Made" is fifth of five in a two-column grid, so it spans the full row instead of orphaning.
 - **Process steps and stats** are centred two-by-two. Their icons are `display:block`, so centring needs auto margins, not `text-align`.
 - **The black cup illustration** (`.power-illustration`) is hidden.
+- **Mobile menu.** `.mobile-menu` sits on `.wrap`, but its own `padding` shorthand carried `0` on the horizontal sides, cancelling `.wrap`'s `0 24px` because it comes later in the stylesheet. That ran the menu edge to edge — link text touching the screen border, the Get A Quote button's rounded ends clipped. The shorthand now names 24px explicitly. Its links are centred; the component is mobile-only, so this lives on the base rule rather than in the media query.
 
 The closing headline is capped at 1.4rem on phones — the largest size that still breaks over two even lines at 360px, the narrowest common width. At 1.45rem it drops to three ragged lines.
 

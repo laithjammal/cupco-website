@@ -197,9 +197,12 @@
   .menu-toggle{width:44px;height:44px;border-radius:99px;border:1.5px solid var(--border);background:none;color:var(--text);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;}
   .desktop-only{display:flex;}
   .mobile-only{display:none;}
-  .mobile-menu{display:none;padding:6px 0 20px 0;border-top:1px solid var(--border-soft);}
+  /* The horizontal 0s in this shorthand were cancelling .wrap's 0 24px, so
+     the menu ran edge to edge: link text touched the screen border and the
+     Get A Quote button had its rounded ends clipped. Keep the side padding. */
+  .mobile-menu{display:none;padding:6px 24px 20px 24px;border-top:1px solid var(--border-soft);}
   .mobile-menu.open{display:block;}
-  .mobile-menu a{display:flex;align-items:center;min-height:46px;font-weight:700;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;color:var(--text-soft);text-decoration:none;border-bottom:1px solid var(--border-soft);}
+  .mobile-menu a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:46px;font-weight:700;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;color:var(--text-soft);text-decoration:none;border-bottom:1px solid var(--border-soft);}
   .mobile-menu a:last-child{border-bottom:none;}
   .mobile-menu .btn{margin-top:14px;}
   @media (max-width:900px){ .nav-links{display:none;} }
