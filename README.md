@@ -30,6 +30,16 @@ This matters here because `index.html` is exported from a Claude Artifact, and t
 
 Form controls are raised to 16px under 720px wide. iOS Safari zooms the viewport when a focused control's text is smaller than that and does not zoom back out, so every field tap would jog the layout. Desktop sizing is unchanged.
 
+Below 720px the layout diverges from desktop in a few deliberate ways, all confined to a single media query at the end of the stylesheet:
+
+- **Hero cups.** The hero photo is 2192x941. Cover-cropping it over the full hero height leaves a slice roughly 14% of the image wide — far too narrow to contain the three cups, which span about 37%. Rather than fight that, phones get `.hero-cups`: a crop of the same photo placed in the flow under the CTAs. The full-bleed photo stays as background atmosphere.
+- **Wall comparison.** The source is one wide image with both cups side by side, so its labels are unreadable at this width. `.wall-compare-stack` carries the two halves split either side of the "VS" badge and stacks them, roughly doubling their rendered size. Desktop still uses the single original.
+- **Feature strip.** "Sydney Made" is fifth of five in a two-column grid, so it spans the full row instead of orphaning.
+- **Process steps and stats** are centred two-by-two. Their icons are `display:block`, so centring needs auto margins, not `text-align`.
+- **The black cup illustration** (`.power-illustration`) is hidden.
+
+Two sections had their padding moved off inline `style` attributes into the stylesheet. Inline styles outrank every selector, so per-breakpoint adjustment was otherwise impossible without `!important`. Desktop values are unchanged.
+
 ## Structure
 
 - Hero section with quote CTA
