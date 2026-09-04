@@ -1577,13 +1577,12 @@
   if (segmentClose) segmentClose.addEventListener('click', closeSegmentDetail);
 
   // ── Quote delivery configuration ────────────────────────────────────
-  // FORM_ENDPOINT: paste the POST URL from your form provider.
-  //   Formspree -> https://formspree.io/f/XXXXXXXX  (Formspree dashboard)
-  //   Basin     -> https://usebasin.com/f/XXXXXXXX
-  //   Getform   -> https://getform.io/f/XXXXXXXX
-  // Leave empty and the form keeps its original mailto: behaviour, so the
-  // page is never broken while the endpoint is being set up.
-  var FORM_ENDPOINT = '';
+  // FORM_ENDPOINT: the form provider's POST URL. Submissions are sent by
+  // fetch() with an Accept: application/json header, which is what makes
+  // Formspree respond with JSON instead of redirecting to its own thank-you
+  // page — the custom success panel below depends on staying on this page.
+  // Set to '' to fall back to the mailto: flow.
+  var FORM_ENDPOINT = 'https://formspree.io/f/xwlkqlrv';
 
   // ADS_CONVERSION_ID: the send_to value from your Google Ads conversion
   // action, e.g. 'AW-123456789/AbC-D_efGhIjKlMnOp'. Requires the Google tag
@@ -1732,8 +1731,13 @@
 
     if (!FORM_ENDPOINT) { sendViaEmail(); return; }
 
+    // Provider fields. _subject titles the notification email; _replyto makes
+    // Reply in the inbox go straight to the enquirer rather than to the form
+    // service. orderTypeSummary flattens the checkbox group into one readable
+    // line, since the raw repeated values are awkward to scan in an email.
     data.append('orderTypeSummary', orderTypes);
-    data.append('_subject', 'Quote request from ' + data.get('firstName') + ' ' + data.get('lastName'));
+    data.append('_subject', 'Quote request from ' + data.get('firstName') + ' ' + data.get('lastName') + ' (' + data.get('business') + ')');
+    data.append('_replyto', data.get('email'));
 
     fetch(FORM_ENDPOINT, {
       method: 'POST',

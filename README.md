@@ -33,21 +33,32 @@ https://claude.ai/code/artifact/5311e2fe-2b68-449e-857b-2321f3fe6ea6
 
 ## Quote form delivery
 
-Two constants at the top of the form script in `index.html` control this:
+Submissions go to **Formspree** (`https://formspree.io/f/xwlkqlrv`) by `fetch()` POST, with an `Accept: application/json` header so Formspree returns JSON instead of redirecting to its own thank-you page. The page keeps the visitor on its own success panel.
 
-| Constant | Purpose |
-|---|---|
-| `FORM_ENDPOINT` | POST URL from a hosted form provider (Formspree, Basin, Getform). |
-| `ADS_CONVERSION_ID` | `send_to` value from a Google Ads conversion action, e.g. `AW-123456789/AbC-D_efGh`. Requires gtag.js on the page. |
+Two constants at the top of the form script in `index.html` control delivery:
+
+| Constant | Value | Purpose |
+|---|---|---|
+| `FORM_ENDPOINT` | set | Provider POST URL. Set to `''` to revert to the `mailto:` flow. |
+| `ADS_CONVERSION_ID` | empty | `send_to` from a Google Ads conversion action, e.g. `AW-123456789/AbC-D_efGh`. **Also requires the gtag.js snippet, which is not yet on the page.** |
+
+Fields sent beyond the visible inputs:
+
+- `orderTypeSummary` — the checkbox group flattened to one readable line
+- `_subject` — names the enquirer and their business, so the inbox is scannable
+- `_replyto` — set to the enquirer's address, so **Reply** goes to them, not to Formspree
 
 Behaviour:
 
-- **Both empty** (current state) — the form opens a pre-filled email to `info@cupco.com.au` in the visitor's own mail client. Works, but produces no conversion data and silently fails for visitors with no mail client configured.
-- **`FORM_ENDPOINT` set** — the form POSTs directly, shows a "Request sent." confirmation, and rewrites the form note accordingly.
-- **`ADS_CONVERSION_ID` set** — a conversion fires on a confirmed server-side accept only. It deliberately does **not** fire on the email path: opening a mail client is not a lead.
-- **Endpoint configured but failing** — falls back to the email path rather than dead-ending. A paid click should never hit a broken form.
+- **Success** — shows "Request sent.", rewrites the form note, and fires the Google Ads conversion if `ADS_CONVERSION_ID` is set.
+- **Any non-2xx, or a network failure** — silently falls back to the `mailto:` flow. A paid click never dead-ends on a broken form.
+- **Conversions never fire on the email path.** Opening a mail client is not a lead, and counting it as one would corrupt bidding data.
 
-All four paths are covered by the checks described under [Testing](#testing).
+### Limits and failure modes
+
+- Formspree's free tier is **50 submissions/month**. Beyond that submissions are rejected, and the page quietly falls back to email — leads still arrive, but conversion tracking stops. Worth watching if campaigns scale.
+- Formspree requires the destination address to be **confirmed** before it delivers anything.
+- Spam: Formspree supports a `_gotcha` honeypot field, not currently implemented.
 
 ## Deployment
 
