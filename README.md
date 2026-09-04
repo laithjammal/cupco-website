@@ -4,9 +4,11 @@ Landing page for **Cupco**, a Sydney-based custom paper cup manufacturer. Built 
 
 ## Live page
 
-Published via GitHub Pages on a custom domain:
+Published via GitHub Pages:
 
-https://new.cupco.com.au
+https://laithjammal.github.io/cupco-website/
+
+The custom domain `new.cupco.com.au` is planned but not active yet — see Deployment below.
 
 The page also exists as a Claude Artifact, which is where day-to-day edits happen:
 
@@ -31,7 +33,14 @@ https://claude.ai/code/artifact/5311e2fe-2b68-449e-857b-2321f3fe6ea6
 
 GitHub Pages serves this repo from the `main` branch, root folder. `index.html` must stay at the repository root under that exact name for the site to resolve.
 
-The `CNAME` file pins the custom domain `new.cupco.com.au`. That domain only resolves once a DNS `CNAME` record for `new` points at `laithjammal.github.io` at whoever hosts `cupco.com.au`. Deleting or renaming the `CNAME` file reverts the site to `laithjammal.github.io/cupco-website`.
+### Custom domain (not yet active)
+
+The site is intended to live at `new.cupco.com.au`. Two things are needed to switch it over:
+
+1. Add a DNS `CNAME` record for `new` pointing at `laithjammal.github.io`, at whoever manages `cupco.com.au` DNS.
+2. Add a `CNAME` file at the repository root containing exactly `new.cupco.com.au`.
+
+Do them in that order. If the `CNAME` file is present before DNS resolves, GitHub redirects the `github.io` URL to the custom domain and the site becomes unreachable at both addresses until the record propagates.
 
 ## Notes
 
