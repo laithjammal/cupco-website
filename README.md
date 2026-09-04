@@ -20,30 +20,27 @@ https://claude.ai/code/artifact/5311e2fe-2b68-449e-857b-2321f3fe6ea6
 
 ## Mobile
 
-The page ships a `<meta name="viewport" content="width=device-width, initial-scale=1">` tag. **Do not lose it.**
+Phones get a **separate layout**, not a restyling of the desktop one. Both live in `index.html`:
 
-The CSS carries 37 responsive breakpoints, but without that tag a mobile browser assumes a 980px viewport and scales the whole page down — on a 375px phone that renders everything at roughly 38% size, and not one breakpoint fires. The design looks broken while the CSS is perfectly fine.
+- `.m-root` holds the phone design. It is `display:none` by default and shown only under 720px.
+- Under 720px the desktop chrome (`#siteHeader`, `#main`, the footer, the sticky bar) is hidden.
+- Above 720px the reverse applies and the desktop layout renders exactly as before.
 
-This matters here because `index.html` is exported from a Claude Artifact, and the artifact host supplies its own viewport tag in the page wrapper. A fresh export will not include one. **Re-add it after any re-export.**
+All phone-design classes are prefixed `m-` so they cannot collide with the desktop stylesheet.
 
-Form controls are raised to 16px under 720px wide. iOS Safari zooms the viewport when a focused control's text is smaller than that and does not zoom back out, so every field tap would jog the layout. Desktop sizing is unchanged.
+### The quote form is never duplicated
 
-Below 720px the layout diverges from desktop in a few deliberate ways, all confined to a single media query at the end of the stylesheet:
+The phone design deliberately contains **no form of its own**. A small script moves the single `.form-card` into `#m-form-slot` under 720px and back out above it. Two forms sharing field ids would break validation and submission, so there is only ever one in the document. Event listeners are bound to the nodes, so they survive the move — validation, the Formspree POST, the email fallback and the conversion hook all keep working untouched.
 
-- **Hero cups.** `.hero-cups` carries a crop of the hero photo centred on the three cups. On phones it sits absolutely behind `.hero-copy`, blurred and semi-transparent, with the full-bleed `.hero-photo-bg` hidden — that photo is a narrow crop of the same shot and layering the two muddied both.
+### Viewport tag
 
-  It uses `object-fit: contain`, not `cover`, so the whole photo stays in frame; `cover` crops to fill the box, which is why only part of it ever showed. No transform either, since scaling pushes the edges back out of view.
+`<meta name="viewport" content="width=device-width, initial-scale=1">` must stay. Without it a mobile browser assumes a 980px viewport and scales everything down, and the 720px breakpoint never fires — the phone design would simply never appear. `index.html` originates from a Claude Artifact whose host page supplies its own viewport tag, so a fresh export will not include one. **Re-add it after any re-export.**
 
-  Blur and opacity are a contrast trade-off, measured against the sub-copy background with the text hidden: 18px/0.55 gives a median contrast of 4.58:1, against 3.85:1 at 14px/0.70 and 3.17:1 at 24px/0.85. Raising the image's presence costs legibility, so change both together and re-measure.
-- **Wall comparison.** The source is one wide image with both cups side by side, so its labels are unreadable at this width. `.wall-compare-stack` carries the two halves split either side of the "VS" badge and stacks them, roughly doubling their rendered size. Desktop still uses the single original.
-- **Feature strip.** "Sydney Made" is fifth of five in a two-column grid, so it spans the full row instead of orphaning.
-- **Process steps and stats** are centred two-by-two. Their icons are `display:block`, so centring needs auto margins, not `text-align`.
-- **The black cup illustration** (`.power-illustration`) is hidden.
-- **Mobile menu.** `.mobile-menu` sits on `.wrap`, but its own `padding` shorthand carried `0` on the horizontal sides, cancelling `.wrap`'s `0 24px` because it comes later in the stylesheet. That ran the menu edge to edge — link text touching the screen border, the Get A Quote button's rounded ends clipped. The shorthand now names 24px explicitly. Its links are centred; the component is mobile-only, so this lives on the base rule rather than in the media query.
+Form controls are 16px under 720px. iOS Safari zooms the viewport when a focused control's text is smaller and does not zoom back out.
 
-The closing headline is capped at 1.4rem on phones — the largest size that still breaks over two even lines at 360px, the narrowest common width. At 1.45rem it drops to three ragged lines.
+### Images
 
-Four sections had their padding moved off inline `style` attributes into the stylesheet. Inline styles outrank every selector, so per-breakpoint adjustment was otherwise impossible without `!important`. Desktop values are unchanged.
+The phone design reuses images already embedded in the page rather than carrying copies: the two wall-comparison halves were moved out of the old mobile stack into it, and the square hero is a crop of the existing hero photo. Desktop still uses the untouched 1400x829 comparison original.
 
 ## Structure
 
