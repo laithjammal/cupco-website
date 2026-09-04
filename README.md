@@ -35,11 +35,21 @@ GitHub Pages serves this repo from the `main` branch, root folder. `index.html` 
 
 ### Search indexing
 
-`robots.txt` currently blocks all crawlers. The `github.io` address is a staging
-URL, and letting it be indexed would put a near-duplicate of the Cupco marketing
-page into search results, competing with `cupco.com.au`.
+Indexing is blocked two ways, because the site is currently served from a
+subpath rather than a domain root:
 
-This is deliberate and temporary — see the switchover checklist below.
+- **`<meta name="robots" content="noindex, nofollow">`** near the top of
+  `index.html`. This is the one doing the work today. Crawlers only honour
+  `robots.txt` at a domain root, so a `robots.txt` under
+  `laithjammal.github.io/cupco-website/` is ignored — only
+  `laithjammal.github.io/robots.txt` would count, and that path belongs to a
+  different repository.
+- **`robots.txt`** at the repository root. Inert on the current staging URL,
+  but becomes the effective control once the site moves to
+  `new.cupco.com.au`, where the repo root *is* the domain root.
+
+Both exist so the block holds before and after the domain switch. Both are
+deliberate and temporary — see the checklist below.
 
 ### Custom domain (not yet active)
 
@@ -48,7 +58,7 @@ The site is intended to live at `new.cupco.com.au`. To switch it over, in this o
 1. Add a DNS `CNAME` record for `new` pointing at `laithjammal.github.io`, at whoever manages `cupco.com.au` DNS.
 2. Wait for it to resolve.
 3. Add a `CNAME` file at the repository root containing exactly `new.cupco.com.au`.
-4. **Remove or relax `robots.txt`**, or the live site will stay invisible to search engines.
+4. **Remove the `noindex` meta tag from `index.html` and remove or relax `robots.txt`**, or the live site will stay invisible to search engines. Both, not one.
 
 Order matters for steps 1–3: if the `CNAME` file is present before DNS resolves, GitHub redirects the `github.io` URL to the custom domain and the site becomes unreachable at both addresses until the record propagates.
 
