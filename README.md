@@ -100,6 +100,22 @@ has not been confirmed. The page reports success and nothing is delivered, so a
 successful-looking submission is not proof that mail is arriving — confirm the
 address, then verify a real submission lands in the inbox.
 
+## Analytics and conversion tracking
+
+The Google tag (`gtag.js`) sits near the top of `index.html`, configured for GA4 property **G-Z2G205R46D**. The same tag carries Google Ads conversions — nothing further needs adding when those are switched on.
+
+| What | Status |
+|---|---|
+| GA4 page views and sessions | Live |
+| `generate_lead` event on a confirmed submission | Live |
+| Google Ads conversion | **Dormant** — needs `ADS_CONVERSION_ID` |
+
+`reportConversion()` runs only on a confirmed Formspree accept. It fires `generate_lead` into GA4 unconditionally, then the Ads conversion if `ADS_CONVERSION_ID` is set. It never runs on the `mailto:` fallback: opening a mail client is not a lead, and counting it as one would corrupt both the GA4 numbers and Ads bidding.
+
+To switch Ads on, set `ADS_CONVERSION_ID` to the `send_to` value from the conversion action (`AW-123456789/AbC-D_efGh`). The tag is already present, so no snippet is needed.
+
+The `noindex` tag does not affect any of this — it governs search indexing, not analytics.
+
 ## Deployment
 
 GitHub Pages serves this repo from the `main` branch, root folder. `index.html` must stay at the repository root under that exact name.

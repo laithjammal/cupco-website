@@ -3,6 +3,17 @@
 <!-- TEMPORARY: staging deployment. Remove this tag when the site goes live
      on new.cupco.com.au, or the real site will never appear in search. -->
 <meta name="robots" content="noindex, nofollow">
+
+<!-- Google tag (gtag.js) — GA4 property G-Z2G205R46D.
+     The same tag carries Google Ads conversions once ADS_CONVERSION_ID is set
+     in the quote-form script below. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2G205R46D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Z2G205R46D');
+</script>
 <meta name="description" content="Custom printed paper cups made in Sydney for caf&eacute;s, corporate events and weddings. Low minimums, fast turnaround, free digital mockups. Get a free quote today.">
 <meta property="og:title" content="Custom Printed Paper Cups Sydney | Cupco">
 <meta property="og:description" content="Custom printed paper cups made in Sydney for caf&eacute;s, corporate events and weddings. Low minimums, fast turnaround, free digital mockups.">
@@ -1837,8 +1848,10 @@
     // Google Ads conversion. Only fires on a confirmed server-side accept,
     // never on the mailto: path \u2014 opening a mail client is not a lead.
     function reportConversion() {
-      if (!ADS_CONVERSION_ID) return;
       if (typeof window.gtag !== 'function') return;
+      // GA4 records the lead whether or not Ads tracking is configured yet.
+      window.gtag('event', 'generate_lead');
+      if (!ADS_CONVERSION_ID) return;
       window.gtag('event', 'conversion', { send_to: ADS_CONVERSION_ID });
     }
 
