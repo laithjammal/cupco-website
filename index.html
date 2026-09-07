@@ -304,6 +304,11 @@
      heading below it. Scoped to this one instance: .eyebrow is also used by the
      hero, process, products, testimonials, final CTA and contact sections. */
   #why-cupco .eyebrow{font-size:1.4rem;}
+  /* Step the white heading below that eyebrow so the two stop competing.
+     Scoped: this h2 takes the browser default 24px, as do the #products and
+     #contact headings, which must keep it. line-height stays at 1 so the
+     three lines remain tightly stacked. */
+  #why-cupco h2{font-size:1.15rem;}
   .segment-row{margin-top:18px;}
   .segment-item{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;position:relative;}
   .segment-item:focus-visible{outline:2px solid var(--accent-light);outline-offset:3px;}
