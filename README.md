@@ -64,6 +64,10 @@ Two constants at the top of the form script in `index.html` control delivery:
 | `FORM_ENDPOINT` | set | Provider POST URL. Set to `''` to revert to the `mailto:` flow. |
 | `ADS_CONVERSION_ID` | empty | `send_to` from a Google Ads conversion action, e.g. `AW-123456789/AbC-D_efGh`. **Also requires the gtag.js snippet, which is not yet on the page.** |
 
+The form carries an optional **Artwork Link** field (`artworkUrl`). Customers paste a Dropbox, Drive or WeTransfer share link rather than uploading a file: print-ready artwork is routinely tens of megabytes, past what a form post handles comfortably, and a link also survives the `mailto:` fallback, which cannot carry an attachment.
+
+A link pasted without a scheme is prefixed with `https://` on submit, so it stays clickable in the notification email.
+
 Fields sent beyond the visible inputs:
 
 - `orderTypeSummary` — the checkbox group flattened to one readable line

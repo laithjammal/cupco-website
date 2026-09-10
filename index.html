@@ -510,6 +510,7 @@
   .checkbox-pill input{width:15px;height:15px;accent-color:var(--accent);flex-shrink:0;cursor:pointer;}
   .checkbox-pill:has(input:checked){border-color:var(--accent);background:var(--accent-tint);color:var(--text);}
   .checkbox-pill:has(input:focus-visible){outline:2.5px solid var(--accent-light);outline-offset:2px;}
+  .field-hint{font-size:.74rem;color:var(--text-faint);margin:6px 0 0 0;}
   .field-error{display:none;font-size:.78rem;color:var(--danger);margin-top:6px;}
   .field-error.show{display:block;}
   .form-msg{display:none;font-size:.88rem;color:var(--danger);margin-top:12px;text-align:center;}
@@ -599,6 +600,7 @@
     #quoteForm input[type="text"],
     #quoteForm input[type="tel"],
     #quoteForm input[type="email"],
+    #quoteForm input[type="url"],
     #quoteForm textarea {
       font-size: 16px;
     }
@@ -1580,6 +1582,7 @@
               <p class="field-error">Please select at least one option.</p>
             </div>
             <div class="field"><label for="message">Message <span class="optional">(optional)</span></label><textarea id="message" name="message" rows="4" placeholder="Cup size, estimated quantity, timeline, artwork status..."></textarea></div>
+            <div class="field"><label for="artworkUrl">Artwork Link <span class="optional">(optional)</span></label><input type="url" id="artworkUrl" name="artworkUrl" inputmode="url" autocomplete="off" placeholder="Dropbox, Google Drive or WeTransfer link"><p class="field-hint">Got artwork ready? Paste a share link and we'll download it.</p></div>
 
             <button type="submit" class="btn btn-primary btn-block" id="quoteSubmitBtn">Send My Quote Request</button>
             <p id="formMsg" class="form-msg">Please fix the highlighted fields above and try again.</p>
@@ -1766,6 +1769,7 @@
       'Phone: ' + data.get('phone') + '\n' +
       'Email: ' + data.get('email') + '\n' +
       'What it\'s for: ' + orderTypes + '\n\n' +
+      'Artwork: ' + (data.get('artworkUrl') || '(none supplied)') + '\n\n' +
       'Message: ' + (data.get('message') || '(none)')
     );
     return 'mailto:info@cupco.com.au?subject=' + subject + '&body=' + body;
@@ -1833,6 +1837,14 @@
       return;
     }
     formMsg.classList.remove('show');
+
+    // A pasted share link often arrives without a scheme ("drive.google.com/..."),
+    // which renders unclickable in the notification email. Add one before the
+    // value is read into the payload.
+    var artwork = document.getElementById('artworkUrl');
+    if (artwork && artwork.value.trim() && !/^https?:\/\//i.test(artwork.value.trim())) {
+      artwork.value = 'https://' + artwork.value.trim();
+    }
 
     var data = new FormData(form);
     var orderTypes = data.getAll('orderType').join(', ') || '(not specified)';
