@@ -2,6 +2,11 @@
 
 Standalone landing page for **Cupco**, a Sydney-based custom paper cup manufacturer. This is **not** the main website — it is a dedicated destination for Google Ads traffic, kept separate from `cupco.com.au` so campaign traffic lands on a single focused page.
 
+> **Note** — the `central-coast/` directory is unrelated to Cupco. It is a
+> separate landing page that shares this repository for now, and it is not
+> linked from, or served as part of, the Cupco site. See
+> [`central-coast/README.md`](central-coast/README.md).
+
 ## Live page
 
 Published via GitHub Pages on a custom domain:

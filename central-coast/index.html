@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- =====================================================================
+     CENTRAL COAST NSW — FREE CONSULTATION LANDING PAGE
+
+     A local lead-generation page for people on the NSW Central Coast.
+     The single conversion goal is a booked free, private, no-obligation
+     consultation.
+
+     COMPLIANCE NOTE (read before editing copy)
+     This page deliberately makes NO therapeutic claim of any kind. It does
+     not name, describe or imply a product, does not mention a condition,
+     symptom, outcome or benefit, and never promises relief, treatment or
+     recovery. Every call to action is about the CONVERSATION, not an
+     outcome. Australian therapeutic-goods advertising rules are the reason
+     for that restraint — any claim added here has to be separately
+     authorised and substantiated before it goes live.
+
+     Nothing on this page is invented. There is no street address, no
+     clinic, no opening hours, no review, no award, no customer count, no
+     "years serving the Coast", no affiliation. If those become genuinely
+     available they must be reviewed for compliance before inclusion.
+
+     TO CONFIGURE (search for CONFIGURE):
+       1. BUSINESS_NAME  — the real trading name, in <title>, the wordmark,
+                           the footer and the JSON-LD below.
+       2. CONTACT_EMAIL  — in the script at the foot of this file.
+       3. CONTACT_PHONE  — in the script. Left empty, the phone CTA is
+                           hidden entirely rather than showing a fake number.
+       4. FORM_ENDPOINT  — in the script. Empty falls back to a mailto: flow
+                           so an ad click never dead-ends.
+       5. The canonical URL and og:url below.
+     ===================================================================== -->
+
+<!-- PARKED, NOT LIVE. This page has nothing to do with Cupco — it only
+     shares this repository for now. While it sits under the Cupco domain it
+     must stay out of search, or it competes with, and confuses, cupco.com.au.
+     REMOVE this tag the moment the page moves to its own domain: local SEO is
+     a core requirement of the brief and noindex cancels all of it. -->
+<meta name="robots" content="noindex, nofollow">
+
+<title>Free Consultation on the Central Coast NSW | Central Coast Consultations</title>
+<meta name="description" content="A free, private, no-obligation consultation for people on the NSW Central Coast who are looking beyond conventional options. Serving Gosford, Erina, Terrigal, Woy Woy, Wyong, Tuggerah and surrounding communities.">
+
+<!-- CONFIGURE: set to the live URL before launch. -->
+<link rel="canonical" href="https://example.com/central-coast/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="A Different Approach, Right Here on the Central Coast">
+<meta property="og:description" content="A free, private, no-obligation consultation for Central Coast locals who are exploring their options. Ask your questions, then decide in your own time.">
+<meta property="og:locale" content="en_AU">
+<meta property="og:url" content="https://example.com/central-coast/">
+<meta name="twitter:card" content="summary">
+
+<!-- Regional signals. These describe the SERVICE AREA (a real region), not a
+     premises — there is no address here to claim. -->
+<meta name="geo.region" content="AU-NSW">
+<meta name="geo.placename" content="Central Coast, New South Wales">
+<meta name="ICBM" content="-33.4269, 151.3417">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Structured data.
+     Service + areaServed, not LocalBusiness-with-an-address: there is no
+     premises to publish, and inventing one would be a fabrication. The
+     suburbs listed are the genuine service area. No aggregateRating, no
+     openingHours, no address — none of those are known. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://example.com/central-coast/#org",
+      "name": "Central Coast Consultations",
+      "description": "Private one-to-one consultations for people across the Central Coast of New South Wales.",
+      "areaServed": {
+        "@type": "GeoCircle",
+        "name": "Central Coast, New South Wales",
+        "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -33.35, "longitude": 151.42 },
+        "geoRadius": "35000"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Free consultation — Central Coast NSW",
+      "serviceType": "Private one-to-one consultation",
+      "description": "A free, private, no-obligation consultation for people on the NSW Central Coast who want to ask questions and understand an alternative approach before deciding whether to explore it further.",
+      "provider": { "@id": "https://example.com/central-coast/#org" },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Central Coast Council, New South Wales" },
+        { "@type": "Place", "name": "Gosford, NSW" },
+        { "@type": "Place", "name": "Erina, NSW" },
+        { "@type": "Place", "name": "Terrigal, NSW" },
+        { "@type": "Place", "name": "Woy Woy, NSW" },
+        { "@type": "Place", "name": "Wyong, NSW" },
+        { "@type": "Place", "name": "Tuggerah, NSW" },
+        { "@type": "Place", "name": "The Entrance, NSW" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "AUD",
+        "description": "The consultation is free and carries no obligation."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which areas of the Central Coast do you cover?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Consultations are available for people right across the Central Coast — Gosford, Erina, Terrigal, Woy Woy, Wyong, Tuggerah, The Entrance and the surrounding communities in between." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the consultation really free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The consultation is free, and there is no obligation to go any further afterwards." }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens in the consultation?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It is a private one-to-one conversation. You ask your questions, you get a clear explanation of the approach, and you decide in your own time whether you would like to explore it further." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to decide anything on the day?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The purpose of the conversation is to give you the information you need. Nothing is decided for you, and you are free to take as long as you like." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* =========================================================================
+   DESIGN NOTE
+
+   Coastal, natural, relaxed, premium, warm, Australian — and deliberately
+   NOT a tourism site. The restraint is the point: this should read as a
+   considered local service, not a holiday brochure and not a national
+   health template with "Central Coast" find-and-replaced into it.
+
+   Palette is drawn from the region rather than from stock wellness green:
+   a deep headland ink, bone and sand grounds, a muted sea teal for
+   interactive elements, and a single warm banksia ochre used sparingly as
+   the accent. Light-only by choice, with every surface painted explicitly.
+
+   Type: Fraunces (soft optical serif) for headlines — warm and established
+   without being ornate; Inter for reading and UI.
+
+   Imagery is hand-built inline SVG, not photography. That is a deliberate
+   placeholder decision: generic overseas stock would read instantly as
+   wrong here, and no genuine Central Coast photography was supplied. The
+   scenes are illustrative Australian coastal forms — headland, ocean,
+   dune, banksia — and cost ~6KB rather than a megabyte, which keeps the
+   first mobile paint fast. Replace with real Central Coast NSW photography
+   when it is available (see README).
+   ========================================================================= */
+
+:root{
+  --ink:#12262B;
+  --ink-2:#1D3A41;
+  --bone:#FBF8F2;
+  --bone-2:#F5EFE4;
+  --sand:#EFE6D6;
+  --sand-deep:#E2D5BE;
+  --sea:#2F6B72;
+  --sea-deep:#215056;
+  --sea-tint:rgba(47,107,114,.08);
+  --ochre:#B4792F;
+  --text:#172B30;
+  --text-soft:#4E656B;
+  --text-faint:#7D9096;
+  --line:rgba(18,38,43,.13);
+  --line-soft:rgba(18,38,43,.07);
+  --shadow:0 1px 2px rgba(18,38,43,.05),0 12px 32px -12px rgba(18,38,43,.16);
+  --radius:16px;
+  --maxw:1120px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+
+body{
+  margin:0;
+  background:var(--bone);
+  color:var(--text);
+  font-family:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3{
+  font-family:'Fraunces','Iowan Old Style',Georgia,serif;
+  font-weight:500;
+  letter-spacing:-.012em;
+  line-height:1.12;
+  color:var(--ink);
+  margin:0;
+  text-wrap:balance;
+}
+h1{font-size:clamp(2.05rem,5.4vw,3.5rem);}
+h2{font-size:clamp(1.62rem,3.6vw,2.5rem);}
+h3{font-size:1.14rem;line-height:1.3;letter-spacing:-.005em;}
+p{margin:0 0 1em 0;}
+p:last-child{margin-bottom:0;}
+a{color:var(--sea-deep);}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sea-deep);margin:0 0 18px 0;
+}
+.eyebrow::before{
+  content:"";width:22px;height:1px;background:var(--ochre);flex:none;
+}
+.lede{font-size:clamp(1.02rem,1.7vw,1.16rem);color:var(--text-soft);max-width:46ch;}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:inherit;font-size:1rem;font-weight:600;line-height:1;
+  padding:17px 26px;border-radius:999px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;text-align:center;
+  transition:background-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.btn-primary{
+  background:var(--ink);color:#FBF8F2;
+  box-shadow:0 10px 24px -12px rgba(18,38,43,.55);
+}
+.btn-primary:hover{background:var(--sea-deep);transform:translateY(-1px);}
+.btn-ghost{
+  background:transparent;color:var(--ink);border-color:var(--line);
+}
+.btn-ghost:hover{background:rgba(18,38,43,.045);}
+.btn-sm{padding:12px 20px;font-size:.92rem;}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{
+  outline:2px solid var(--sea);outline-offset:3px;
+}
+
+.assurance{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;
+  margin:18px 0 0 0;font-size:.86rem;font-weight:500;color:var(--text-faint);
+}
+.assurance span{display:inline-flex;align-items:center;gap:7px;}
+.assurance span::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--ochre);flex:none;
+}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:60;
+  background:rgba(251,248,242,.88);
+  backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color .2s ease;
+}
+.site-header.is-stuck{border-bottom-color:var(--line-soft);}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  min-height:68px;
+}
+.wordmark{
+  display:inline-flex;align-items:center;gap:11px;
+  text-decoration:none;color:var(--ink);
+}
+.wordmark svg{flex:none;}
+.wordmark b{
+  font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.12rem;
+  letter-spacing:-.01em;line-height:1.1;display:block;
+}
+.wordmark small{
+  display:block;font-size:.66rem;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--text-faint);
+}
+.header-nav{display:flex;align-items:center;gap:30px;}
+.header-nav a{
+  font-size:.92rem;font-weight:500;color:var(--text-soft);text-decoration:none;
+}
+.header-nav a:hover{color:var(--ink);}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--bone);}
+.hero-scene{
+  position:absolute;left:0;right:0;bottom:0;
+  height:min(58%,420px);width:100%;
+  display:block;pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:1;
+  padding:clamp(34px,6vw,84px) 0 clamp(210px,26vw,330px) 0;
+  max-width:50rem;
+}
+.hero h1{margin-bottom:20px;}
+.hero h1 em{font-style:normal;color:var(--sea-deep);}
+.hero .lede{max-width:40rem;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+
+/* A thin sand rule where the scene meets the next section, so the
+   illustration resolves into the page instead of being cut off. */
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--line-soft);
+}
+
+/* ---------- generic sections ---------- */
+section{position:relative;}
+.band{padding:clamp(56px,8vw,104px) 0;}
+.band-sand{background:var(--bone-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.band-ink{background:var(--ink);color:rgba(251,248,242,.82);}
+.band-ink h2,.band-ink h3{color:#FBF8F2;}
+.band-ink .eyebrow{color:#9FC6C4;}
+.band-ink .eyebrow::before{background:var(--ochre);}
+.section-head{max-width:38rem;margin-bottom:clamp(30px,4vw,48px);}
+.section-head p{margin-top:16px;}
+
+/* ---------- searching / problem framing ---------- */
+.points{
+  display:grid;gap:14px;margin:0;padding:0;list-style:none;max-width:44rem;
+}
+.points li{
+  position:relative;padding:0 0 0 30px;color:var(--text-soft);
+  font-size:1.02rem;
+}
+.points li::before{
+  content:"";position:absolute;left:0;top:.62em;
+  width:14px;height:1px;background:var(--ochre);
+}
+.points li strong{color:var(--ink);font-weight:600;}
+.pull{
+  margin:clamp(28px,4vw,40px) 0 0 0;padding:24px 0 0 0;
+  border-top:1px solid var(--line);
+  max-width:40rem;
+  font-family:'Fraunces',Georgia,serif;font-size:clamp(1.14rem,2.3vw,1.42rem);
+  line-height:1.38;color:var(--ink);
+}
+
+/* ---------- lifestyle / local identity ---------- */
+.split{
+  display:grid;grid-template-columns:1fr;gap:clamp(30px,5vw,60px);align-items:center;
+}
+@media (min-width:880px){
+  .split{grid-template-columns:1.05fr .95fr;}
+  .split.reverse > *:first-child{order:2;}
+}
+.scene-card{
+  border-radius:var(--radius);overflow:hidden;background:var(--sand);
+  border:1px solid var(--line-soft);box-shadow:var(--shadow);
+}
+.scene-card svg{display:block;width:100%;height:auto;}
+
+/* ---------- consultation steps ---------- */
+.steps{
+  display:grid;grid-template-columns:1fr;gap:1px;
+  background:var(--line-soft);border:1px solid var(--line-soft);
+  border-radius:var(--radius);overflow:hidden;
+}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr);}}
+.step{background:var(--bone);padding:clamp(24px,3vw,32px);}
+.band-ink .step{background:var(--ink-2);}
+.step-n{
+  font-family:'Fraunces',Georgia,serif;font-size:.95rem;font-weight:500;
+  color:var(--ochre);margin:0 0 14px 0;letter-spacing:.06em;
+}
+.step h3{margin-bottom:9px;}
+.step p{font-size:.97rem;color:var(--text-soft);margin:0;}
+.band-ink .step p{color:rgba(251,248,242,.72);}
+
+/* ---------- trust ---------- */
+.trust-grid{display:grid;grid-template-columns:1fr;gap:clamp(22px,3vw,34px);}
+@media (min-width:700px){.trust-grid{grid-template-columns:repeat(2,1fr);}}
+.trust-item{display:flex;gap:16px;align-items:flex-start;}
+.trust-item svg{flex:none;margin-top:2px;}
+.trust-item h3{margin-bottom:6px;font-size:1.04rem;}
+.trust-item p{margin:0;font-size:.97rem;color:var(--text-soft);}
+
+/* ---------- service area ---------- */
+.area-card{
+  background:var(--bone);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.area-body{padding:clamp(28px,4.5vw,52px);text-align:center;}
+.area-body h2{margin-bottom:16px;}
+.area-body > p{margin-left:auto;margin-right:auto;max-width:46rem;color:var(--text-soft);}
+.area-list{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:10px 0;margin:26px auto 0 auto;max-width:44rem;
+  font-family:'Fraunces',Georgia,serif;font-size:clamp(1rem,2vw,1.2rem);
+  color:var(--ink);line-height:1.4;
+}
+.area-list li{list-style:none;display:inline-flex;align-items:center;}
+.area-list li:not(:last-child)::after{
+  content:"";width:4px;height:4px;border-radius:50%;background:var(--ochre);
+  margin:0 14px;flex:none;
+}
+.area-more{
+  margin:12px 0 0 0;font-size:.92rem;color:var(--text-faint);
+}
+.area-coast{display:block;width:100%;height:auto;background:var(--sand);}
+
+/* ---------- faq ---------- */
+.faq{max-width:46rem;}
+.faq details{border-bottom:1px solid var(--line-soft);}
+.faq details:first-of-type{border-top:1px solid var(--line-soft);}
+.faq summary{
+  list-style:none;cursor:pointer;padding:20px 40px 20px 0;position:relative;
+  font-family:'Fraunces',Georgia,serif;font-size:1.06rem;color:var(--ink);
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"";position:absolute;right:8px;top:50%;width:9px;height:9px;
+  border-right:1.5px solid var(--text-faint);border-bottom:1.5px solid var(--text-faint);
+  transform:translateY(-70%) rotate(45deg);transition:transform .2s ease;
+}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg);}
+.faq .faq-a{padding:0 0 22px 0;color:var(--text-soft);font-size:.99rem;max-width:44rem;}
+
+/* ---------- booking ---------- */
+.book-grid{display:grid;grid-template-columns:1fr;gap:clamp(30px,5vw,56px);align-items:start;}
+@media (min-width:940px){.book-grid{grid-template-columns:.9fr 1.1fr;}}
+.form-card{
+  background:var(--bone);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(24px,3.5vw,36px);box-shadow:var(--shadow);
+}
+.field{margin-bottom:16px;}
+.field label{
+  display:block;font-size:.83rem;font-weight:600;letter-spacing:.02em;
+  color:var(--text-soft);margin-bottom:7px;
+}
+.field .opt{color:var(--text-faint);font-weight:400;}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 14px;border-radius:11px;
+  border:1.5px solid var(--line);background:#fff;color:var(--text);
+  font-family:inherit;
+  /* 16px minimum: iOS Safari zooms a focused control with smaller text and
+     never zooms back out. */
+  font-size:16px;line-height:1.4;
+}
+.field textarea{min-height:92px;resize:vertical;}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--sea);outline:none;box-shadow:0 0 0 3px var(--sea-tint);
+}
+.field input.err,.field select.err{border-color:#B4453A;}
+.field-row{display:grid;grid-template-columns:1fr;gap:0 16px;}
+@media (min-width:560px){.field-row{grid-template-columns:1fr 1fr;}}
+.form-note{font-size:.85rem;color:var(--text-faint);margin:14px 0 0 0;line-height:1.5;}
+.form-card .btn{width:100%;margin-top:6px;}
+.form-ok{
+  display:none;text-align:center;padding:20px 0;
+}
+.form-ok h3{margin-bottom:10px;}
+.form-ok p{color:var(--text-soft);margin:0;}
+.is-sent .form-live{display:none;}
+.is-sent .form-ok{display:block;}
+.book-aside .points li{color:rgba(251,248,242,.78);}
+.book-aside .points li strong{color:#FBF8F2;}
+.book-aside .points li::before{background:var(--ochre);}
+
+/* ---------- footer ---------- */
+.site-footer{
+  background:var(--bone-2);border-top:1px solid var(--line-soft);
+  padding:clamp(38px,5vw,56px) 0 calc(clamp(38px,5vw,56px) + env(safe-area-inset-bottom));
+  font-size:.88rem;color:var(--text-faint);
+}
+.footer-top{
+  display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;
+  align-items:flex-start;margin-bottom:26px;
+}
+.footer-area{max-width:34rem;color:var(--text-soft);}
+.disclaimer{
+  border-top:1px solid var(--line-soft);padding-top:22px;margin:0;
+  max-width:60rem;line-height:1.6;
+}
+.footer-legal{margin:14px 0 0 0;}
+
+/* ---------- mobile sticky CTA ---------- */
+.sticky-cta{
+  display:none;
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom)) 14px;
+  background:rgba(251,248,242,.94);
+  backdrop-filter:saturate(1.4) blur(12px);
+  border-top:1px solid var(--line-soft);
+  transform:translateY(0);transition:transform .25s ease;
+}
+.sticky-cta.is-hidden{transform:translateY(120%);}
+.sticky-cta .btn{width:100%;padding:15px 20px;}
+.sticky-cta small{
+  display:block;text-align:center;margin-top:6px;
+  font-size:.74rem;color:var(--text-faint);letter-spacing:.02em;
+}
+
+@media (max-width:719px){
+  body{font-size:16.5px;}
+  .header-nav{display:none;}
+  /* The sticky bar already carries the CTA on phones; a second one in the
+     header only crowds the wordmark and wraps to two lines. */
+  .site-header .btn{display:none;}
+  .sticky-cta{display:block;}
+  /* Clear the sticky bar so the last content is never trapped behind it. */
+  .site-footer{padding-bottom:calc(120px + env(safe-area-inset-bottom));}
+
+  /* FIRST VIEWPORT CONTRACT (phones)
+     Central Coast + another approach + free consultation, all visible
+     without a scroll. The hero becomes a column — copy first, illustration
+     beneath it — so the scene can never sit under the type the way an
+     absolutely positioned background does. Heights are measured in dvh so
+     mobile browser chrome does not quietly eat the CTA. */
+  /* 68px header + 92px sticky bar are subtracted, so the whole hero —
+     illustration included — lands in the space the visitor can actually
+     see, instead of sliding under the sticky CTA. */
+  .hero{display:flex;flex-direction:column;min-height:calc(100dvh - 68px - 92px);}
+  .hero > .wrap{order:1;flex:1 1 auto;display:flex;}
+  .hero-scene{order:2;position:static;flex:none;height:132px;}
+  .hero-inner{
+    width:100%;padding:16px 0 20px 0;min-height:0;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .hero h1{font-size:clamp(1.92rem,8.2vw,2.5rem);margin-bottom:14px;}
+  .hero .lede{font-size:1rem;}
+  .hero-cta{margin-top:22px;}
+  .hero-cta .btn{width:100%;}
+  /* One decision in the first viewport. The secondary link is reachable by
+     scrolling; on a phone it only competes with the CTA. */
+  .hero-cta .btn-ghost{display:none;}
+}
+@supports not (height:100dvh){
+  @media (max-width:719px){.hero{min-height:calc(100vh - 160px);}}
+}
+
+/* Short phones: drop the supporting paragraph and shrink the scene rather
+   than push the CTA below the fold. The headline and the CTA are the
+   contract; the paragraph is not. */
+@media (max-width:719px) and (max-height:660px){
+  .hero .lede{display:none;}
+  .hero-scene{height:96px;}
+}
+
+/* ---------- entrance motion ---------- */
+.rise{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+.rise.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <!-- CONFIGURE: BUSINESS_NAME. The mark is a headland-and-water glyph,
+         not a health or medical symbol — this is a consultation, and the
+         branding should not imply clinical status. -->
+    <a class="wordmark" href="#top" aria-label="Home">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+        <circle cx="15" cy="15" r="14" fill="none" stroke="#12262B" stroke-width="1.2" opacity=".28"/>
+        <path d="M6 18.4c2.2-4.6 4.4-7.6 6.6-7.6 2.3 0 3.1 3.4 5.2 3.4 1.7 0 3.2-1.8 4.6-4.2" fill="none" stroke="#12262B" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M6.2 21.6h17.6" stroke="#B4792F" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <b>Central Coast</b>
+        <small>Consultations</small>
+      </span>
+    </a>
+
+    <nav class="header-nav" aria-label="Sections">
+      <a href="#approach">The conversation</a>
+      <a href="#area">Service area</a>
+      <a href="#questions">Questions</a>
+    </nav>
+
+    <a class="btn btn-primary btn-sm" href="#book" data-cta="header">Book a free consultation</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ==================== HERO ====================
+       Headline chosen from the three directions in the brief. It reads as a
+       statement rather than a keyword string — local without announcing
+       itself as a local SEO page. -->
+  <section class="hero">
+    <svg class="hero-scene" viewBox="0 0 1440 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FBF8F2"/>
+          <stop offset=".55" stop-color="#F7EEDC"/>
+          <stop offset="1" stop-color="#F0E4CD"/>
+        </linearGradient>
+        <linearGradient id="w1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#5D8E93"/><stop offset="1" stop-color="#77A5A5"/>
+        </linearGradient>
+        <linearGradient id="w2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#7FADAB"/><stop offset="1" stop-color="#A3C6BF"/>
+        </linearGradient>
+        <linearGradient id="dune" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#EEE3CD"/><stop offset="1" stop-color="#DDCEAE"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="70%" cy="10%" r="52%">
+          <stop offset="0" stop-color="#FFF4DC" stop-opacity=".9"/>
+          <stop offset="1" stop-color="#FFF4DC" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+          <feColorMatrix type="saturate" values="0"/>
+        </filter>
+      </defs>
+
+      <rect width="1440" height="440" fill="url(#sky)"/>
+      <rect width="1440" height="440" fill="url(#glow)"/>
+
+      <!-- Layered headlands. The Coast is read from its headlands more than
+           anything else, so the horizon is never a flat line. Depth comes
+           from stacked silhouettes at falling opacity, not from detail. -->
+      <path d="M0 196 C 118 190 208 178 306 170 C 392 163 470 176 560 182 C 664 189 748 174 852 168 C 962 162 1054 178 1168 180 C 1278 182 1360 172 1440 164 L1440 238 L0 238 Z"
+            fill="#B7C8C3" opacity=".42"/>
+      <path d="M868 238 C 936 218 996 196 1068 182 C 1158 164 1268 156 1360 150 C 1392 148 1418 150 1440 146 L1440 240 L860 240 Z"
+            fill="#93AFAD" opacity=".62"/>
+      <path d="M0 174 C 58 178 116 190 172 204 C 226 217 272 228 310 238 L0 240 Z"
+            fill="#A2BAB7" opacity=".5"/>
+
+      <!-- Open water, then the inshore band, then the break -->
+      <rect y="236" width="1440" height="58" fill="url(#w1)"/>
+      <path d="M0 290 C 200 286 360 298 560 294 C 760 290 920 300 1120 296 C 1260 293 1350 297 1440 294 L1440 332 L0 332 Z" fill="url(#w2)"/>
+      <path d="M0 262 C 170 256 310 268 480 262 C 650 256 790 268 960 262 C 1120 256 1300 268 1440 260"
+            fill="none" stroke="#FBF8F2" stroke-opacity=".3" stroke-width="2"/>
+      <path d="M0 282 C 190 277 330 289 500 283 C 680 277 830 289 1010 283 C 1190 277 1310 288 1440 282"
+            fill="none" stroke="#FBF8F2" stroke-opacity=".22" stroke-width="2"/>
+      <path d="M0 322 C 180 315 340 331 520 325 C 700 319 860 333 1040 327 C 1210 321 1330 331 1440 325 L1440 342 L0 342 Z"
+            fill="#FBF8F2" opacity=".66"/>
+
+      <!-- Wet sand giving way to the dune -->
+      <path d="M0 334 C 220 344 420 332 660 340 C 900 348 1120 334 1440 342 L1440 440 L0 440 Z" fill="#E9DDC6"/>
+      <path d="M0 372 C 240 358 460 386 720 378 C 980 370 1210 392 1440 382 L1440 440 L0 440 Z" fill="url(#dune)"/>
+
+      <!-- Dune grass. Fine strokes only, kept to the edges of frame: the
+           foreground should stay quiet behind the headline. -->
+      <g stroke="#A2946C" stroke-width="1.5" stroke-linecap="round" opacity=".6">
+        <path d="M76 412 l-10-24 M85 412 l0-30 M94 412 l10-23 M104 414 l16-18"/>
+        <path d="M214 424 l-8-20 M222 424 l1-26 M230 424 l9-19"/>
+        <path d="M1228 408 l-11-22 M1237 408 l0-28 M1246 408 l11-21 M1257 410 l17-17"/>
+        <path d="M1356 420 l-8-19 M1364 420 l1-24 M1372 420 l10-18"/>
+      </g>
+
+      <rect width="1440" height="440" filter="url(#grain)" opacity=".05" style="mix-blend-mode:multiply"/>
+    </svg>
+
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="eyebrow">Central Coast, NSW</p>
+        <h1>A different approach,<br>right here on the <em>Central Coast</em>.</h1>
+        <p class="lede">If you&rsquo;re on the Central Coast and looking beyond conventional pharmaceutical options, a free private consultation gives you the opportunity to ask questions, understand an alternative approach and decide whether you&rsquo;d like to explore it further.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#book" data-cta="hero">Book your free Central Coast consultation</a>
+          <a class="btn btn-ghost" href="#approach">What the conversation covers</a>
+        </div>
+        <p class="assurance"><span>Free</span><span>Private</span><span>No obligation</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LOCAL PROBLEM FRAMING ==================== -->
+  <section class="band" id="approach">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Where most people start</p>
+        <h2>Searching for options on the Central Coast?</h2>
+        <p class="lede">With so much information available online, it can be difficult to know what is actually worth exploring.</p>
+      </div>
+      <ul class="points">
+        <li>You may have <strong>tried different approaches already</strong>, and found it hard to tell one from the next.</li>
+        <li>You may be weighing up something you&rsquo;ve read, and have no straight answer to check it against.</li>
+        <li>You may simply be <strong>curious about whether there is another option</strong> worth understanding.</li>
+      </ul>
+      <p class="pull">Rather than trying to work it all out online, you can have a private conversation with someone locally &mdash; and take it from there.</p>
+    </div>
+  </section>
+
+  <!-- ==================== LOCAL IDENTITY ====================
+       Lifestyle positioning only. No claim about the health, habits or
+       needs of people who live here, and no stereotype of the region. -->
+  <section class="band band-sand">
+    <div class="wrap split reverse">
+      <div class="scene-card rise">
+        <svg viewBox="0 0 620 440" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="s2sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F9F2E3"/>
+              <stop offset=".6" stop-color="#F6E9D2"/>
+              <stop offset="1" stop-color="#F0DEC0"/>
+            </linearGradient>
+            <linearGradient id="s2w1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#5F8F93"/><stop offset="1" stop-color="#83AEAC"/>
+            </linearGradient>
+            <linearGradient id="s2w2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8CB6B0"/><stop offset="1" stop-color="#B2CDC2"/>
+            </linearGradient>
+            <linearGradient id="s2sand" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#EDE2CB"/><stop offset="1" stop-color="#DACAA8"/>
+            </linearGradient>
+            <radialGradient id="s2sun" cx="66%" cy="24%" r="40%">
+              <stop offset="0" stop-color="#FFF1D4" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#FFF1D4" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <rect width="620" height="440" fill="url(#s2sky)"/>
+          <rect width="620" height="440" fill="url(#s2sun)"/>
+          <circle cx="409" cy="106" r="26" fill="#FBEBC8" opacity=".85"/>
+
+          <!-- A lagoon and its far shore: as much of the Coast is lake and
+               lagoon as it is surf. -->
+          <path d="M0 208 C 96 202 172 212 272 206 C 366 200 456 210 548 204 C 582 202 604 205 620 203 L620 226 L0 226 Z"
+                fill="#AFC2BC" opacity=".55"/>
+          <path d="M372 226 C 424 212 470 200 528 194 C 566 190 596 192 620 188 L620 228 L364 228 Z"
+                fill="#8FA9A6" opacity=".6"/>
+
+          <rect y="224" width="620" height="44" fill="url(#s2w1)"/>
+          <path d="M0 264 C 120 260 220 272 340 266 C 452 260 540 270 620 264 L620 306 L0 306 Z" fill="url(#s2w2)"/>
+          <!-- Light running off the water, under the sun -->
+          <g stroke="#FBF8F2" stroke-linecap="round" opacity=".5">
+            <path d="M366 240 h86" stroke-width="2"/>
+            <path d="M380 252 h62" stroke-width="2" opacity=".8"/>
+            <path d="M356 276 h104" stroke-width="2" opacity=".6"/>
+            <path d="M386 290 h52" stroke-width="2" opacity=".45"/>
+          </g>
+          <path d="M0 246 C 130 242 230 252 350 247" fill="none" stroke="#FBF8F2" stroke-opacity=".26" stroke-width="2"/>
+
+          <!-- Sandbar, then the near bank the path runs along -->
+          <path d="M0 300 C 140 310 300 296 440 304 C 520 308 578 300 620 302 L620 344 L0 344 Z" fill="#E7DBC3"/>
+          <path d="M0 334 C 160 322 320 348 470 340 C 546 336 590 344 620 340 L620 440 L0 440 Z" fill="url(#s2sand)"/>
+          <!-- The worn line of a coastal track, reading as distance rather
+               than as a drawn object -->
+          <path d="M-20 428 C 120 400 236 376 340 360 C 424 347 506 340 620 336"
+                fill="none" stroke="#F2E7D0" stroke-width="16" stroke-linecap="round" opacity=".9"/>
+          <path d="M-20 428 C 120 400 236 376 340 360 C 424 347 506 340 620 336"
+                fill="none" stroke="#C9B896" stroke-width="1.2" stroke-linecap="round" opacity=".45"/>
+
+          <g stroke="#A2946C" stroke-width="1.6" stroke-linecap="round" opacity=".55">
+            <path d="M84 424 l-9-22 M93 424 l0-28 M102 424 l10-21"/>
+            <path d="M532 400 l-8-20 M541 400 l1-25 M550 400 l10-19"/>
+            <path d="M296 414 l-7-16 M303 414 l1-21 M310 414 l8-15"/>
+          </g>
+        </svg>
+      </div>
+
+      <div>
+        <p class="eyebrow">Life on the Coast</p>
+        <h2>An approach has to fit the way you actually live.</h2>
+        <p>Mornings on the beach track. A garden that needs doing. Grandkids on the weekend, or a commute south that starts early. The Coast runs at its own pace, and it doesn&rsquo;t clear its calendar while you weigh something up.</p>
+        <p>Whether you&rsquo;re based around the beaches, the hinterland, Gosford or the northern end of the Coast, finding an approach that fits into everyday life matters &mdash; which is exactly what a conversation is for.</p>
+        <p style="margin-top:26px;"><a class="btn btn-ghost" href="#book" data-cta="lifestyle">Start with a free consultation</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONSULTATION POSITIONING ==================== -->
+  <section class="band band-ink">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The consultation</p>
+        <h2>A local, one-to-one conversation.</h2>
+        <p style="color:rgba(251,248,242,.78);max-width:46ch;">Not a call centre, not a form letter, and not a national website with a Central Coast page. You speak with someone serving the Central Coast, and you ask your questions directly.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <p class="step-n">01</p>
+          <h3>Tell us where you&rsquo;re at</h3>
+          <p>Send through your details and the times that suit you. It takes about a minute, and it costs nothing.</p>
+        </div>
+        <div class="step">
+          <p class="step-n">02</p>
+          <h3>Have the conversation</h3>
+          <p>A private one-to-one chat at a time that works around your week. Ask whatever you want to ask.</p>
+        </div>
+        <div class="step">
+          <p class="step-n">03</p>
+          <h3>Decide in your own time</h3>
+          <p>Understand the approach first, then decide whether you&rsquo;d like to explore it further. There&rsquo;s no obligation either way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LOCAL TRUST ====================
+       Proximity and access, not authority. Nothing here counts customers,
+       years, qualifications or reviews — none of that was supplied, and
+       manufacturing it would be both dishonest and non-compliant. -->
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why people start here</p>
+        <h2>A conversation first, a decision later.</h2>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-item">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="#2F6B72" stroke-width="1.3" opacity=".45"/><path d="M6.4 11.6l3 3 6.2-6.6" fill="none" stroke="#B4792F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <h3>Someone serving the Central Coast</h3>
+            <p>Consultations are for people here, arranged around Coast hours &mdash; not routed to another state.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="#2F6B72" stroke-width="1.3" opacity=".45"/><path d="M11 5.6c2.3 0 4.2 1.9 4.2 4.2v1.4h-8.4V9.8c0-2.3 1.9-4.2 4.2-4.2z" fill="none" stroke="#B4792F" stroke-width="1.5" stroke-linejoin="round"/><rect x="6.8" y="11.2" width="8.4" height="5.2" rx="1.2" fill="none" stroke="#B4792F" stroke-width="1.5"/></svg>
+          <div>
+            <h3>Private, one to one</h3>
+            <p>What you discuss stays between you and the consultant. Your details aren&rsquo;t passed around.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="#2F6B72" stroke-width="1.3" opacity=".45"/><path d="M8 8.8c0-1.7 1.4-2.9 3.1-2.9 1.7 0 3 1 3 2.6 0 2.4-3 2.2-3 4.4" fill="none" stroke="#B4792F" stroke-width="1.6" stroke-linecap="round"/><circle cx="11.1" cy="16" r="1.05" fill="#B4792F"/></svg>
+          <div>
+            <h3>Ask before you decide</h3>
+            <p>Bring the questions you haven&rsquo;t been able to get a straight answer to online.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="10" fill="none" stroke="#2F6B72" stroke-width="1.3" opacity=".45"/><path d="M11 6v5.4l3.4 2" fill="none" stroke="#B4792F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <h3>Take the time you need</h3>
+            <p>Nothing is decided on the day. The point of the conversation is to leave you better informed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICE AREA ==================== -->
+  <section class="band band-sand" id="area">
+    <div class="wrap">
+      <div class="area-card rise">
+        <svg class="area-coast" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <rect width="1200" height="120" fill="#EFE6D6"/>
+          <path d="M0 86 C 90 70 150 96 236 84 C 320 72 372 40 452 44 C 530 48 560 84 640 86 C 724 88 768 54 852 52 C 936 50 980 82 1064 80 C 1130 78 1160 62 1200 56 L1200 120 L0 120 Z" fill="#CFDCD6"/>
+          <path d="M0 86 C 90 70 150 96 236 84 C 320 72 372 40 452 44 C 530 48 560 84 640 86 C 724 88 768 54 852 52 C 936 50 980 82 1064 80 C 1130 78 1160 62 1200 56"
+                fill="none" stroke="#2F6B72" stroke-width="1.6" opacity=".45"/>
+          <g fill="#B4792F" opacity=".85">
+            <circle cx="236" cy="84" r="4"/><circle cx="452" cy="44" r="4"/>
+            <circle cx="640" cy="86" r="4"/><circle cx="852" cy="52" r="4"/>
+            <circle cx="1064" cy="80" r="4"/>
+          </g>
+        </svg>
+        <div class="area-body">
+          <p class="eyebrow" style="justify-content:center;">Service area</p>
+          <h2>Serving communities across the Central Coast</h2>
+          <p>Consultations are available for people across the Central Coast, including the Gosford, Erina, Terrigal, Woy Woy, Wyong, Tuggerah and surrounding areas.</p>
+          <ul class="area-list">
+            <li>Gosford</li><li>Erina</li><li>Terrigal</li><li>Woy&nbsp;Woy</li><li>Wyong</li><li>Tuggerah</li><li>The&nbsp;Entrance</li>
+          </ul>
+          <p class="area-more">and surrounding Central Coast communities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== QUESTIONS ====================
+       Every answer here is also in the FAQPage JSON-LD above. Keep them in
+       step: structured data must never say more than the visible page. -->
+  <section class="band" id="questions">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Before you book</p>
+        <h2>Questions people ask first.</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>Which areas of the Central Coast do you cover?</summary>
+          <div class="faq-a">Consultations are available for people right across the Central Coast &mdash; Gosford, Erina, Terrigal, Woy Woy, Wyong, Tuggerah, The Entrance and the surrounding communities in between.</div>
+        </details>
+        <details>
+          <summary>Is the consultation really free?</summary>
+          <div class="faq-a">Yes. The consultation is free, and there is no obligation to go any further afterwards.</div>
+        </details>
+        <details>
+          <summary>What happens in the consultation?</summary>
+          <div class="faq-a">It&rsquo;s a private one-to-one conversation. You ask your questions, you get a clear explanation of the approach, and you decide in your own time whether you&rsquo;d like to explore it further.</div>
+        </details>
+        <details>
+          <summary>Do I have to decide anything on the day?</summary>
+          <div class="faq-a">No. The purpose of the conversation is to give you the information you need. Nothing is decided for you, and you can take as long as you like.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BOOKING ==================== -->
+  <section class="band band-ink" id="book">
+    <div class="wrap book-grid">
+      <div class="book-aside">
+        <p class="eyebrow">Book your free consultation</p>
+        <h2>Talk to a local consultant.</h2>
+        <p style="color:rgba(251,248,242,.78);margin-top:16px;">Send your details through and we&rsquo;ll arrange a time that works around your week.</p>
+        <ul class="points" style="margin-top:26px;">
+          <li><strong>Free</strong> &mdash; there&rsquo;s no cost for the conversation.</li>
+          <li><strong>Private</strong> &mdash; one to one, and your details stay with us.</li>
+          <li><strong>No obligation</strong> &mdash; understand the approach, then decide.</li>
+        </ul>
+        <!-- Phone CTA is revealed by the script only when CONTACT_PHONE is
+             set. No placeholder number is ever shown. -->
+        <p id="phoneCta" hidden style="margin-top:26px;">
+          <a class="btn btn-ghost" style="color:#FBF8F2;border-color:rgba(251,248,242,.3);" href="#" id="phoneLink" data-cta="phone">Prefer to call?</a>
+        </p>
+      </div>
+
+      <div class="form-card" id="formCard">
+        <div class="form-live">
+          <form id="bookForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-name">Your name</label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="f-suburb">Suburb</label>
+                <input id="f-suburb" name="suburb" type="text" list="cc-suburbs" autocomplete="address-level2" placeholder="e.g. Terrigal" required>
+                <!-- The suburb list does the local work the copy shouldn't:
+                     a Coast local sees their own suburb the moment they type,
+                     with no keyword stuffing anywhere on the page. -->
+                <datalist id="cc-suburbs">
+                  <option value="Gosford"></option><option value="East Gosford"></option>
+                  <option value="West Gosford"></option><option value="Erina"></option>
+                  <option value="Terrigal"></option><option value="Wamberal"></option>
+                  <option value="Avoca Beach"></option><option value="Copacabana"></option>
+                  <option value="Kincumber"></option><option value="Green Point"></option>
+                  <option value="Saratoga"></option><option value="Point Clare"></option>
+                  <option value="Woy Woy"></option><option value="Umina Beach"></option>
+                  <option value="Ettalong Beach"></option><option value="Empire Bay"></option>
+                  <option value="Wyoming"></option><option value="Narara"></option>
+                  <option value="Lisarow"></option><option value="Niagara Park"></option>
+                  <option value="Kariong"></option><option value="Somersby"></option>
+                  <option value="Ourimbah"></option><option value="Tuggerah"></option>
+                  <option value="Wyong"></option><option value="Berkeley Vale"></option>
+                  <option value="Bateau Bay"></option><option value="Shelly Beach"></option>
+                  <option value="Long Jetty"></option><option value="The Entrance"></option>
+                  <option value="Toukley"></option><option value="Budgewoi"></option>
+                  <option value="Gorokan"></option><option value="Lake Haven"></option>
+                  <option value="Other Central Coast area"></option>
+                </datalist>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="f-phone">Phone</label>
+                <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
+              </div>
+              <div class="field">
+                <label for="f-email">Email <span class="opt">(optional)</span></label>
+                <input id="f-email" name="email" type="email" autocomplete="email">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-time">Best time to reach you</label>
+              <select id="f-time" name="bestTime">
+                <option value="Anytime">Anytime</option>
+                <option value="Morning">Morning</option>
+                <option value="Midday">Midday</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="After 5pm">After 5pm</option>
+                <option value="Weekend">Weekend</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="f-msg">Anything you&rsquo;d like to ask <span class="opt">(optional)</span></label>
+              <textarea id="f-msg" name="message" placeholder="A question you&rsquo;d like covered in the conversation."></textarea>
+            </div>
+
+            <!-- Honeypot: hidden from people, filled by bots. -->
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <label for="f-website">Leave this blank</label>
+              <input id="f-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button class="btn btn-primary" type="submit" id="submitBtn">Book my free consultation</button>
+            <p class="form-note" id="formNote">Free, private and no obligation. Submitting opens a pre-filled email so you can send it from your own address.</p>
+          </form>
+        </div>
+
+        <div class="form-ok" role="status" aria-live="polite">
+          <h3>Request sent.</h3>
+          <p>Thanks &mdash; we&rsquo;ll be in touch to arrange a time that suits you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-area">
+        <!-- CONFIGURE: BUSINESS_NAME -->
+        <p style="font-family:'Fraunces',Georgia,serif;font-size:1.05rem;color:var(--ink);margin-bottom:8px;">Central Coast Consultations</p>
+        <p style="margin:0;">Free, private, no-obligation consultations for people across the Central Coast of New South Wales &mdash; Gosford, Erina, Terrigal, Woy Woy, Wyong, Tuggerah, The Entrance and surrounding communities.</p>
+      </div>
+      <div>
+        <a class="btn btn-primary btn-sm" href="#book" data-cta="footer">Book a free consultation</a>
+      </div>
+    </div>
+
+    <p class="disclaimer">This page offers a free, no-obligation consultation. It is general information only, it is not medical advice, and it does not make any claim about treating, curing or preventing any condition. If you have a health concern, please speak with your doctor or another qualified health professional.</p>
+    <p class="footer-legal">&copy; <span id="yr">2026</span> Central Coast Consultations. Central Coast, NSW, Australia.</p>
+  </div>
+</footer>
+
+<!-- Mobile sticky CTA. Hides itself once the booking form is on screen so it
+     never sits on top of the thing it is pointing at. -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn-primary" href="#book" data-cta="sticky">Book your free consultation</a>
+  <small>Free &bull; Private &bull; No obligation</small>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ===================== CONFIGURE =====================
+     CONTACT_EMAIL  — where enquiries land while FORM_ENDPOINT is empty, and
+                      the fallback destination if a POST ever fails.
+     CONTACT_PHONE  — E.164 or local format. Left empty, the "Prefer to call?"
+                      CTA stays hidden. No invented number is ever displayed.
+     FORM_ENDPOINT  — a form provider POST URL (Formspree or similar). Empty
+                      keeps the mailto: flow, so a paid click never
+                      dead-ends on a form that goes nowhere.
+     ===================================================== */
+  var CONTACT_EMAIL = 'hello@example.com';
+  var CONTACT_PHONE = '';
+  var FORM_ENDPOINT = '';
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ---------- year ---------- */
+  var yr = $('yr'); if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---------- header shadow on scroll ---------- */
+  var header = $('siteHeader');
+  var onScroll = function(){
+    if (header) header.classList.toggle('is-stuck', window.scrollY > 8);
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- phone CTA, only when a real number exists ---------- */
+  if (CONTACT_PHONE) {
+    var pc = $('phoneCta'), pl = $('phoneLink');
+    if (pc && pl) {
+      pl.href = 'tel:' + CONTACT_PHONE.replace(/[^+0-9]/g, '');
+      pl.textContent = 'Call ' + CONTACT_PHONE;
+      pc.hidden = false;
+    }
+  }
+
+  /* ---------- sticky CTA: stand down once the form is visible ---------- */
+  var sticky = $('stickyCta'), book = $('book');
+  if (sticky && book && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ sticky.classList.toggle('is-hidden', e.isIntersecting); });
+    }, {threshold:0.12}).observe(book);
+  }
+
+  /* ---------- entrance motion ---------- */
+  var rises = document.querySelectorAll('.rise');
+  if ('IntersectionObserver' in window) {
+    var ro = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    Array.prototype.forEach.call(rises, function(el){ ro.observe(el); });
+  } else {
+    Array.prototype.forEach.call(rises, function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- the note under the button must match the live path ----------
+     A quick visual check that the endpoint is actually in use, without
+     opening DevTools. */
+  var note = $('formNote');
+  if (note && FORM_ENDPOINT) {
+    note.textContent = 'Free, private and no obligation. We usually reply within one business day.';
+  }
+  try {
+    console.info('[consultation form] delivery path: ' + (FORM_ENDPOINT ? 'endpoint POST' : 'mailto fallback'));
+  } catch (e) {}
+
+  /* ---------- form ---------- */
+  var form = $('bookForm'), card = $('formCard'), btn = $('submitBtn');
+  if (!form) return;
+
+  var clearErr = function(el){ el.classList.remove('err'); };
+  ['f-name','f-suburb','f-phone'].forEach(function(id){
+    var el = $(id); if (el) el.addEventListener('input', function(){ clearErr(el); });
+  });
+
+  var validate = function(){
+    var bad = null;
+    ['f-name','f-suburb','f-phone'].forEach(function(id){
+      var el = $(id);
+      if (!el) return;
+      if (!el.value.trim()) { el.classList.add('err'); if (!bad) bad = el; }
+    });
+    var em = $('f-email');
+    if (em && em.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())) {
+      em.classList.add('err'); if (!bad) bad = em;
+    }
+    if (bad) { bad.focus(); return false; }
+    return true;
+  };
+
+  var collect = function(){
+    return {
+      name:     $('f-name').value.trim(),
+      suburb:   $('f-suburb').value.trim(),
+      phone:    $('f-phone').value.trim(),
+      email:    $('f-email').value.trim(),
+      bestTime: $('f-time').value,
+      message:  $('f-msg').value.trim()
+    };
+  };
+
+  var mailtoFallback = function(d){
+    var body = [
+      'Name: ' + d.name,
+      'Suburb: ' + d.suburb + ' (Central Coast, NSW)',
+      'Phone: ' + d.phone,
+      'Email: ' + (d.email || '-'),
+      'Best time to call: ' + d.bestTime,
+      '',
+      'Question:',
+      (d.message || '-')
+    ].join('\n');
+    window.location.href = 'mailto:' + CONTACT_EMAIL +
+      '?subject=' + encodeURIComponent('Free consultation request — ' + d.name + ', ' + d.suburb) +
+      '&body=' + encodeURIComponent(body);
+  };
+
+  var succeed = function(){
+    if (card) card.classList.add('is-sent');
+    /* Conversion hook. Wire a GA4 / Google Ads tag here if one is added —
+       and only on this path. Opening a mail client is not a lead, and
+       counting it as one would corrupt the numbers. */
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {event_category:'consultation', event_label:'central-coast'});
+      }
+    } catch (e) {}
+    if (card && card.scrollIntoView) card.scrollIntoView({block:'center', behavior:'smooth'});
+  };
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if ($('f-website') && $('f-website').value) return;   /* honeypot */
+    if (!validate()) return;
+
+    var d = collect();
+
+    if (!FORM_ENDPOINT) { mailtoFallback(d); return; }
+
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    var payload = new FormData();
+    payload.append('name', d.name);
+    payload.append('suburb', d.suburb);
+    payload.append('phone', d.phone);
+    payload.append('email', d.email);
+    payload.append('bestTime', d.bestTime);
+    payload.append('message', d.message);
+    payload.append('_subject', 'Free consultation request — ' + d.name + ', ' + d.suburb);
+    if (d.email) payload.append('_replyto', d.email);
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: payload,
+      headers: {'Accept': 'application/json'}
+    }).then(function(res){
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      succeed();
+    }).catch(function(err){
+      /* Silent by design: the visitor never sees an error, the lead still
+         reaches an inbox, and the console carries the diagnosis. */
+      try { console.warn('[consultation form] endpoint failed, falling back to email:', err); } catch (e) {}
+      mailtoFallback(d);
+    }).then(function(){
+      if (btn) { btn.disabled = false; btn.textContent = 'Book my free consultation'; }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
