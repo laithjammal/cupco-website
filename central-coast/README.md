@@ -1,24 +1,42 @@
-# Central Coast NSW — free consultation landing page
+# Lifestyle For You — Central Coast NSW landing page
 
 **This page has nothing to do with Cupco.** It only shares this repository for
-now. It is a self-contained, single-file landing page (`index.html`, ~57 KB, no
-build step, no dependencies) for a local lead-generation campaign aimed at
-people living on the Central Coast of New South Wales. Open the file directly in
-a browser to preview it.
+now. It is a self-contained, single-file landing page (`index.html`, no build
+step, no dependencies) for a local lead-generation campaign aimed at people
+living on the Central Coast of New South Wales. Open the file directly in a
+browser to preview it.
 
-The single conversion goal is a booked **free, private, no-obligation
-consultation**.
+The conversion goal is a booked **free, private, no-obligation in-house
+treatment and consultation**, by phone or through the form.
 
-## Before it goes live
+## Configured
 
-| # | What | Where |
-|---|---|---|
-| 1 | Real trading name | `<title>`, the header wordmark, the footer, and `name` in the JSON-LD. Search the file for `CONFIGURE`. |
-| 2 | `CONTACT_EMAIL` | Script at the foot of the file. Currently `hello@example.com`. |
-| 3 | `CONTACT_PHONE` | Script. **Left empty, the "Prefer to call?" CTA stays hidden** rather than showing an invented number. |
-| 4 | `FORM_ENDPOINT` | Script. Empty keeps the `mailto:` flow. |
-| 5 | Canonical / `og:url` | `<head>`. Currently `example.com`. |
-| 6 | **Remove the `noindex` tag** | `<head>`. See *Search* below — this is the one that silently kills the whole local-SEO effort if forgotten. |
+| What | Value |
+|---|---|
+| Business name | **Lifestyle For You** — in `<title>`, the wordmark, the footer and the JSON-LD |
+| Phone | **0416 915 173** (`tel:+61416915173`) — header, hero, FAQ, booking section, footer, and the mobile sticky bar |
+| Email | **None.** No email address appears anywhere on the page, because none was supplied |
+
+## Still to do before launch
+
+1. **`FORM_ENDPOINT`** — still empty, in the script at the foot of the file.
+   Read the next section before deciding this is optional.
+2. **Canonical and `og:url`** — still `example.com`, in `<head>`.
+3. **Remove the `noindex` tag** — see *Search* below. It is the one that
+   silently kills the whole local-SEO effort if forgotten.
+
+### Why the empty endpoint matters more than usual
+
+With no endpoint *and* no email address, there is nowhere for a form submission
+to be delivered. Accepting someone's details and showing "Request sent." would
+be a lie, so while `FORM_ENDPOINT` is empty the form does something else: it
+validates the fields, then hands the visitor to the phone — one tap to call,
+one tap to send **the same details as a pre-filled text message**. Nothing is
+silently dropped and no lead is lost.
+
+Set `FORM_ENDPOINT` and the normal POST path takes over automatically; the
+phone handoff stays on as the failure fallback, exactly where the old `mailto:`
+fallback used to sit.
 
 ## Search
 
@@ -30,12 +48,15 @@ the moment the page moves to its own domain.**
 
 What is built for search, and deliberately limited:
 
-- Title, description and headings target consultation-shaped terms only —
-  *Central Coast consultation*, *free consultation Central Coast*, *wellness
-  consultant Central Coast NSW*, *non-pharmaceutical options Central Coast*.
-- **No disease or treatment keywords.** Nothing targets "pain treatment",
-  "arthritis", "circulation" or similar. Search must never introduce a claim
-  the visible page does not make.
+- Title, description and headings target booking-shaped terms —
+  *free in-house treatment Central Coast*, *free consultation Central Coast*,
+  *Central Coast NSW consultation*, *non-pharmaceutical options Central Coast*.
+- **No disease keywords.** "Treatment" appears only as the name of the free
+  session, never attached to a condition: nothing targets "pain treatment",
+  "arthritis", "circulation" or anything like them, and nothing in the metadata
+  says more than the visible page does.
+- The phone number is in the meta description, so it is one tap away straight
+  from a search result.
 - JSON-LD is `Organization` + `Service` + `FAQPage`. There is **no**
   `LocalBusiness` with an address, no `openingHours`, no `aggregateRating` —
   none of that was supplied, and schema must not say more than the page.
@@ -44,37 +65,73 @@ What is built for search, and deliberately limited:
 - Every FAQ answer in the structured data is also visible on the page, word for
   word. Keep them in step when editing.
 
-## Compliance
+## Compliance — read before editing copy
 
-The copy makes **no therapeutic claim of any kind**. It does not name or
-describe a product, does not mention a condition, symptom, outcome or benefit,
-and never promises relief, treatment or recovery. Every CTA is about the
-*conversation*, never an outcome ("Book your free Central Coast consultation",
-not "Get relief"). A footer disclaimer states plainly that the page is general
-information, is not medical advice, and makes no claim about treating, curing or
-preventing anything.
+The page offers a **free in-house treatment**, and says so in the hero, the
+CTAs, the steps, the FAQ, the booking section and the metadata. That wording
+was requested directly. It is worth being clear about what it changes:
 
-Nothing on the page is invented: no address, clinic, opening hours, review,
-award, customer count, "years serving the Coast", partnership or healthcare
-affiliation. If genuine testimonials or local social proof become available,
-they need a separate compliance review before they go anywhere near this page.
+- The page still makes **no therapeutic claim**. It never names a product, a
+  condition, a symptom, a benefit or an outcome, and it never promises relief,
+  improvement or recovery. "Treatment" appears only as the name of the free
+  session being offered — never as a claim about what that session does.
+- Every CTA is still about **booking the session**, never about a result.
+  "Book your free in-house treatment", never "Get relief" or "Treat your pain".
+- The footer disclaimer states plainly that Lifestyle For You is **not a
+  medical practice**, does not provide diagnosis or medical treatment, makes no
+  claim about any outcome, and that nobody should change or stop a medication
+  without their doctor.
+- A **"What this is / What this isn't"** panel does the same work in the body
+  of the page. Every line in it is a limit, not a claim.
 
-A quick regression check after any copy edit — everything it flags should fall
-inside the disclaimer and nowhere else:
+If the underlying product is a therapeutic good, offering a free "treatment" is
+the wording most likely to attract attention under Australian therapeutic-goods
+advertising rules, precisely because "treatment" implies a therapeutic purpose
+even when nothing else on the page does. That is a judgement for the business,
+and for someone qualified to advise on it if it matters commercially. The page
+is built so the terminology can be swapped back to "consultation" with a
+find-and-replace if that call goes the other way.
 
-```
-python3 - <<'PY'
-import re
-s=open('central-coast/index.html').read()
-t=re.sub(r'<script.*?</script>|<style.*?</style>|<!--.*?-->','',s,flags=re.S)
-t=re.sub(r'<[^>]+>',' ',t).lower()
-for w in ['treat','cure','heal','relief','relieve','remedy','therapy','symptom',
-          'pain','arthritis','inflammation','circulation','diagnos','patient',
-          'clinic','medicine','medical','doctor','health']:
-    for m in re.finditer(r'.{60}\b'+w+r'.{60}', t):
-        print(w, '::', ' '.join(m.group(0).split()))
-PY
-```
+### What was deliberately not added
+
+The brief asked the page to "feel more like it's run by a medical
+professional". The page has been given a **clinical, precise visual language** —
+the anatomical figure, the specification-style session list, the
+this-is/this-isn't panel, restrained typography — because all of that is
+presentation, and it is honest.
+
+What it does **not** contain, and must not be given without evidence:
+
+- Any title, qualification, degree, registration or accreditation.
+- "Dr", "practitioner", "clinician", "therapist", "nurse" or "specialist".
+- AHPRA, TGA, association or healthcare-partner logos or mentions.
+- "Clinic", "practice", "medically supervised", "clinically proven".
+- Medical insignia — a cross, a caduceus, a stethoscope, a white coat.
+
+Implying medical qualifications the operator does not hold misleads the people
+this page is asking to trust it, and in Australia it is taken seriously. If
+Lifestyle For You genuinely holds relevant qualifications or registrations,
+name them — a real credential is far more persuasive than the *impression* of
+one, and it can be stated plainly.
+
+Also still absent, as before: no address, clinic, opening hours, review, award,
+customer count, "years serving the Coast", partnership or affiliation. Nothing
+on this page is invented.
+
+A regression check after any copy edit. "Treatment" is expected now; everything
+else it flags should fall inside the disclaimer or the "what this isn't" panel
+and nowhere else:
+
+    python3 -c "
+    import re
+    s=open('central-coast/index.html').read()
+    t=re.sub(r'<script.*?</script>|<style.*?</style>|<!--.*?-->','',s,flags=re.S)
+    t=re.sub(r'<[^>]+>',' ',t).lower()
+    for w in ['cure','heal','relief','relieve','remedy','therapy','symptom','pain',
+              'arthritis','inflammation','circulation','diagnos','patient','clinic',
+              'medicine','medical','doctor','registered','qualified','specialist']:
+        if re.search(r'\b'+w, t): print('FLAG', w)
+    "
 
 ## Mobile
 
@@ -105,18 +162,26 @@ scroll at either size or on desktop.
 
 ## Imagery
 
-The two coastal scenes are **hand-built inline SVG, not photography** — a
-deliberate placeholder decision. Generic overseas stock reads instantly as wrong
-to someone who lives here, and no genuine Central Coast photography was
-supplied, so nothing is passed off as somewhere it isn't. The scenes are
-abstract Australian coastal forms (layered headlands, banded water, dune and
-dune grass) and cost about 6 KB, which keeps the first mobile paint fast.
+Everything on the page is **hand-built inline SVG, not photography** — a
+placeholder decision for the coastal scenes, and a permanent one for the figure.
 
-When real photography is available, brief it as **Central Coast NSW, Australia /
+**The two coastal scenes.** Generic overseas stock reads instantly as wrong to
+someone who lives here, and no genuine Central Coast photography was supplied,
+so nothing is passed off as somewhere it isn't. The scenes are abstract
+Australian coastal forms (layered headlands, banded water, dune and dune grass)
+and cost about 6 KB, which keeps the first mobile paint fast. When real
+photography is available, brief it as **Central Coast NSW, Australia /
 Australian coastal lifestyle / New South Wales Central Coast / Australian
 suburban environment**. Not Sydney Harbour, not the Gold Coast or anywhere in
-Queensland, and no US or European streets or architecture. Avoid landmarks
-unless the shot genuinely is the Central Coast.
+Queensland, and no US or European streets or architecture.
+
+**The anatomical figure** in the dark "session" band is an anterior view of the
+muscular system, drawn as one mirrored half so it stays symmetrical and is half
+the work to edit. It carries **no labels, markers, pointers or highlighted
+regions, deliberately** — an annotated region would read as "we treat this",
+which is a therapeutic claim this page does not make. Keep it that way. The
+slow light pass across it is decorative and stops dead under
+`prefers-reduced-motion`.
 
 ## The local treatment
 
@@ -132,27 +197,30 @@ suburb list does its work where it is useful rather than in the prose:
   commute south) are positioning only. There are no claims about who lives here
   or what they need.
 
-## Quote form delivery
+## Booking form delivery
 
-Same pattern as the Cupco page, and the reasoning is the same: a paid click must
-never dead-end.
+The order of preference is: endpoint POST, then phone handoff. A paid click must
+never dead-end, and a lead must never be silently dropped.
 
-- With `FORM_ENDPOINT` set, submissions `fetch()`-POST as `FormData` with
-  `Accept: application/json`, so a provider like Formspree returns JSON instead
-  of redirecting away from the page. Success swaps in the "Request sent." panel.
-- **Any non-2xx or network failure silently falls back to `mailto:`.** The
+- With `FORM_ENDPOINT` set, submissions `fetch()`-POST as `FormData` with an
+  `Accept: application/json` header, so a provider like Formspree returns JSON
+  instead of redirecting away from the page. Success swaps in "Request sent."
+- **With no endpoint, or on any non-2xx or network failure**, the card swaps to
+  "One last step" with two buttons: call, or send the same details as a
+  pre-filled SMS (iOS wants `?&body=`, everything else takes `?body=`). The
   visitor never sees an error; the console carries the diagnosis.
-- **Conversions never fire on the email path.** Opening a mail client is not a
-  lead, and counting it as one would corrupt the numbers. `generate_lead` fires
-  only on a confirmed endpoint accept, and only if a `gtag` is present — no
-  analytics tag is installed on this page yet.
+- **Conversions never fire on the phone handoff.** Opening a dialler is not a
+  confirmed lead. `generate_lead` fires only on a confirmed endpoint accept, and
+  only if a `gtag` is present — no analytics tag is installed on this page yet.
+- The visitor's name is HTML-escaped before it goes into the handoff panel.
 - A `_gotcha` honeypot silently discards bot submissions.
-- The note under the button changes with the active path ("Submitting opens a
-  pre-filled email…" vs "We usually reply within one business day"), so you can
-  tell which path is live without opening DevTools.
+- The note under the button changes with the active path, so you can tell which
+  one is live without opening DevTools.
 
 Verified with Playwright: empty submit marks and focuses the first bad field;
-no endpoint builds a correct `mailto:`; a 200 shows the success panel and fires
-exactly one lead event; HTTP 500 and a dead network both fall back to email with
-no conversion counted and the button restored; a filled honeypot suppresses the
-submission entirely.
+no endpoint produces the phone handoff with a correct `tel:` and an SMS body
+carrying the suburb; a script-shaped name is escaped rather than injected; a 200
+shows "Request sent." with the phone actions staying hidden and exactly one lead
+event; HTTP 500 falls back to the handoff with no conversion counted; a filled
+honeypot suppresses the submission entirely; all seven `tel:` links on the page
+point at 0416 915 173, and there are zero `mailto:` links.
