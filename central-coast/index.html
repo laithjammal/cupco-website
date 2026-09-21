@@ -476,39 +476,6 @@ section{position:relative;}
 @media (prefers-reduced-motion:reduce){.painpoints li:hover{transform:none;}}
 
 
-/* The figure is a 72-frame turntable rendered offline from BodyParts3D 4.0
-   geometry (CC BY 4.0, credited in the footer), composited into one 9x8 WebP
-   sprite sheet and stepped through by CSS alone — no JavaScript, and none of
-   the 21.4MB the live 3D atlas would have cost.
-
-   72 frames means 5 degrees a step, which is what lets the rotation run this
-   slowly (14s a turn) without reading as stop-motion. Percentage
-   background-size keeps it resolution-independent; steps(n, jump-none) lands
-   on all nine columns and all eight rows rather than skipping the last of
-   each, and the X axis completes one sweep per row, walking the sheet like a
-   raster scan.
-
-   The head is skinned and the body is not, on purpose: a bare skull read as
-   frightening, and the contrast is what makes it legible as muscle rather
-   than as a figure with no clothes on.
-
-   Deliberately unlabelled: a marked-up region beside a free treatment offer
-   would read as "we treat this". */
-.anat-figure{
-  width:min(340px,72vw);aspect-ratio:320/460;
-  background-image:url("muscle-turntable.webp");
-  background-size:900% 800%;
-  background-repeat:no-repeat;
-  background-position:0% 0%;
-  animation:anSpinX 1.75s steps(9,jump-none) infinite,
-            anSpinY 14s   steps(8,jump-none) infinite;
-}
-@keyframes anSpinX{from{background-position-x:0%}to{background-position-x:100%}}
-@keyframes anSpinY{from{background-position-y:0%}to{background-position-y:100%}}
-@media (prefers-reduced-motion:reduce){
-  /* Hold the front view. Still the real model, just not turning. */
-  .anat-figure{animation:none;background-position:0% 0%;}
-}
 
 /* ---------- what people are after ---------- */
 .want-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line-soft);
@@ -825,31 +792,9 @@ section{position:relative;}
 .ok-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
 .ok-actions .btn{width:100%;}
 
-/* ---------- anatomy band ---------- */
-.anat-grid{display:grid;grid-template-columns:1fr;gap:clamp(30px,5vw,56px);align-items:center;}
-@media (min-width:900px){.anat-grid{grid-template-columns:1.02fr .98fr;}}
-.anat-stage{
-  position:relative;border-radius:var(--radius);overflow:hidden;
-  background:linear-gradient(180deg,#17323A 0%,#102A31 100%);
-  border:1px solid rgba(251,248,242,.09);
-  display:flex;align-items:center;justify-content:center;
-  padding:18px 0;
-}
-.anat-stage svg{display:block;width:100%;max-width:340px;height:auto;}
-/* A slow light pass over the figure, the way a visualisation reads on a
-   screen. Decorative only, and it stops dead under reduced motion. */
-.anat-sweep{
-  position:absolute;left:0;right:0;height:38%;
-  background:linear-gradient(180deg,rgba(159,198,196,0) 0%,rgba(159,198,196,.12) 50%,rgba(159,198,196,0) 100%);
-  animation:sweep 7s ease-in-out infinite;pointer-events:none;
-}
-@keyframes sweep{
-  0%,100%{transform:translateY(-40%);opacity:0;}
-  50%{transform:translateY(190%);opacity:1;}
-}
-@media (prefers-reduced-motion:reduce){.anat-sweep{display:none;}}
-
-.spec{list-style:none;margin:26px 0 0 0;padding:0;display:grid;gap:0;}
+/* ---------- the session ---------- */
+.session-body{max-width:64rem;}
+.spec{list-style:none;margin:28px 0 0 0;padding:0;display:grid;gap:0;}
 .spec li{
   display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline;
   padding:14px 0;border-top:1px solid rgba(251,248,242,.12);
@@ -860,6 +805,12 @@ section{position:relative;}
   text-transform:uppercase;color:#9FC6C4;white-space:nowrap;
 }
 .spec span{color:rgba(251,248,242,.8);font-size:.97rem;}
+@media (min-width:860px){
+  .spec{grid-template-columns:repeat(3,1fr);gap:0 32px;}
+  .spec li{grid-template-columns:1fr;gap:6px;align-content:start;}
+  .spec li:last-child{border-bottom:none;}
+  .spec li{border-bottom:1px solid rgba(251,248,242,.12);}
+}
 @media (max-width:560px){
   .spec li{grid-template-columns:1fr;gap:5px;}
 }
@@ -1299,38 +1250,22 @@ section{position:relative;}
     </div>
   </section>
 
-  <!-- ==================== THE SESSION ====================
-       The anatomical figure is a general illustration of the human body. It
-       carries NO labels, markers or pointers, deliberately: an annotated
-       region would read as "we treat this", which is a therapeutic claim
-       this page does not make and is not authorised to make.
-
-       Equally deliberate is what is NOT here: no title, qualification,
-       registration, accreditation, clinical badge or medical insignia.
-       Nothing on this page may imply the operator is a medical professional
-       unless that is true and can be evidenced. -->
+  <!-- ==================== THE SESSION ==================== -->
   <section class="band band-ink">
     <div class="wrap">
-      <div class="anat-grid">
-        <div>
-          <p class="eyebrow">The session</p>
-          <h2>Unhurried, private, and explained properly.</h2>
-          <p style="color:rgba(251,248,242,.78);margin-top:16px;max-width:46ch;">Someone who does this every day comes to you, looks at your situation, and shows you exactly what&rsquo;s involved &mdash; step by step, with time to ask questions as you go.</p>
-          <p style="color:rgba(251,248,242,.78);max-width:46ch;">Nothing is rushed, nothing is assumed, and nothing is decided for you on the day.</p>
-          <ul class="spec">
-            <li><b>One to one</b><span>Never a group session and never a sales room.</span></li>
-            <li><b>In your own home</b><span>They come to you, at a time that suits, anywhere on the Coast.</span></li>
-            <li><b>Questions welcome</b><span>Including the ones you haven&rsquo;t been able to get a straight answer to.</span></li>
-          </ul>
-          <p style="margin-top:28px;">
-            <a class="btn btn-primary" style="background:#FBF8F2;color:var(--ink);" href="#book" data-cta="anatomy">Book your free treatment today</a>
-          </p>
-        </div>
-
-        <div class="anat-stage rise">
-          <span class="anat-sweep" aria-hidden="true"></span>
-          <div class="anat-figure" role="img" aria-label="Rotating illustration of the human muscular system, front view"></div>
-        </div>
+      <div class="session-body">
+        <p class="eyebrow">The session</p>
+        <h2>Unhurried, private, and explained properly.</h2>
+        <p style="color:rgba(251,248,242,.78);margin-top:16px;max-width:52ch;">Someone who does this every day comes to you, looks at your situation, and shows you exactly what&rsquo;s involved &mdash; step by step, with time to ask questions as you go.</p>
+        <p style="color:rgba(251,248,242,.78);max-width:52ch;">Nothing is rushed, nothing is assumed, and nothing is decided for you on the day.</p>
+        <ul class="spec">
+          <li><b>One to one</b><span>Never a group session and never a sales room.</span></li>
+          <li><b>In your own home</b><span>They come to you, at a time that suits, anywhere on the Coast.</span></li>
+          <li><b>Questions welcome</b><span>Including the ones you haven&rsquo;t been able to get a straight answer to.</span></li>
+        </ul>
+        <p style="margin-top:28px;">
+          <a class="btn btn-primary" href="#book" data-cta="session">Book your free treatment today</a>
+        </p>
       </div>
 
       <!-- Saying plainly what this is not is the honest way to look
@@ -1649,7 +1584,7 @@ section{position:relative;}
     </div>
 
     <p class="disclaimer">This page offers a free, no-obligation in-house treatment session and consultation. It is general information only and it is not medical advice. Lifestyle For You is not a medical practice and does not provide diagnosis, medical treatment or a treatment plan. If you have a health concern, please speak with your doctor or another qualified health professional, and do not change or stop any medication without their advice.</p>
-    <p class="footer-legal">&copy; <span id="yr">2026</span> Lifestyle For You. Central Coast, NSW, Australia. &middot; Anatomical figure adapted from BodyParts3D, &copy; The Database Center for Life Science, licensed <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>.</p>
+    <p class="footer-legal">&copy; <span id="yr">2026</span> Lifestyle For You. Central Coast, NSW, Australia.</p>
   </div>
 </footer>
 

@@ -224,40 +224,14 @@ Australian coastal lifestyle / New South Wales Central Coast / Australian
 suburban environment**. Not Sydney Harbour, not the Gold Coast or anywhere in
 Queensland, and no US or European streets or architecture.
 
-**The anatomical figure** is real anatomy: BodyParts3D 4.0, the adult male
-reference model, via `ashemag/human-atlas` (MIT application code, CC BY 4.0
-data). It is credited in the footer, which the licence requires — keep that
-line.
-
-It is not a live 3D scene, and it should not become one. The packaged atlas is
-31.4 MB gzipped across 15 chunks, and the muscular system's 402 meshes are
-spread across 10 of those 15, so showing only muscles would still mean a
-21.4 MB download plus Three.js, against a page that is otherwise ~88 KB.
-
-Instead the rotation is pre-rendered. `scratchpad` tooling decoded the 402
-muscular meshes plus 14 skull and mandible meshes straight out of the binary
-chunks using the byte offsets in `atlas.json`, merged them into a GLB, and
-rendered a 36-frame turntable offline with lighting matched to the page
-palette. Those frames are composited into a single 6x6 WebP sprite sheet,
-`muscle-turntable.webp` (269 KB), stepped through by CSS alone:
-
-- `background-size:600% 600%` keeps it resolution-independent, so the figure
-  scales with the viewport without a second asset.
-- Two animations run together — `anSpinX` at 0.55s and `anSpinY` at 3.3s, each
-  `steps(6, jump-none)`. The X cycle completes six times per Y cycle, which
-  walks the sheet like a raster scan. `jump-none` matters: plain `steps(6)`
-  would skip the last column and row.
-- Under `prefers-reduced-motion` the animation stops on the front view. Still
-  the real model, just not turning.
-
-To re-render at a different size or frame count, the pipeline is: extract the
-meshes to a GLB, serve it, drive `render.html` with Playwright, and call
-`window.__sheet(quality)` to get the sprite sheet back as a data URL. Keep the
-grid square so the two-axis CSS stepping still works.
-
-**It carries no labels, markers or highlighted regions, and must not.** A
-marked-up region beside a free treatment offer reads as "we treat this", which
-is a therapeutic claim this page does not make.
+There is **no anatomical figure**. One was built and then removed at the
+client's request: first a hand-drawn SVG, then a pre-rendered turntable of real
+BodyParts3D geometry with a skinned head. Neither landed, and the "session"
+band reads fine without a visual — the three-across spec list fills the space.
+If a figure is ever wanted again, the constraint that killed the live 3D
+version still holds: the atlas is 31.4 MB gzipped and the muscular meshes are
+spread across 10 of its 15 chunks, so anything from it has to be pre-rendered,
+and it must carry no labels or highlighted regions.
 
 ## The local treatment
 
