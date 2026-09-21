@@ -66,7 +66,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Structured data.
      Service + areaServed, not LocalBusiness-with-an-address: there is no
@@ -162,8 +162,9 @@
    interactive elements, and a single warm banksia ochre used sparingly as
    the accent. Light-only by choice, with every surface painted explicitly.
 
-   Type: Fraunces (soft optical serif) for headlines — warm and established
-   without being ornate; Inter for reading and UI.
+   Type: Work Sans throughout — 600 at tight tracking for headlines, 400/500
+   for reading and UI. The supplied design paired a display serif with it;
+   the serif was dropped at the client's request.
 
    Imagery is hand-built inline SVG, not photography. That is a deliberate
    placeholder decision: generic overseas stock would read instantly as
@@ -217,17 +218,17 @@ body{
 }
 
 h1,h2,h3{
-  font-family:'Fraunces','Iowan Old Style',Georgia,serif;
-  font-weight:500;
-  letter-spacing:-.012em;
-  line-height:1.12;
+  font-family:'Work Sans',ui-sans-serif,system-ui,sans-serif;
+  font-weight:600;
+  letter-spacing:-.024em;
+  line-height:1.1;
   color:var(--ink);
   margin:0;
   text-wrap:balance;
 }
-h1{font-size:clamp(2.05rem,5.4vw,3.5rem);}
-h2{font-size:clamp(1.62rem,3.6vw,2.5rem);}
-h3{font-size:1.14rem;line-height:1.3;letter-spacing:-.005em;}
+h1{font-size:clamp(1.95rem,4.7vw,3.05rem);}
+h2{font-size:clamp(1.55rem,3.2vw,2.2rem);}
+h3{font-size:1.1rem;line-height:1.32;letter-spacing:-.012em;}
 p{margin:0 0 1em 0;}
 p:last-child{margin-bottom:0;}
 a{color:var(--sea-deep);}
@@ -296,7 +297,7 @@ a{color:var(--sea-deep);}
 }
 .wordmark svg{flex:none;}
 .wordmark b{
-  font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.12rem;
+  font-family:'Work Sans',sans-serif;font-weight:500;font-size:1.12rem;
   letter-spacing:-.01em;line-height:1.1;display:block;
 }
 .wordmark small{
@@ -435,8 +436,8 @@ section{position:relative;}
   margin:clamp(28px,4vw,40px) 0 0 0;padding:24px 0 0 0;
   border-top:1px solid var(--line);
   max-width:40rem;
-  font-family:'Fraunces',Georgia,serif;font-size:clamp(1.14rem,2.3vw,1.42rem);
-  line-height:1.38;color:var(--ink);
+  font-family:'Work Sans',sans-serif;font-weight:500;font-size:clamp(1.1rem,2.2vw,1.34rem);
+  line-height:1.42;color:var(--ink);
 }
 
 
@@ -463,14 +464,13 @@ section{position:relative;}
   box-shadow:var(--shadow);
 }
 .pp-n{
-  flex:none;font-family:'Fraunces',Georgia,serif;font-size:.92rem;
+  flex:none;font-family:'Work Sans',sans-serif;font-size:.92rem;
   color:var(--ochre);letter-spacing:.06em;padding-top:.22em;
 }
 .painpoints p{
   margin:0;
-  font-family:'Fraunces',Georgia,serif;
-  font-size:clamp(1.06rem,1.9vw,1.24rem);
-  line-height:1.34;color:var(--text-soft);
+  font-size:clamp(1rem,1.7vw,1.14rem);
+  line-height:1.42;color:var(--text-soft);
 }
 .painpoints strong{font-weight:600;color:var(--ink);}
 @media (prefers-reduced-motion:reduce){.painpoints li:hover{transform:none;}}
@@ -501,9 +501,11 @@ section{position:relative;}
   .split.reverse > *:first-child{order:2;}
 }
 .scene-card{
-  border-radius:var(--radius);overflow:hidden;background:var(--sand);
+  position:relative;border-radius:var(--radius);overflow:hidden;background:var(--sand);
   border:1px solid var(--line-soft);box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;
 }
+.scene-tag{position:absolute;z-index:2;}
 .scene-card svg{display:block;width:100%;height:auto;}
 
 /* ---------- consultation steps ---------- */
@@ -516,7 +518,7 @@ section{position:relative;}
 .step{background:var(--bone);padding:clamp(24px,3vw,32px);}
 .band-ink .step{background:var(--ink-2);}
 .step-n{
-  font-family:'Fraunces',Georgia,serif;font-size:.95rem;font-weight:500;
+  font-family:'Work Sans',sans-serif;font-size:.95rem;font-weight:500;
   color:var(--ochre);margin:0 0 14px 0;letter-spacing:.06em;
 }
 .step h3{margin-bottom:9px;}
@@ -542,7 +544,7 @@ section{position:relative;}
 .area-list{
   display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
   gap:10px 0;margin:26px auto 0 auto;max-width:44rem;
-  font-family:'Fraunces',Georgia,serif;font-size:clamp(1rem,2vw,1.2rem);
+  font-family:'Work Sans',sans-serif;font-weight:600;font-size:clamp(1rem,2vw,1.15rem);
   color:var(--ink);line-height:1.4;
 }
 .area-list li{list-style:none;display:inline-flex;align-items:center;}
@@ -561,7 +563,7 @@ section{position:relative;}
 .faq details:first-of-type{border-top:1px solid var(--line-soft);}
 .faq summary{
   list-style:none;cursor:pointer;padding:20px 40px 20px 0;position:relative;
-  font-family:'Fraunces',Georgia,serif;font-size:1.06rem;color:var(--ink);
+  font-family:'Work Sans',sans-serif;font-size:1.06rem;color:var(--ink);
 }
 .faq summary::-webkit-details-marker{display:none;}
 .faq summary::after{
@@ -633,7 +635,7 @@ section{position:relative;}
 .about-copy p{color:var(--text-soft);max-width:48ch;}
 .stats{margin-top:30px;}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.stat .num{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--sea);line-height:1;}
+.stat .num{font-family:'Work Sans',sans-serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--sea);line-height:1;}
 .stat-label{font-size:.8rem;color:var(--text-faint);margin-top:6px;}
 
 /* ---------- testimonials ---------- */
@@ -685,7 +687,7 @@ section{position:relative;}
 .foot-brand p{margin:0;max-width:34ch;}
 .foot-logo{
   display:flex;align-items:center;gap:10px;color:var(--ink);
-  font-family:'Fraunces',Georgia,serif;font-size:1.12rem;margin-bottom:4px;
+  font-family:'Work Sans',sans-serif;font-size:1.12rem;margin-bottom:4px;
 }
 .ph-inline{
   display:inline-block;padding:4px 10px;font-size:.84rem;width:fit-content;
@@ -775,14 +777,14 @@ section{position:relative;}
 .header-tel:hover{color:var(--sea-deep);}
 .btn-call{gap:9px;}
 .footer-tel{
-  font-family:'Fraunces',Georgia,serif;font-size:1.15rem;color:var(--ink);
+  font-family:'Work Sans',sans-serif;font-size:1.15rem;color:var(--ink);
   text-decoration:none;
 }
 .footer-tel:hover{color:var(--sea-deep);}
 .big-tel{margin:22px 0 0 0;}
 .big-tel a{
   display:inline-flex;align-items:center;gap:12px;
-  font-family:'Fraunces',Georgia,serif;font-size:clamp(1.5rem,3.4vw,2rem);
+  font-family:'Work Sans',sans-serif;font-size:clamp(1.5rem,3.4vw,2rem);
   color:#FBF8F2;text-decoration:none;letter-spacing:.01em;
 }
 .big-tel a:hover{color:#9FC6C4;}
@@ -1053,6 +1055,7 @@ section{position:relative;}
   <section class="band band-sand">
     <div class="wrap split reverse">
       <div class="scene-card rise">
+          <span class="photo-tag scene-tag">[PHOTO &mdash; Terrigal Beach, Central Coast NSW]</span>
         <svg viewBox="0 0 620 440" aria-hidden="true" focusable="false">
           <defs>
             <linearGradient id="s2sky" x1="0" y1="0" x2="0" y2="1">
