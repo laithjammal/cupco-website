@@ -67,13 +67,17 @@ before launch.**
 | Hero | `[PHOTO — consultant with a client, Central Coast NSW, natural light]` | Real Central Coast photography. Brief it as *Central Coast NSW, Australia / Australian coastal lifestyle*. Not Sydney Harbour, not Queensland, no US or European streets. |
 | Hero | `[X.X / 5 from local clients]` review chip | Needs a real, verifiable rating or the whole chip goes. |
 | About | `[PHOTO — Michelle or the team, Central Coast NSW]` | Get Michelle's consent before publishing her photo or name. |
-| About | `[X]+ Coast locals visited`, `[X] Years on the Central Coast` | Only publish numbers you can evidence. Delete any you can't. "100% locally owned" stays only if true. |
 | Testimonials | Three bracketed quotes and client names | See the compliance note below — these need more than just filling in. |
 | Footer | `[Street address]`, `[Suburb], NSW [Postcode]`, `Mon–Fri: [Hours]`, `Sat: [Hours]` | If there is no premises, **delete the whole Visit column** rather than inventing one. |
 | Footer | `[Email address]`, `[Instagram · Facebook]` | No email was supplied. Delete if there isn't one. |
 | Head | canonical and `og:url` still point at `example.com` | |
 | Head | `<meta name="robots" content="noindex, nofollow">` | Remove only when the page moves to its own domain. |
 | Script | `FORM_ENDPOINT` still empty | See *Booking form delivery*. |
+
+The About stat row is filled in with figures supplied by the client: **2,000+
+Coast locals visited**, **10 years on the Central Coast**, **100% locally
+owned**. The ten years is also stated in the copy above it. Keep the two in
+step if either changes.
 
 Also confirm before launch: **"Central Coast owned & operated"** in the hero
 badge and **"Michelle, our leading expert"** are both true and that Michelle
