@@ -476,23 +476,32 @@ section{position:relative;}
 @media (prefers-reduced-motion:reduce){.painpoints li:hover{transform:none;}}
 
 
-/* The figure is a 36-frame turntable rendered offline from BodyParts3D 4.0
-   geometry (CC BY 4.0, credited in the footer), composited into one 6x6
-   WebP sprite sheet and stepped through with CSS. 269KB and no JavaScript,
-   against the 21.4MB the live 3D atlas would have cost. Percentage
-   background-size keeps it resolution-independent, and steps(6, jump-none)
-   lands on all six columns and rows rather than skipping the last.
+/* The figure is a 72-frame turntable rendered offline from BodyParts3D 4.0
+   geometry (CC BY 4.0, credited in the footer), composited into one 9x8 WebP
+   sprite sheet and stepped through by CSS alone — no JavaScript, and none of
+   the 21.4MB the live 3D atlas would have cost.
 
-   Deliberately unlabelled, like the drawing it replaces: a marked-up region
-   beside a free treatment offer would read as "we treat this". */
+   72 frames means 5 degrees a step, which is what lets the rotation run this
+   slowly (14s a turn) without reading as stop-motion. Percentage
+   background-size keeps it resolution-independent; steps(n, jump-none) lands
+   on all nine columns and all eight rows rather than skipping the last of
+   each, and the X axis completes one sweep per row, walking the sheet like a
+   raster scan.
+
+   The head is skinned and the body is not, on purpose: a bare skull read as
+   frightening, and the contrast is what makes it legible as muscle rather
+   than as a figure with no clothes on.
+
+   Deliberately unlabelled: a marked-up region beside a free treatment offer
+   would read as "we treat this". */
 .anat-figure{
-  width:min(380px,74vw);aspect-ratio:380/545;
+  width:min(340px,72vw);aspect-ratio:320/460;
   background-image:url("muscle-turntable.webp");
-  background-size:600% 600%;
+  background-size:900% 800%;
   background-repeat:no-repeat;
   background-position:0% 0%;
-  animation:anSpinX .55s steps(6,jump-none) infinite,
-            anSpinY 3.3s steps(6,jump-none) infinite;
+  animation:anSpinX 1.75s steps(9,jump-none) infinite,
+            anSpinY 14s   steps(8,jump-none) infinite;
 }
 @keyframes anSpinX{from{background-position-x:0%}to{background-position-x:100%}}
 @keyframes anSpinY{from{background-position-y:0%}to{background-position-y:100%}}
