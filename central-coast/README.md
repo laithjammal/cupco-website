@@ -66,7 +66,7 @@ before launch.**
 |---|---|---|
 | Hero | `[PHOTO — consultant with a client, Central Coast NSW, natural light]` | Real Central Coast photography. Brief it as *Central Coast NSW, Australia / Australian coastal lifestyle*. Not Sydney Harbour, not Queensland, no US or European streets. |
 | Hero | `[X.X / 5 from local clients]` review chip | Needs a real, verifiable rating or the whole chip goes. |
-| About | `[PHOTO — Michelle or the team, Central Coast NSW]` | Get Michelle's consent before publishing her photo or name. |
+| About | `[PHOTO — happy Central Coast locals in their 60s–70s at the beach, natural light]` | Needs a licensed photo or one of your own. **If it is stock, do not caption or imply that the people in it are clients** — that is fabricated social proof, whatever the picture shows. A photo of Michelle or the team works here too, with her consent. |
 | Testimonials | Three bracketed quotes and client names | See the compliance note below — these need more than just filling in. |
 | Footer | `[Street address]`, `[Suburb], NSW [Postcode]`, `Mon–Fri: [Hours]`, `Sat: [Hours]` | If there is no premises, **delete the whole Visit column** rather than inventing one. |
 | Footer | `[Email address]`, `[Instagram · Facebook]` | No email was supplied. Delete if there isn't one. |
