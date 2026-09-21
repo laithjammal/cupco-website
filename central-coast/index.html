@@ -66,7 +66,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Structured data.
      Service + areaServed, not LocalBusiness-with-an-address: there is no
@@ -175,21 +175,24 @@
    ========================================================================= */
 
 :root{
-  --ink:#12262B;
-  --ink-2:#1D3A41;
-  --bone:#FBF8F2;
-  --bone-2:#F5EFE4;
-  --sand:#EFE6D6;
-  --sand-deep:#E2D5BE;
-  --sea:#2F6B72;
-  --sea-deep:#215056;
-  --sea-tint:rgba(47,107,114,.08);
-  --ochre:#B4792F;
-  --text:#172B30;
-  --text-soft:#4E656B;
-  --text-faint:#7D9096;
-  --line:rgba(18,38,43,.13);
-  --line-soft:rgba(18,38,43,.07);
+  /* Palette and type taken from the supplied design: eucalypt green as the
+     primary, a warm terracotta accent, paper and card creams. */
+  --ink:#20302A;
+  --ink-2:#2B4239;
+  --bone:#FBF6EC;
+  --bone-2:#F3ECDC;
+  --sand:#EFE6CF;
+  --sand-deep:#E7DFC9;
+  --sea:#2F6F63;
+  --sea-deep:#1F4A41;
+  --sea-tint:rgba(47,111,99,.10);
+  --ochre:#E2895F;
+  --sage:#A9C2AE;
+  --text:#20302A;
+  --text-soft:#4A5650;
+  --text-faint:#77857E;
+  --line:#E7DFC9;
+  --line-soft:rgba(32,48,42,.09);
   --shadow:0 1px 2px rgba(18,38,43,.05),0 12px 32px -12px rgba(18,38,43,.16);
   --radius:16px;
   --maxw:1120px;
@@ -207,7 +210,7 @@ body{
   margin:0;
   background:var(--bone);
   color:var(--text);
-  font-family:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-family:'Work Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
   font-size:17px;
   line-height:1.62;
   -webkit-font-smoothing:antialiased;
@@ -250,14 +253,16 @@ a{color:var(--sea-deep);}
   transition:background-color .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease;
 }
 .btn-primary{
-  background:var(--ink);color:#FBF8F2;
-  box-shadow:0 10px 24px -12px rgba(18,38,43,.55);
+  background:var(--ochre);color:var(--ink);font-weight:700;
+  box-shadow:0 10px 24px -12px rgba(32,48,42,.45);
 }
-.btn-primary:hover{background:var(--sea-deep);transform:translateY(-1px);}
+.btn-primary:hover{background:#D5764A;transform:translateY(-1px);}
+.btn-green{background:var(--sea);color:var(--bone);font-weight:600;}
+.btn-green:hover{background:var(--sea-deep);transform:translateY(-1px);}
 .btn-ghost{
-  background:transparent;color:var(--ink);border-color:var(--line);
+  background:transparent;color:var(--ink);border-color:var(--sand-deep);
 }
-.btn-ghost:hover{background:rgba(18,38,43,.045);}
+.btn-ghost:hover{background:rgba(32,48,42,.05);}
 .btn-sm{padding:12px 20px;font-size:.92rem;}
 .btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{
   outline:2px solid var(--sea);outline-offset:3px;
@@ -304,29 +309,52 @@ a{color:var(--sea-deep);}
 }
 .header-nav a:hover{color:var(--ink);}
 
-/* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;background:var(--bone);}
-.hero-scene{
-  position:absolute;left:0;right:0;bottom:0;
-  height:min(58%,420px);width:100%;
-  display:block;pointer-events:none;
+/* ---------- hero, in the supplied two-column form ---------- */
+.hero{background:var(--bone);padding:clamp(28px,4vw,60px) 0 clamp(36px,5vw,72px) 0;}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px);align-items:center;}
+@media (min-width:940px){.hero-grid{grid-template-columns:1.02fr .98fr;gap:64px;}}
+.hero-copy{display:flex;flex-direction:column;align-items:flex-start;}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--sand);border-radius:999px;padding:8px 16px;
+  font-size:.81rem;font-weight:600;letter-spacing:.01em;color:var(--ink);
+  margin:0 0 20px 0;
 }
-.hero-inner{
-  position:relative;z-index:1;
-  padding:clamp(34px,6vw,84px) 0 clamp(210px,26vw,330px) 0;
-  max-width:50rem;
+.hero h1{margin-bottom:18px;}
+.hero h1 em{font-style:normal;color:var(--sea);}
+.hero .lede{max-width:34rem;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.hero-visual{position:relative;}
+.hero-photo{
+  position:relative;width:100%;height:clamp(260px,42vw,520px);
+  border-radius:28px;overflow:hidden;background:var(--sage);
+  display:flex;align-items:center;justify-content:center;
 }
-.hero h1{margin-bottom:20px;}
-.hero h1 em{font-style:normal;color:var(--sea-deep);}
-.hero .lede{max-width:40rem;}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.hero-art{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.photo-tag{
+  position:relative;z-index:1;max-width:82%;text-align:center;
+  font-size:.78rem;font-weight:600;color:var(--ink);
+  background:rgba(251,246,236,.86);padding:10px 18px;border-radius:999px;
+  border:1.5px dashed var(--sea);
+}
+.review-chip.ph{
+  position:absolute;left:22px;bottom:-22px;
+  background:var(--ink);color:var(--bone);border-radius:16px;
+  padding:14px 20px;box-shadow:0 12px 30px rgba(32,48,42,.25);
+  border-color:var(--sage);
+}
+.review-chip .big{font-size:.86rem;font-weight:700;}
+.review-chip .small{font-size:.74rem;color:#CBD6CE;margin-top:2px;}
+.review-chip .ph-tag{background:rgba(251,246,236,.16);color:#CBD6CE;margin-bottom:6px;}
 
-/* A thin sand rule where the scene meets the next section, so the
-   illustration resolves into the page instead of being cut off. */
-.hero::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
-  background:var(--line-soft);
+/* ---------- suburb strip ---------- */
+.strip{
+  background:var(--ink);display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:center;gap:14px 34px;
+  padding:26px 22px;
 }
+.strip-label{color:#CBD6CE;font-size:.82rem;font-weight:600;letter-spacing:.04em;}
+.suburb{color:var(--bone);font-size:.92rem;font-weight:600;}
 
 /* ---------- generic sections ---------- */
 section{position:relative;}
@@ -339,6 +367,29 @@ section{position:relative;}
 .section-head{max-width:38rem;margin-bottom:clamp(30px,4vw,48px);}
 .section-head p{margin-top:16px;}
 
+
+
+/* ---------- placeholders ----------
+   Nothing in a .ph block is real. Each one is a slot waiting for something
+   the business actually has: a photo, a rating, a review, a number, an
+   address. They are styled to look unfinished on purpose — dashed, muted,
+   bracketed — so this page cannot be mistaken for ready to publish. Fill
+   them in or delete the block; never leave one live.
+   The README lists every one. */
+.ph{
+  position:relative;
+  border:1.5px dashed var(--sage);
+  background:repeating-linear-gradient(135deg,rgba(169,194,174,.13) 0 10px,transparent 10px 20px);
+  border-radius:14px;color:var(--text-faint);
+}
+.ph-tag{
+  display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--sea-deep);
+  background:var(--sand);border-radius:999px;padding:5px 11px;margin-bottom:10px;
+}
+.ph-note{
+  font-size:.82rem;color:var(--text-faint);font-style:italic;margin:12px 0 0 0;
+}
 
 /* ---------- how it works ---------- */
 .band-flow{padding:clamp(40px,5vw,64px) 0;border-bottom:1px solid var(--line-soft);}
@@ -560,22 +611,83 @@ section{position:relative;}
 .book-aside .points li strong{color:#FBF8F2;}
 .book-aside .points li::before{background:var(--ochre);}
 
+
+/* ---------- about ---------- */
+.about{
+  display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px);
+  align-items:center;background:var(--bone-2);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:clamp(40px,6vw,80px) 22px;
+}
+@media (min-width:920px){
+  .about{grid-template-columns:.9fr 1.1fr;padding-left:clamp(22px,6vw,90px);padding-right:clamp(22px,6vw,90px);}
+}
+.about-photo{
+  min-height:clamp(260px,34vw,440px);border-radius:24px;
+  background:linear-gradient(160deg,#CFE0D6 0%,var(--sage) 55%,var(--sand) 100%);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.about-copy h2{margin-bottom:16px;}
+.about-copy p{color:var(--text-soft);max-width:48ch;}
+.stats{margin-top:28px;padding:18px 20px;}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.stat .num{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--sea);line-height:1;}
+.stat-label{font-size:.8rem;color:var(--text-faint);margin-top:6px;}
+
+/* ---------- testimonials ---------- */
+.testi-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+@media (min-width:820px){.testi-grid{grid-template-columns:repeat(3,1fr);}}
+.testi-card{padding:24px;}
+.testi-card .stars{color:var(--ochre);letter-spacing:.16em;font-size:.95rem;margin-bottom:12px;}
+.testi-card p{font-size:1rem;color:var(--text-soft);margin:0 0 14px 0;}
+.testi-name{font-size:.85rem;font-weight:600;color:var(--text-faint);}
+
+/* ---------- closing banner ---------- */
+.cta-banner{
+  background:var(--ink);color:var(--bone);border-radius:24px;
+  padding:clamp(28px,4vw,48px);
+  display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;
+}
+.cta-banner h2{color:var(--bone);margin-bottom:8px;}
+.cta-banner p{color:#CBD6CE;margin:0;}
+.cta-buttons{display:flex;flex-wrap:wrap;gap:12px;}
+.btn-outline{background:transparent;color:var(--bone);border:2px solid var(--bone);font-weight:700;}
+.btn-outline:hover{background:rgba(251,246,236,.12);}
+
 /* ---------- footer ---------- */
 .site-footer{
   background:var(--bone-2);border-top:1px solid var(--line-soft);
   padding:clamp(38px,5vw,56px) 0 calc(clamp(38px,5vw,56px) + env(safe-area-inset-bottom));
   font-size:.88rem;color:var(--text-faint);
 }
-.footer-top{
-  display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;
-  align-items:flex-start;margin-bottom:26px;
-}
-.footer-area{max-width:34rem;color:var(--text-soft);}
 .disclaimer{
   border-top:1px solid var(--line-soft);padding-top:22px;margin:0;
   max-width:60rem;line-height:1.6;
 }
 .footer-legal{margin:14px 0 0 0;}
+
+
+.foot-grid{
+  display:grid;grid-template-columns:1fr;gap:28px;margin-bottom:34px;
+}
+@media (min-width:700px){.foot-grid{grid-template-columns:repeat(2,1fr);gap:32px;}}
+@media (min-width:1000px){.foot-grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;}}
+.foot-col{display:flex;flex-direction:column;gap:9px;font-size:.88rem;color:var(--text-soft);}
+.foot-col.ph{padding:16px 18px;}
+.foot-title{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:3px;
+}
+.foot-col a{color:var(--text-soft);text-decoration:none;}
+.foot-col a:hover{color:var(--sea-deep);}
+.foot-brand p{margin:0;max-width:34ch;}
+.foot-logo{
+  display:flex;align-items:center;gap:10px;color:var(--ink);
+  font-family:'Fraunces',Georgia,serif;font-size:1.12rem;margin-bottom:4px;
+}
+.ph-inline{
+  display:inline-block;padding:4px 10px;font-size:.84rem;width:fit-content;
+}
 
 /* ---------- mobile sticky CTA ---------- */
 .sticky-cta{
@@ -606,34 +718,20 @@ section{position:relative;}
 
   /* FIRST VIEWPORT CONTRACT (phones)
      Central Coast + another approach + free consultation, all visible
-     without a scroll. The hero becomes a column — copy first, illustration
-     beneath it — so the scene can never sit under the type the way an
-     absolutely positioned background does. Heights are measured in dvh so
-     mobile browser chrome does not quietly eat the CTA. */
-  /* 68px header + 92px sticky bar are subtracted, so the whole hero —
-     illustration included — lands in the space the visitor can actually
-     see, instead of sliding under the sticky CTA. */
-  .hero{display:flex;flex-direction:column;min-height:calc(100dvh - 68px - 92px);}
-  .hero > .wrap{order:1;flex:1 1 auto;display:flex;}
-  .hero-scene{order:2;position:static;flex:none;height:132px;}
-  .hero-inner{
-    width:100%;padding:16px 0 20px 0;min-height:0;
-    display:flex;flex-direction:column;justify-content:center;
-  }
-  .hero h1{font-size:clamp(1.92rem,8.2vw,2.5rem);margin-bottom:14px;}
-  /* Keep the header to a single line: the name and the number are the two
-     things that matter up there on a phone. */
-  .wordmark b{font-size:1.02rem;}
-  .wordmark small{font-size:.6rem;white-space:nowrap;}
-  .header-tel{font-size:.92rem;}
-  .offer-chip{font-size:.8rem;padding:7px 14px 7px 11px;margin-bottom:14px;}
-  .hero-scene{height:118px;}
+     without a scroll. The copy column comes first and the photo panel
+     stacks under it, so nothing competes with the CTA above the fold. */
+  .hero{padding:18px 0 28px 0;}
+  .hero-grid{gap:24px;}
+  .hero h1{font-size:clamp(1.86rem,8vw,2.4rem);margin-bottom:12px;}
   .hero .lede{font-size:1rem;}
-  .hero-cta{margin-top:22px;}
+  .badge{font-size:.76rem;padding:7px 13px;margin-bottom:14px;}
+  .hero-cta{margin-top:20px;}
   .hero-cta .btn{width:100%;}
-  /* One decision in the first viewport. The secondary link is reachable by
-     scrolling; on a phone it only competes with the CTA. */
-  .hero-cta .btn-ghost{display:none;}
+  .hero-photo{height:230px;border-radius:22px;}
+  .review-chip{left:14px;right:14px;bottom:-18px;}
+  .photo-tag{font-size:.72rem;}
+  .strip{gap:10px 20px;padding:22px 18px;}
+  .strip-label{width:100%;text-align:center;}
 }
 /* Narrow phones: the wordmark's second line is the first thing to go — the
    hero eyebrow says "Central Coast, NSW" immediately below it anyway, and
@@ -646,16 +744,11 @@ section{position:relative;}
   .header-tel{font-size:.88rem;gap:6px;}
 }
 
-@supports not (height:100dvh){
-  @media (max-width:719px){.hero{min-height:calc(100vh - 160px);}}
-}
-
-/* Short phones: drop the supporting paragraph and shrink the scene rather
-   than push the CTA below the fold. The headline and the CTA are the
-   contract; the paragraph is not. */
-@media (max-width:719px) and (max-height:660px){
+/* Short phones: drop the supporting paragraph rather than push the CTA
+   below the fold. The headline and the CTA are the contract. */
+@media (max-width:719px) and (max-height:700px){
   .hero .lede{display:none;}
-  .hero-scene{height:92px;}
+  .hero-photo{height:190px;}
 }
 
 
@@ -676,6 +769,7 @@ section{position:relative;}
   font-size:.95rem;font-weight:600;color:var(--ink);text-decoration:none;
   white-space:nowrap;
 }
+.header-tel{color:var(--sea);}
 .header-tel:hover{color:var(--sea-deep);}
 .btn-call{gap:9px;}
 .footer-tel{
@@ -746,7 +840,7 @@ section{position:relative;}
 }
 .spec li:last-child{border-bottom:1px solid rgba(251,248,242,.12);}
 .spec b{
-  font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.13em;
+  font-family:'Work Sans',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.13em;
   text-transform:uppercase;color:#9FC6C4;white-space:nowrap;
 }
 .spec span{color:rgba(251,248,242,.8);font-size:.97rem;}
@@ -821,7 +915,28 @@ section{position:relative;}
        statement rather than a keyword string — local without announcing
        itself as a local SEO page. -->
   <section class="hero">
-    <svg class="hero-scene" viewBox="0 0 1440 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="badge">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Central Coast owned &amp; operated
+        </p>
+        <h1>A different approach,<br>right here on the <em>Central Coast</em>.</h1>
+        <p class="offer-chip">Book a free in-house treatment today</p>
+        <p class="lede">Someone who works with this approach every day comes to you, anywhere on the Coast. They&rsquo;ll look at your situation, show you exactly what&rsquo;s involved, and answer your questions properly. Free, and no obligation either way.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#book" data-cta="hero">Book your free treatment</a>
+          <a class="btn btn-ghost btn-call" href="tel:+61416915173" data-cta="hero-phone">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.4 2.2h2.3l1.1 2.8-1.4 1a8.4 8.4 0 0 0 3.6 3.6l1-1.4 2.8 1.1v2.3a1.2 1.2 0 0 1-1.3 1.2A10.7 10.7 0 0 1 2.2 3.5a1.2 1.2 0 0 1 1.2-1.3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            0416 915 173
+          </a>
+        </div>
+        <p class="assurance"><span>Free</span><span>Private</span><span>No obligation</span></p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-photo">
+          <svg class="hero-art" viewBox="0 0 1440 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#FBF8F2"/>
@@ -885,23 +1000,26 @@ section{position:relative;}
 
       <rect width="1440" height="440" filter="url(#grain)" opacity=".05" style="mix-blend-mode:multiply"/>
     </svg>
-
-    <div class="wrap">
-      <div class="hero-inner">
-        <p class="eyebrow">Central Coast, NSW</p>
-        <h1>A different approach,<br>right here on the <em>Central Coast</em>.</h1>
-        <p class="offer-chip">Book a free in-house treatment today</p>
-        <p class="lede">Someone who works with this approach every day comes to you, anywhere on the Coast. They&rsquo;ll look at your situation, show you exactly what&rsquo;s involved, and answer your questions properly. Free, and no obligation either way.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#book" data-cta="hero">Book your free in-house treatment</a>
-          <a class="btn btn-ghost btn-call" href="tel:+61416915173" data-cta="hero-phone">
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.4 2.2h2.3l1.1 2.8-1.4 1a8.4 8.4 0 0 0 3.6 3.6l1-1.4 2.8 1.1v2.3a1.2 1.2 0 0 1-1.3 1.2A10.7 10.7 0 0 1 2.2 3.5a1.2 1.2 0 0 1 1.2-1.3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-            0416 915 173
-          </a>
+          <span class="photo-tag">[PHOTO &mdash; consultant with a client, Central Coast NSW, natural light]</span>
         </div>
-        <p class="assurance"><span>Free</span><span>Private</span><span>No obligation</span></p>
+        <!-- PLACEHOLDER: no rating exists yet. Fill in with a real, verifiable
+             figure or delete this block before the page goes live. -->
+        <div class="review-chip ph">
+          <span class="ph-tag">Placeholder</span>
+          <div class="big">[X.X / 5 from local clients]</div>
+          <div class="small">Erina &middot; Terrigal &middot; Gosford &middot; Woy Woy</div>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- SUBURB STRIP -->
+  <section class="strip">
+    <span class="strip-label">Serving the Central Coast, from</span>
+    <span class="suburb">Gosford</span><span class="suburb">Erina</span>
+    <span class="suburb">Terrigal</span><span class="suburb">Avoca Beach</span>
+    <span class="suburb">The Entrance</span><span class="suburb">Woy Woy</span>
+    <span class="suburb">Wyong</span><span class="suburb">Toukley</span>
   </section>
 
   <!-- ==================== HOW IT WORKS ====================
@@ -1388,6 +1506,66 @@ section{position:relative;}
     </div>
   </section>
 
+  <!-- ==================== ABOUT ====================
+       PLACEHOLDERS: the photo and all three numbers below are empty slots.
+       Fill them with figures the business can actually evidence, or delete
+       the stat row entirely. Never publish the bracketed versions. -->
+  <section class="about" id="about">
+    <div class="about-photo">
+      <span class="photo-tag">[PHOTO &mdash; Michelle or the team, Central Coast NSW]</span>
+    </div>
+    <div class="about-copy">
+      <p class="eyebrow">Our story</p>
+      <h2>Locals looking after locals.</h2>
+      <p>Lifestyle For You is Central Coast owned and operated. We&rsquo;re not a call centre in another state and we&rsquo;re not a national website with a Central Coast page bolted on &mdash; we live here, and the drive out to Gosford, Woy Woy or Wyong is a short one.</p>
+      <p>Every visit is unhurried. You get a proper conversation, a clear explanation, and as long as you need to think it over.</p>
+      <div class="stats ph">
+        <span class="ph-tag">Placeholder &mdash; needs real figures</span>
+        <div class="stat-row">
+          <div class="stat"><div class="num">[X]+</div><div class="stat-label">Coast locals visited</div></div>
+          <div class="stat"><div class="num">[X]</div><div class="stat-label">Years on the Central Coast</div></div>
+          <div class="stat"><div class="num">100%</div><div class="stat-label">Locally owned</div></div>
+        </div>
+        <p class="ph-note">Only publish numbers you can evidence. Delete any you can&rsquo;t.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ====================
+       PLACEHOLDERS. No reviews have been supplied. Real testimonials for a
+       health-adjacent service also need a compliance read before they go
+       live: a customer saying a product fixed their condition is a
+       therapeutic claim, even in their words. -->
+  <section class="band" id="testimonials">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What our clients say</p>
+        <h2>Real feedback from around the Coast.</h2>
+        <p class="lede">Placeholder quotes shown here &mdash; swap in your own before publishing.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card ph">
+          <span class="ph-tag">Placeholder</span>
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>&ldquo;[Client quote about feeling heard and not rushed, in their own words.]&rdquo;</p>
+          <div class="testi-name">&mdash; [Client name], Terrigal</div>
+        </div>
+        <div class="testi-card ph">
+          <span class="ph-tag">Placeholder</span>
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>&ldquo;[Client quote about the visit at home and how it was explained.]&rdquo;</p>
+          <div class="testi-name">&mdash; [Client name], Gosford</div>
+        </div>
+        <div class="testi-card ph">
+          <span class="ph-tag">Placeholder</span>
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>&ldquo;[Client quote about there being no pressure to decide.]&rdquo;</p>
+          <div class="testi-name">&mdash; [Client name], The Entrance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== QUESTIONS ====================
        Every answer here is also in the FAQPage JSON-LD above. Keep them in
        step: structured data must never say more than the visible page. -->
@@ -1531,23 +1709,66 @@ section{position:relative;}
     </div>
   </section>
 
+  <!-- CLOSING BANNER -->
+  <section class="wrap" style="padding-bottom:clamp(40px,5vw,72px);">
+    <div class="cta-banner">
+      <div>
+        <h2>Ready to book your free treatment?</h2>
+        <p>A local consultant, a visit at home, and no obligation either way.</p>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="#book" data-cta="banner">Book now</a>
+        <a class="btn btn-outline" href="tel:+61416915173" data-cta="banner-phone">Call 0416 915 173</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" id="contact">
   <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-area">
-        <!-- CONFIGURE: BUSINESS_NAME -->
-        <p style="font-family:'Fraunces',Georgia,serif;font-size:1.05rem;color:var(--ink);margin-bottom:8px;">Lifestyle For You</p>
-        <p style="margin:0 0 12px 0;">Free, private, no-obligation in-house treatments and consultations for people across the Central Coast of New South Wales &mdash; Gosford, Erina, Terrigal, Woy Woy, Wyong, Tuggerah, The Entrance and surrounding communities.</p>
-        <p style="margin:0;"><a class="footer-tel" href="tel:+61416915173" data-cta="footer-phone">0416&nbsp;915&nbsp;173</a></p>
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <div class="foot-logo">
+          <svg width="28" height="28" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+            <circle cx="15" cy="15" r="14" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".45"/>
+            <path d="M6 18.4c2.2-4.6 4.4-7.6 6.6-7.6 2.3 0 3.1 3.4 5.2 3.4 1.7 0 3.2-1.8 4.6-4.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6.2 21.6h17.6" stroke="#E2895F" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Lifestyle For You</span>
+        </div>
+        <p>Free, private, no-obligation in-house treatments and consultations, delivered locally across the NSW Central Coast.</p>
       </div>
-      <div>
-        <a class="btn btn-primary btn-sm" href="#book" data-cta="footer">Book your free treatment</a>
+
+      <!-- PLACEHOLDER: no premises, hours or email were supplied. Fill these
+           in or delete the column; do not publish the bracketed text. -->
+      <div class="foot-col ph">
+        <span class="ph-tag">Placeholder</span>
+        <span class="foot-title">Visit</span>
+        <span>[Street address]</span>
+        <span>[Suburb], NSW [Postcode]</span>
+        <span>Mon&ndash;Fri: [Hours]</span>
+        <span>Sat: [Hours]</span>
+      </div>
+
+      <div class="foot-col">
+        <span class="foot-title">Contact</span>
+        <a class="footer-tel" href="tel:+61416915173" data-cta="footer-phone">0416&nbsp;915&nbsp;173</a>
+        <span class="ph ph-inline">[Email address]</span>
+        <span class="ph ph-inline">[Instagram &middot; Facebook]</span>
+      </div>
+
+      <div class="foot-col">
+        <span class="foot-title">Explore</span>
+        <a href="#how">How it works</a>
+        <a href="#want">What people are after</a>
+        <a href="#area">Service area</a>
+        <a href="#questions">Questions</a>
+        <a href="#book">Book a free treatment</a>
       </div>
     </div>
 
-    <p class="disclaimer">This page offers a free, no-obligation in-house treatment session and consultation. It is general information only, it is not medical advice, and it does not make any claim about treating, curing or preventing any condition, or about any outcome. Lifestyle For You is not a medical practice and does not provide diagnosis or medical treatment. If you have a health concern, please speak with your doctor or another qualified health professional, and do not change or stop any medication without their advice.</p>
+    <p class="disclaimer">This page offers a free, no-obligation in-house treatment session and consultation. It is general information only and it is not medical advice. Lifestyle For You is not a medical practice and does not provide diagnosis, medical treatment or a treatment plan. If you have a health concern, please speak with your doctor or another qualified health professional, and do not change or stop any medication without their advice.</p>
     <p class="footer-legal">&copy; <span id="yr">2026</span> Lifestyle For You. Central Coast, NSW, Australia.</p>
   </div>
 </footer>

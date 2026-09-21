@@ -38,6 +38,55 @@ Set `FORM_ENDPOINT` and the normal POST path takes over automatically; the
 phone handoff stays on as the failure fallback, exactly where the old `mailto:`
 fallback used to sit.
 
+## Design basis
+
+The visual design follows a template supplied by the client (eucalypt green
+`#2F6F63` primary, terracotta `#E2895F` accent, paper `#FBF6EC` and card
+`#F3ECDC` grounds, Fraunces over Work Sans). Structure carried across from it:
+the hero badge and two-column hero with a photo panel and review chip, the
+dark suburb strip, the "our story" section with a stat row, the testimonial
+grid, the closing CTA banner and the four-column footer.
+
+What was **not** carried across is the template's content. It described a
+different business — naturopathy, nutrition, remedial massage and acupuncture
+from a clinic with an address and opening hours — and it carried claims this
+page cannot make ("feel like yourself again", "get to the root of fatigue,
+digestion and hormone concerns", "relief for tradie backs", Medicare and
+private health rebates). The content here remains the free in-house treatment
+and consultation.
+
+## Placeholders — this page is NOT ready to publish
+
+Every placeholder is styled to look unfinished: dashed sage border, hatched
+background, a "Placeholder" tag, bracketed text. That is deliberate, so the
+page cannot be mistaken for finished. **Fill each one in or delete the block
+before launch.**
+
+| Where | Placeholder | Notes |
+|---|---|---|
+| Hero | `[PHOTO — consultant with a client, Central Coast NSW, natural light]` | Real Central Coast photography. Brief it as *Central Coast NSW, Australia / Australian coastal lifestyle*. Not Sydney Harbour, not Queensland, no US or European streets. |
+| Hero | `[X.X / 5 from local clients]` review chip | Needs a real, verifiable rating or the whole chip goes. |
+| About | `[PHOTO — Michelle or the team, Central Coast NSW]` | Get Michelle's consent before publishing her photo or name. |
+| About | `[X]+ Coast locals visited`, `[X] Years on the Central Coast` | Only publish numbers you can evidence. Delete any you can't. "100% locally owned" stays only if true. |
+| Testimonials | Three bracketed quotes and client names | See the compliance note below — these need more than just filling in. |
+| Footer | `[Street address]`, `[Suburb], NSW [Postcode]`, `Mon–Fri: [Hours]`, `Sat: [Hours]` | If there is no premises, **delete the whole Visit column** rather than inventing one. |
+| Footer | `[Email address]`, `[Instagram · Facebook]` | No email was supplied. Delete if there isn't one. |
+| Head | canonical and `og:url` still point at `example.com` | |
+| Head | `<meta name="robots" content="noindex, nofollow">` | Remove only when the page moves to its own domain. |
+| Script | `FORM_ENDPOINT` still empty | See *Booking form delivery*. |
+
+Also confirm before launch: **"Central Coast owned & operated"** in the hero
+badge and **"Michelle, our leading expert"** are both true and that Michelle
+consents to being named.
+
+### Testimonials need a compliance read, not just content
+
+Real reviews cannot simply be dropped into those three cards. A customer
+saying a product fixed their pain is a therapeutic claim in exactly the same
+way as the page saying it — the fact that a customer said it is not a defence.
+Any testimonial used here needs checking against the same rules as the rest of
+the copy before it goes live.
+
 ## Search
 
 The page currently carries `<meta name="robots" content="noindex, nofollow">`
