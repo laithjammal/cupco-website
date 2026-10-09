@@ -102,7 +102,7 @@ address, then verify a real submission lands in the inbox.
 
 ## Analytics and conversion tracking
 
-The Google tag (`gtag.js`) sits near the top of `index.html`, configured for GA4 property **G-Z2G205R46D**. The same tag carries Google Ads conversions — nothing further needs adding when those are switched on.
+The Google tag (`gtag.js`) sits near the top of `index.html`, configured for GA4 property **G-Z2G205R46D**, with a second property, **G-HHQ4EQKQFZ**, configured alongside it (one `gtag('config', …)` line each; both receive the same page views and events). The same tag carries Google Ads conversions — nothing further needs adding when those are switched on.
 
 | What | Status |
 |---|---|
