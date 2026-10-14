@@ -27,6 +27,7 @@ Thumbs.db
 *.jpg
 *.jpeg
 !assets/**
+!site2/assets/**
 verify_*.py
 shot*.py
 check_*.py

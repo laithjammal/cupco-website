@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --blue:#58aef8; --blue-dark:#3f95ea; --coral:#f4a090; --navy:#10284d; --white:#fff;
+  --blue:#58aef8; --blue-dark:#3f95ea; --coral:#F2A095; --navy:#20394B; --white:#fff;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',system-ui,sans-serif;color:var(--white);background:var(--blue)}
@@ -27,9 +27,9 @@ a{color:inherit;text-decoration:none}
   position:relative;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;
   align-items:center;padding:20px 40px;
 }
-.nav-links{display:flex;gap:36px;font-weight:600;font-size:15px}
+.nav-links{display:flex;gap:36px;font-weight:600;font-size:15px;white-space:nowrap}
 .nav-links a:hover{opacity:.8}
-.logo{display:block;height:28px}
+.logo{display:block;height:34px}
 .logo img{height:100%;display:block}
 .logo span{font-weight:800;font-size:28px;letter-spacing:-.5px;line-height:1}
 .call{
@@ -41,9 +41,9 @@ a{color:inherit;text-decoration:none}
 /* copy */
 .copy{
   position:absolute;z-index:2;left:40px;top:50%;transform:translateY(-8%);
-  max-width:640px;
+  max-width:none;
 }
-.copy h1{
+.copy h1{white-space:nowrap;
   font-weight:800;color:var(--coral);text-transform:uppercase;
   font-size:clamp(48px,7.2vw,92px);line-height:1;letter-spacing:-1px;
 }
@@ -81,7 +81,7 @@ a{color:inherit;text-decoration:none}
       <a href="#contact">Contact Us</a>
     </div>
     <a class="logo" href="/" aria-label="Cupco">
-      <img src="assets/logo.svg" alt="Cupco" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'cupco'}))">
+      <img src="assets/logo-white.png" alt="Cupco" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'cupco'}))">
     </a>
     <a class="call" href="tel:">Call Now</a>
   </nav>
