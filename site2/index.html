@@ -86,7 +86,9 @@ h2{font-weight:800;font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing
 .wall{background:var(--powder);border-radius:var(--radius);padding:30px 34px}
 .wall h4{font-size:1.2rem;font-weight:700;margin-bottom:6px}
 .wall p{color:#35566b;font-size:.97rem}
-.price-note{margin-top:36px;text-align:center}
+.price-note{margin:36px auto 0;text-align:center;max-width:680px}
+.from{display:inline-flex;align-items:baseline;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-top:26px;background:var(--navy);color:#fff;border-radius:99px;padding:14px 34px;font-size:.95rem}
+.from strong{font:800 1.7rem 'Poppins';color:var(--coral)}
 
 /* ---------- PROCESS ---------- */
 #process{background:var(--powder)}
@@ -109,7 +111,10 @@ h2{font-weight:800;font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing
 .who b{display:block;font:600 .95rem 'Poppins'}.who span{font-size:.82rem;color:var(--muted)}
 .made{margin-top:64px;background:var(--navy);border-radius:var(--radius);padding:44px 34px 36px;color:#fff;text-align:center}
 .made p{font:600 1.1rem 'Poppins';margin-bottom:22px}
-.made img{margin:0 auto;max-height:200px;width:auto}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,260px));justify-content:center;gap:20px}
+.gallery figure{background:#fff;border-radius:18px;padding:18px 18px 14px}
+.gallery img{width:100%;height:auto}
+.gallery figcaption{color:var(--navy);font:600 .88rem 'Poppins';margin-top:8px}
 
 /* ---------- ROI ---------- */
 #roi{background:var(--navy);color:#fff}
@@ -215,7 +220,7 @@ footer a:hover{color:#fff}
   <div class="wrap trust-grid">
     <div class="trust-item"><i><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></i>Fast turnaround</div>
     <div class="trust-item"><i><svg viewBox="0 0 24 24"><path d="m17 3 4 4L7 21H3v-4z"/></svg></i>Free design support</div>
-    <div class="trust-item"><i><svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></i>Low minimums</div>
+    <div class="trust-item"><i><svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg></i>No minimum order</div>
     <div class="trust-item"><i><svg viewBox="0 0 24 24"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13Z"/><circle cx="12" cy="9" r="3"/></svg></i>Made in Australia</div>
   </div>
 </div>
@@ -226,7 +231,8 @@ footer a:hover{color:#fff}
     <div class="center">
       <span class="eyebrow">Pricing</span>
       <h2>Any size. Any design.</h2>
-      <p class="lead">Pick a size and a wall type, tell us how many. The more you order, the less each cup costs, and there are no setup fees.</p>
+      <p class="lead">Pick a size and a wall type, tell us how many. There's no minimum order and no setup fees.</p>
+      <div class="from"><span>Pricing starts at</span><strong>$110 per box</strong><span>that's just 11 cents per cup</span></div>
     </div>
 
     <div class="size-grid">
@@ -255,7 +261,7 @@ footer a:hover{color:#fff}
       <div class="wall"><h4>Single wall</h4><p>Lighter and easier to store. The cost-effective choice for grab-and-go drinks.</p></div>
       <div class="wall"><h4>Double wall</h4><p>Two layers keep drinks hot and hands cool, with a thicker, more premium feel.</p></div>
     </div>
-    <p class="price-note muted">Not sure what you need? Tell us your quantity and we'll send an exact price, usually the same day.</p>
+    <p class="price-note muted">Your price per cup depends on quantity, cup size and wall type. The more you order, the lower the price per cup, so larger runs save you more. Not sure what you need? Tell us your quantity and we'll send an exact price, usually the same day.</p>
   </div>
 </section>
 
@@ -292,8 +298,11 @@ footer a:hover{color:#fff}
       <div class="review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“There were no unexpected setup costs, which made budgeting for the campaign much easier.”</blockquote><div class="who"><div class="av">AT</div><div><b>Angus T.</b><span>Promotional event</span></div></div></div>
     </div>
     <div class="made">
-      <p>A few of the cups we've printed</p>
-      <img src="assets/cups-lineup.webp" alt="Five custom printed Cupco cups in different brand designs">
+      <p>Cups we've printed</p>
+      <div class="gallery">
+        <figure><img src="assets/example-coastal.webp" alt="Custom printed white cup with a blue coastal illustration for Coastal Coffee Co." loading="lazy"><figcaption>Coastal Coffee Co.</figcaption></figure>
+        <!-- more examples to come -->
+      </div>
     </div>
   </div>
 </section>
