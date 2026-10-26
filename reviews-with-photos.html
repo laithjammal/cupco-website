@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* ===================================================================
+   CUPCO CUSTOMER REVIEWS — review-card strip
+   Paste this whole file into a Wix "Embed HTML / iframe" element.
+
+   >>> COLOURS AND FONTS ARE THE BLOCK BELOW. Change these only. <<<
+   =================================================================== */
+:root{
+  --rev-bg:      transparent;  /* sits on whatever Wix section colour is behind it */
+  --rev-card:    #FFFFFF;  /* review card */
+  --rev-text:    #1D2B24;  /* review text */
+  --rev-name:    #17352A;  /* reviewer name */
+  --rev-sub:     #6B7B70;  /* the line under the name */
+  --rev-border:  #E3E8E3;  /* card edge */
+  --rev-star:    #F2A33C;  /* star colour — amber is what people read as a rating */
+
+  --rev-font-body:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --rev-speed:   52s;      /* higher = slower */
+  --rev-card-w:  clamp(260px, 78vw, 330px);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--rev-bg)}
+body{font-family:var(--rev-font-body);-webkit-font-smoothing:antialiased}
+
+.rev{background:var(--rev-bg);padding:8px 0;overflow:hidden}
+
+
+.rev-window{
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 40px,#000 calc(100% - 40px),transparent);
+          mask-image:linear-gradient(to right,transparent,#000 40px,#000 calc(100% - 40px),transparent);
+}
+.rev-track{
+  display:flex;gap:16px;width:max-content;padding:4px 20px;
+  animation:rev-marquee var(--rev-speed) linear infinite;
+}
+.rev-window:hover .rev-track,
+.rev-window:focus-within .rev-track{animation-play-state:paused}
+
+.rev-card{
+  flex:none;width:var(--rev-card-w);margin:0;
+  background:var(--rev-card);border:1px solid var(--rev-border);
+  border-radius:8px;padding:14px 15px 15px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06), 0 6px 18px rgba(0,0,0,.10);
+}
+
+.rev-head{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.rev-avatar{
+  flex:none;position:relative;overflow:hidden;
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:600;font-size:16px;line-height:1;
+}
+/* DEMO PHOTOS — a reviewer with a photo gets class "has-photo ph-<name>".
+   The photo is a small face crop embedded below as a data URI, so this file
+   stays one self-contained paste. The coloured initial stays in the markup
+   (hidden behind the photo) as the fallback — a reviewer WITHOUT a photo
+   (Rohan B. in this demo) just shows the initial, like Google does.
+   To use a real photo/logo: swap the data URI for a hosted image URL.
+   Each reviewer appears TWICE in the markup (the duplicate set keeps the
+   scroll seamless) — update both copies or the face will change mid-loop. */
+.rev-avatar.has-photo{
+  color:transparent;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+.ph-adam{background-image:url(data:image/webp;base64,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)}
+.ph-tahlia{background-image:url(data:image/webp;base64,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)}
+.ph-mirella{background-image:url(data:image/webp;base64,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)}
+.ph-declan{background-image:url(data:image/webp;base64,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)}
+.ph-georgia{background-image:url(data:image/webp;base64,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)}
+.rev-who{min-width:0}
+.rev-name{margin:0;font-size:14px;font-weight:600;color:var(--rev-name);line-height:1.3}
+.rev-sub{margin:1px 0 0;font-size:12px;color:var(--rev-sub);line-height:1.3}
+
+.rev-stars{margin:0 0 7px;line-height:1;letter-spacing:1px}
+.rev-stars span{color:var(--rev-star);font-size:15px}
+
+.rev-quote{
+  margin:0;font-size:13.5px;line-height:1.6;color:var(--rev-text);
+}
+
+@keyframes rev-marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+@media (prefers-reduced-motion: reduce){
+  .rev-track{animation:none;width:auto;overflow-x:auto;padding-bottom:10px}
+  .rev-window{-webkit-mask-image:none;mask-image:none}
+}
+</style>
+</head>
+<body>
+
+<section class="rev" aria-label="Customer reviews">
+  <div class="rev-window">
+    <div class="rev-track">
+      <figure class="rev-card">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-adam" style="background-color:#C75F43">A</span>
+          <div class="rev-who"><p class="rev-name">Adam M.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">Cupco made the whole process easy from fast turnaround, great quality, and exactly what we ordered.</blockquote>
+      </figure>
+      <figure class="rev-card">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-tahlia" style="background-color:#2E6B4F">T</span>
+          <div class="rev-who"><p class="rev-name">Tahlia K.</p><p class="rev-sub">Personal Event</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">The cups looked great and arrived well before our wedding. Exactly what we needed for the day.</blockquote>
+      </figure>
+      <figure class="rev-card">
+        <div class="rev-head">
+          <span class="rev-avatar" style="background-color:#8A6A4B">R</span>
+          <div class="rev-who"><p class="rev-name">Rohan B.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">Our old cups had inconsistent colours. Cupco's printing has been much more consistent.</blockquote>
+      </figure>
+      <figure class="rev-card">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-mirella" style="background-color:#C75F43">M</span>
+          <div class="rev-who"><p class="rev-name">Mirella D.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">The seven day turnaround saved us. Our previous supplier quoted nearly three months for the same job.</blockquote>
+      </figure>
+      <figure class="rev-card">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-declan" style="background-color:#2E6B4F">D</span>
+          <div class="rev-who"><p class="rev-name">Declan M.</p><p class="rev-sub">Promotional Event</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">We needed branded cups quickly for a launch. Cupco delivered on time and made the whole process easy.</blockquote>
+      </figure>
+      <figure class="rev-card">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-georgia" style="background-color:#8A6A4B">G</span>
+          <div class="rev-who"><p class="rev-name">Georgia V.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">The low minimum order meant we could test our new branding without committing to a huge quantity.</blockquote>
+      </figure>
+
+      <!-- duplicate set keeps the loop seamless -->
+      <figure class="rev-card" aria-hidden="true">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-adam" style="background-color:#C75F43">A</span>
+          <div class="rev-who"><p class="rev-name">Adam M.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">Cupco made the whole process easy from fast turnaround, great quality, and exactly what we ordered.</blockquote>
+      </figure>
+      <figure class="rev-card" aria-hidden="true">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-tahlia" style="background-color:#2E6B4F">T</span>
+          <div class="rev-who"><p class="rev-name">Tahlia K.</p><p class="rev-sub">Personal Event</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">The cups looked great and arrived well before our wedding. Exactly what we needed for the day.</blockquote>
+      </figure>
+      <figure class="rev-card" aria-hidden="true">
+        <div class="rev-head">
+          <span class="rev-avatar" style="background-color:#8A6A4B">R</span>
+          <div class="rev-who"><p class="rev-name">Rohan B.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">Our old cups had inconsistent colours. Cupco's printing has been much more consistent.</blockquote>
+      </figure>
+      <figure class="rev-card" aria-hidden="true">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-mirella" style="background-color:#C75F43">M</span>
+          <div class="rev-who"><p class="rev-name">Mirella D.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">The seven day turnaround saved us. Our previous supplier quoted nearly three months for the same job.</blockquote>
+      </figure>
+      <figure class="rev-card" aria-hidden="true">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-declan" style="background-color:#2E6B4F">D</span>
+          <div class="rev-who"><p class="rev-name">Declan M.</p><p class="rev-sub">Promotional Event</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">We needed branded cups quickly for a launch. Cupco delivered on time and made the whole process easy.</blockquote>
+      </figure>
+      <figure class="rev-card" aria-hidden="true">
+        <div class="rev-head">
+          <span class="rev-avatar has-photo ph-georgia" style="background-color:#8A6A4B">G</span>
+          <div class="rev-who"><p class="rev-name">Georgia V.</p><p class="rev-sub">Cafe</p></div>
+        </div>
+        <p class="rev-stars" aria-label="Rated 5 out of 5"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+        <blockquote class="rev-quote">The low minimum order meant we could test our new branding without committing to a huge quantity.</blockquote>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
