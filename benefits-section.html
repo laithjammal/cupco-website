@@ -1,0 +1,164 @@
+<!-- CUPCO "What you get" benefits section — paste the <link>, <style> and <section> into your page.
+     Photos: set each card's <img src> (see images/benefits/…). Until then the soft tinted placeholder shows. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  .cc-benefits{
+    --cc-green:#17493a; --cc-green-soft:#cfdccf; --cc-orange:#d4623f;
+    --cc-bg:#fbf7ee; --cc-card:#fdfaf3; --cc-text:#5a5a52;
+    position:relative; overflow:hidden; background:var(--cc-bg);
+    padding:clamp(40px,6vw,64px) clamp(16px,3vw,24px) clamp(40px,6vw,56px);
+    font-family:'Jost',system-ui,sans-serif; color:var(--cc-text);
+  }
+  .cc-benefits *{box-sizing:border-box}
+  .cc-leaf{position:absolute;top:-6px;right:-10px;width:clamp(150px,22vw,300px);opacity:.55;pointer-events:none}
+  .cc-head{text-align:center;position:relative;margin-bottom:clamp(24px,4vw,36px)}
+  .cc-eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--cc-green);margin:0 0 6px;font-weight:400}
+  .cc-head h2{font-family:'Playfair Display',serif;font-weight:700;color:var(--cc-green);
+    font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px}
+  .cc-sub{font-size:clamp(11px,1.4vw,14px);letter-spacing:.3em;text-transform:uppercase;color:var(--cc-green);margin:0;font-weight:400}
+  .cc-rule{display:block;width:104px;height:3px;border-radius:2px;background:var(--cc-orange);margin:14px auto 0}
+
+  .cc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;max-width:1280px;margin:0 auto}
+  .cc-card{grid-column:span 3;background:var(--cc-card);border-radius:6px;overflow:visible;
+    box-shadow:0 2px 14px rgba(60,50,20,.06);display:flex;flex-direction:column}
+  .cc-card.wide{grid-column:span 4}
+  .cc-media{position:relative;height:230px;border-radius:6px 6px 0 0;
+    background:linear-gradient(135deg,#e9dfc9,#c9d6c6)}
+  .cc-card.wide .cc-media{height:214px}
+  .cc-media img{width:100%;height:100%;object-fit:cover;display:block;border-radius:6px 6px 0 0}
+  .cc-num{position:absolute;left:14px;bottom:-4px;transform:translateY(-52px);
+    width:34px;height:34px;border-radius:50%;background:var(--cc-green-soft);color:var(--cc-green);
+    font-size:15px;font-weight:500;display:grid;place-items:center;z-index:2}
+  .cc-icon{position:absolute;left:14px;bottom:-30px;width:54px;height:54px;border-radius:50%;
+    background:var(--cc-green);display:grid;place-items:center;z-index:2}
+  .cc-icon.orange{background:var(--cc-orange)}
+  .cc-icon svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .cc-body{padding:40px 18px 22px 18px;flex:1}
+  .cc-body h3{font-family:'Playfair Display',serif;font-weight:600;color:var(--cc-green);
+    font-size:clamp(19px,1.9vw,23px);line-height:1.2;margin:0 0 12px;letter-spacing:-.005em}
+  .cc-body p{margin:0;font-size:15px;line-height:1.45;font-weight:300}
+  .cc-body p br{display:block}
+
+  @media (max-width:980px){
+    .cc-card,.cc-card.wide{grid-column:span 6}
+    .cc-card.wide:last-child{grid-column:span 12}
+  }
+  @media (max-width:560px){
+    .cc-card,.cc-card.wide,.cc-card.wide:last-child{grid-column:span 12}
+    .cc-media,.cc-card.wide .cc-media{height:200px}
+  }
+</style>
+
+<section class="cc-benefits" aria-labelledby="cc-benefits-title">
+  <!-- decorative leaf sprig -->
+  <svg class="cc-leaf" viewBox="0 0 300 160" fill="none" stroke="#7d8f76" stroke-width="1" aria-hidden="true">
+    <path d="M300 10C230 30 150 60 60 150"/>
+    <g fill="#e9efe4" fill-opacity=".6">
+      <path d="M255 22c-6-22-28-30-44-28 2 18 20 34 44 28z"/>
+      <path d="M215 40c-18-14-42-8-54 6 12 14 38 16 54-6z"/>
+      <path d="M180 62c-22-4-40 10-44 26 18 6 40-2 44-26z"/>
+      <path d="M140 86c-20 0-36 16-36 30 18 2 36-8 36-30z"/>
+      <path d="M262 52c14-16 12-38 0-50-14 16-12 38 0 50z"/>
+      <path d="M222 80c14-14 14-34 4-46-14 14-14 34-4 46z"/>
+      <path d="M186 108c12-12 14-30 6-42-12 12-14 30-6 42z"/>
+    </g>
+  </svg>
+
+  <header class="cc-head">
+    <p class="cc-eyebrow">What you get</p>
+    <h2 id="cc-benefits-title">More than just coffee cups.</h2>
+    <p class="cc-sub">Real benefits for your business.</p>
+    <span class="cc-rule"></span>
+  </header>
+
+  <div class="cc-grid">
+
+    <article class="cc-card">
+      <div class="cc-media">
+        <img src="images/benefits/01-box.jpg" alt="Branded CUPCO cups packed in a kraft box" loading="lazy" onerror="this.remove()">
+        <span class="cc-num">01</span>
+        <span class="cc-icon"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>Look like a proper brand without betting the budget.</h3>
+        <p>Low minimum orders<br>from just 500 cups.</p>
+      </div>
+    </article>
+
+    <article class="cc-card">
+      <div class="cc-media">
+        <img src="images/benefits/02-cup.jpg" alt="Cream CUPCO cup with leaf pattern and green lid" loading="lazy" onerror="this.remove()">
+        <span class="cc-num" style="background:#f3d6c8;color:var(--cc-orange)">02</span>
+        <span class="cc-icon orange"><svg viewBox="0 0 24 24"><path d="M13 2 5 13h6l-1 9 8-11h-6z"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>Never get caught short mid-service, or have to move the event date.</h3>
+        <p>Fast 10-day turnaround,<br>printed locally in Australia.</p>
+      </div>
+    </article>
+
+    <article class="cc-card">
+      <div class="cc-media">
+        <img src="images/benefits/03-stacks.jpg" alt="Stacks of CUPCO cups in green, terracotta and cream" loading="lazy" onerror="this.remove()">
+        <span class="cc-num">03</span>
+        <span class="cc-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v4c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 10v4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4M5 14v4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>Cash that stays in your business, not in a storeroom.</h3>
+        <p>Order only what you need,<br>when you need it.</p>
+      </div>
+    </article>
+
+    <article class="cc-card">
+      <div class="cc-media">
+        <img src="images/benefits/04-proof.jpg" alt="Digital cup proof on a laptop screen" loading="lazy" onerror="this.remove()">
+        <span class="cc-num" style="background:#f3d6c8;color:var(--cc-orange)">04</span>
+        <span class="cc-icon orange"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 1.6-2-.5-1.2.2-2.4 1.6-2.4H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7.5" r="1"/><circle cx="14.5" cy="7.5" r="1"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>Know exactly what you’re getting before you spend a cent.</h3>
+        <p>Free digital proof you sign off.</p>
+      </div>
+    </article>
+
+    <article class="cc-card wide">
+      <div class="cc-media">
+        <img src="images/benefits/05-line.jpg" alt="Row of green CUPCO cups on a counter" loading="lazy" onerror="this.remove()">
+        <span class="cc-num">05</span>
+        <span class="cc-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.8 6.3.8-4.6 4.4 1.2 6.3L12 17.2 6.4 20.3l1.2-6.3L3 9.6l6.3-.8z"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>Your brand looks the same on every cup, every order.</h3>
+        <p>Full CMYK colour and consistent<br>local printing.</p>
+      </div>
+    </article>
+
+    <article class="cc-card wide">
+      <div class="cc-media">
+        <img src="images/benefits/06-packing.jpg" alt="Packing CUPCO cups into a branded box" loading="lazy" onerror="this.remove()">
+        <span class="cc-num" style="background:#f3d6c8;color:var(--cc-orange)">06</span>
+        <span class="cc-icon orange"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>One less job on your plate.</h3>
+        <p>We make your logo print-ready,<br>and handle the rest.</p>
+      </div>
+    </article>
+
+    <article class="cc-card wide">
+      <div class="cc-media">
+        <img src="images/benefits/07-desk.jpg" alt="Green CUPCO cup on a desk next to a laptop" loading="lazy" onerror="this.remove()">
+        <span class="cc-num">07</span>
+        <span class="cc-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+      </div>
+      <div class="cc-body">
+        <h3>Your brand gets seen every day, not binned.</h3>
+        <p>A cup travels from the counter to the boardroom<br>to the reception table.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
