@@ -6,128 +6,166 @@
 <title>Cupco – For Cafés</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fbf7f4;
-    --navy: #1f3a52;
-    --muted: #5d6e7e;
-    --salmon: #f4a193;
-    --salmon-text: #f0907f;
-    --sky: #a9d8e6;
-    --card: #ffffff;
+    --cream: #fcf8f0;
+    --card: #fdf9f1;
+    --forest: #1b4a3a;
+    --forest-deep: #153a2d;
+    --terracotta: #d96a50;
+    --blush: #f6dcd3;
+    --mint: #d5e4da;
+    --text: #3d4a44;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg);
-    color: var(--navy);
-    font-family: "Inter", system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--forest);
+    font-family: "Jost", system-ui, sans-serif;
   }
+
   .cafes {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 48px 28px 56px;
+    padding: 36px 24px 64px;
   }
-  .eyebrow {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.2em;
+
+  /* header */
+  .head { text-align: center; margin-bottom: 44px; }
+  .eyebrow, .sub {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--salmon-text);
-    margin-bottom: 20px;
+    color: var(--forest);
   }
   h2 {
-    font-family: "Poppins", sans-serif;
+    font-family: "Playfair Display", serif;
     font-weight: 700;
-    font-size: clamp(34px, 5.4vw, 60px);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    max-width: 780px;
-    margin-bottom: 24px;
+    font-size: clamp(36px, 6vw, 62px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--forest);
+    margin: 8px auto 14px;
+    max-width: 820px;
   }
-  .lead {
-    font-size: clamp(17px, 2vw, 20px);
-    line-height: 1.7;
-    color: var(--muted);
-    max-width: 620px;
-    margin-bottom: 44px;
+  .rule {
+    display: block;
+    width: 104px;
+    height: 3px;
+    background: var(--terracotta);
+    margin: 18px auto 0;
   }
+
+  /* cards */
   .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
   }
   .card {
+    position: relative;
     background: var(--card);
-    border-radius: 28px;
-    padding: 24px 24px 28px;
-    box-shadow: 0 10px 30px rgba(31, 58, 82, 0.06);
+    border-radius: 6px;
+    box-shadow: 0 2px 14px rgba(27, 74, 58, 0.08);
+    overflow: visible;
   }
-  .icon {
-    width: 48px;
-    height: 48px;
+  .photo {
+    position: relative;
+    height: 230px;
+    border-radius: 6px 6px 0 0;
+    background-color: var(--forest);
+    background-size: cover;
+    background-position: center;
+  }
+  /* Swap these for real photos, e.g.
+     .p1 { background-image: url("images/cups-in-box.jpg"); } */
+  .p1 { background-image: linear-gradient(135deg, #234f3f, #153a2d 60%, #3a6b57); }
+  .p2 { background-image: linear-gradient(135deg, #e9c9b8, #d96a50 55%, #a94a35); }
+  .p3 { background-image: linear-gradient(135deg, #efe6d3, #b9ccbd 55%, #1b4a3a); }
+  .photo::after { /* faint leaf motif until photos are added */
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 22px 46px at 20% 30%, rgba(255,255,255,.14) 98%, transparent) ,
+      radial-gradient(ellipse 18px 40px at 60% 65%, rgba(255,255,255,.12) 98%, transparent),
+      radial-gradient(ellipse 26px 54px at 85% 25%, rgba(255,255,255,.10) 98%, transparent);
+    border-radius: inherit;
+  }
+  .num {
+    position: absolute;
+    left: 16px; bottom: 14px;
+    z-index: 1;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    background: var(--sky);
-    display: grid;
-    place-items: center;
-    margin-bottom: 22px;
+    display: grid; place-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--mint);
+    color: var(--forest);
   }
-  .icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--navy);
-    fill: none;
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .n2 .num { background: var(--blush); color: var(--terracotta); }
+  .badge {
+    position: absolute;
+    left: 14px;
+    top: 200px;           /* straddles the photo edge */
+    z-index: 2;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--forest);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
   }
-  .card h3 {
-    font-family: "Poppins", sans-serif;
+  .n2 .badge { background: var(--terracotta); }
+  .badge svg {
+    width: 22px; height: 22px;
+    fill: none; stroke: #fff; stroke-width: 1.6;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .body { padding: 44px 18px 26px; }
+  .body h3 {
+    font-family: "Playfair Display", serif;
     font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 8px;
+    font-size: 23px;
+    line-height: 1.22;
+    color: var(--forest);
+    margin-bottom: 12px;
   }
-  .card p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--muted);
-  }
-  .cta-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 40px;
-  }
-  .btn {
-    display: inline-block;
-    background: var(--salmon);
-    color: var(--navy);
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    text-decoration: none;
-    padding: 18px 36px;
-    border-radius: 999px;
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(244, 161, 147, 0.45);
-  }
-  .guarantee strong {
-    display: block;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-  }
-  .guarantee a {
-    display: inline-block;
-    margin-top: 4px;
+  .body p {
     font-size: 15px;
-    color: var(--muted);
+    line-height: 1.55;
+    color: var(--text);
   }
+
+  /* CTA – terracotta bar + dark strip, as on the live site */
+  .cta {
+    margin-top: 56px;
+    text-align: center;
+  }
+  .cta a {
+    display: block;
+    background: var(--terracotta);
+    color: #fff;
+    text-decoration: none;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    padding: 12px 16px;
+    transition: background .15s ease;
+  }
+  .cta a:hover { background: #c75d44; }
+  .cta .strip {
+    background: #262626;
+    color: var(--terracotta);
+    font-size: 17px;
+    letter-spacing: 0.04em;
+    padding: 6px 16px 8px;
+  }
+  .cta .strip a {
+    display: inline; background: none; padding: 0; font-size: inherit;
+    color: inherit; text-decoration: underline;
+  }
+
   @media (max-width: 860px) {
     .cards { grid-template-columns: 1fr; }
   }
@@ -135,42 +173,51 @@
 </head>
 <body>
   <section class="cafes">
-    <p class="eyebrow">For cafés</p>
-    <h2>Every coffee you sell is a free ad for your café</h2>
-    <p class="lead">Your customers carry your cup around the neighbourhood, in front of people who could walk through your door tomorrow.</p>
+    <header class="head">
+      <p class="eyebrow">For cafés</p>
+      <h2>Every coffee you sell is a free ad for your café.</h2>
+      <p class="sub">Your cup, seen around the neighbourhood</p>
+      <span class="rule"></span>
+    </header>
 
     <div class="cards">
-      <article class="card">
-        <div class="icon">
+      <article class="card n1">
+        <div class="photo p1"><span class="num">01</span></div>
+        <div class="badge">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M15.5 4.8a3.5 3.5 0 0 1 0 6.4"/><path d="M18 14.4c2 .8 3.5 2.6 3.5 5.6"/></svg>
         </div>
-        <h3>New customers, no ad spend</h3>
-        <p>1,000 coffees a week means 1,000 locals seeing your name.</p>
+        <div class="body">
+          <h3>New customers without the ad spend.</h3>
+          <p>1,000 coffees a week means<br>1,000 locals seeing your name.</p>
+        </div>
       </article>
 
-      <article class="card">
-        <div class="icon">
+      <article class="card n2">
+        <div class="photo p2"><span class="num">02</span></div>
+        <div class="badge">
           <svg viewBox="0 0 24 24"><path d="M12 2.5l2.4 1.7 2.9-.2 1.1 2.7 2.5 1.5-.8 2.8 1 2.7-2 2.1-.4 2.9-2.8.6L12 21.5l-2.4-1.7-2.9.2-1.1-2.7-2.5-1.5.8-2.8-1-2.7 2-2.1.4-2.9 2.8-.6z"/><path d="M8.5 12.2l2.5 2.5 4.5-5"/></svg>
         </div>
-        <h3>Look like the brand</h3>
-        <p>Stand next to the chain down the road and look like you belong.</p>
+        <div class="body">
+          <h3>Look like the brand down the road.</h3>
+          <p>Stand next to the chain<br>and look like you belong.</p>
+        </div>
       </article>
 
-      <article class="card">
-        <div class="icon">
+      <article class="card n1">
+        <div class="photo p3"><span class="num">03</span></div>
+        <div class="badge">
           <svg viewBox="0 0 24 24"><path d="M12 2.8l8 4.2v10l-8 4.2-8-4.2V7z"/><path d="M4 7l8 4.2L20 7"/><path d="M12 11.2v10"/></svg>
         </div>
-        <h3>No hassle, no pallets</h3>
-        <p>We design it, make it in Australia and ship it as you need it, with matching lids.</p>
+        <div class="body">
+          <h3>No hassle, no pallets.</h3>
+          <p>We design it, make it in Australia<br>and ship it as you need it, with matching lids.</p>
+        </div>
       </article>
     </div>
 
-    <div class="cta-row">
-      <a class="btn" href="#mockup">Get your free cup mockup</a>
-      <div class="guarantee">
-        <strong>Doesn't match your approved proof? We reprint it free.</strong>
-        <a href="#reprint-policy">See our reprint policy</a>
-      </div>
+    <div class="cta">
+      <a href="#mockup">Click Here to Get Your Free Cup Mockup</a>
+      <p class="strip">Doesn't match your approved proof? We reprint it free. | <a href="#reprint-policy">See our reprint policy</a></p>
     </div>
   </section>
 </body>
