@@ -1,9 +1,15 @@
-Size,Supplier,Qty,Cup unit ex GST,Lid unit ex GST,Cups+lids ex GST,Shipping ex GST,Subtotal ex GST,GST,Total inc GST,Cost/piece ex GST,Cost/piece inc GST,Notes
-8oz,Vista Corporate,30000,0.3216,0,9649.09,0,9649.09,964.91,10614,0.3216,0.3538,Lid + standard delivery included; inc-GST quote
-8oz,bioSupply,30000,0.1816,0.0494,6929.27,0,6929.27,692.93,7622.2,0.231,0.2541,Delivery included per BQ-1181; lids at $0.0494 each
-8oz,bioSupply + email freight,30000,0.1816,0.0494,6929.27,498.88,7428.15,742.81,8170.96,0.2476,0.2724,If email TNT freight also applies (treated as ex GST)
-12oz,Vista Corporate,50000,0.3362,0,16809.09,0,16809.09,1680.91,18490,0.3362,0.3698,Lid + standard delivery included; inc-GST quote
-12oz,bioSupply,50000,0.1878,0.0494,11860.63,0,11860.63,1186.06,13046.69,0.2372,0.2609,Delivery included per BQ-1181; lids at $0.0494 each
-12oz,bioSupply + email freight,50000,0.1878,0.0494,11860.63,981.72,12842.35,1284.23,14126.58,0.2568,0.2825,If email TNT freight also applies (treated as ex GST)
-16oz,Vista Corporate,20000,0.358,0,7160.0,0,7160.0,716.0,7876,0.358,0.3938,Lid + standard delivery included; inc-GST quote
-16oz,bioSupply,10000,0.2418,0.0494,2912.0,0,2912.0,291.2,3203.2,0.2912,0.3203,Delivery included per BQ-1181; lids at $0.0494 each
+Size,Supplier,Qty,Cup unit ex GST,Lid unit ex GST,Cups+lids ex GST,Shipping ex GST,Subtotal ex GST,GST,Total inc GST,Cost/piece ex GST,Cost/piece inc GST,Notes,Source,Link
+8oz,Vista Corporate,30000,0.3216,0,9649.09,0,9649.09,964.91,10614,0.3216,0.3538,Lid + standard delivery included; inc-GST quote,Your quote,
+8oz,bioSupply,30000,0.1816,0.0494,6929.27,0,6929.27,692.93,7622.2,0.231,0.2541,Delivery included per BQ-1181; lids at $0.0494 each,Your quote,
+8oz,bioSupply + email freight,30000,0.1816,0.0494,6929.27,498.88,7428.15,742.81,8170.96,0.2476,0.2724,If email TNT freight also applies (treated as ex GST),Your quote,
+12oz,Vista Corporate,50000,0.3362,0,16809.09,0,16809.09,1680.91,18490,0.3362,0.3698,Lid + standard delivery included; inc-GST quote,Your quote,
+12oz,bioSupply,50000,0.1878,0.0494,11860.63,0,11860.63,1186.06,13046.69,0.2372,0.2609,Delivery included per BQ-1181; lids at $0.0494 each,Your quote,
+12oz,bioSupply + email freight,50000,0.1878,0.0494,11860.63,981.72,12842.35,1284.23,14126.58,0.2568,0.2825,If email TNT freight also applies (treated as ex GST),Your quote,
+16oz,Vista Corporate,20000,0.358,0,7160.0,0,7160.0,716.0,7876,0.358,0.3938,Lid + standard delivery included; inc-GST quote,Your quote,
+16oz,bioSupply,10000,0.2418,0.0494,2912.0,0,2912.0,291.2,3203.2,0.2912,0.3203,Delivery included per BQ-1181; lids at $0.0494 each,Your quote,
+8oz,WF Plastic (premium branded),10000,0.108,0.049,1570.0,,1570.0,,,0.157,0.1727,"Listed 10,000 qty only ($1,080 ex GST); sipper lid $49/1,000 ex GST; delivery not included (from $14.95, pallet freight extra); print spec not stated - confirm full colour",Web list price (indicative),https://wholesale.wfplastic.com.au/p/Custom-Printing/Premium-Printed-Packaging/Premium-Printed-Single-Wall-Cups/Premium-Branded-8oz-Single-Wall-Coffee-Cups/SW8-PREMIUM-BRANDED
+12oz,WF Plastic (premium branded),10000,0.1267,0.049,1757.0,,1757.0,,,0.1757,0.1933,"Listed 10,000 qty only ($1,267 ex GST); sipper lid $49/1,000 ex GST; delivery not included; print spec not stated",Web list price (indicative),https://wholesale.wfplastic.com.au/p/Custom-Printing/Printed-Paper-Cups/Printed-Single-Wall-Cups/12oz-Custom-Printed-Single-Wall-Cups-10K/WBSINGLE12-CUSTOM-10K
+16oz,WF Plastic (premium branded),10000,0.142,0.049,1910.0,,1910.0,,,0.191,0.2101,"Listed 10,000 qty only ($1,420 ex GST); lid price assumed same as sipper lid - 16oz is 90mm so confirm; delivery not included",Web list price (indicative),https://wholesale.wfplastic.com.au/p/Custom-Printing/Premium-Printed-Packaging/Premium-Printed-Single-Wall-Cups/Premium-Branded-16oz-Single-Wall-Coffee-Cups/SW16-PREMIUM-BRANDED
+12oz,Custom Coffee Cups,10000,0.2298,,2298.0,,2298.0,,,0.2298,0.2528,"10,000 qty $2,298 ex GST, full colour edge-to-edge; CUPS ONLY - lids not priced on page; delivery at checkout; 500 min; no 30k/50k tier listed",Web list price (indicative),https://customcoffeecups.com.au/product/12oz-medium-custom-coffee-cups/
+8oz/12oz,bioSupply website (entry list price),1000,0.335,0.044,379.0,,379.0,,,0.379,0.4169,"Entry price 'from $335/1,000' at 1,000 min; drops steeply at 2,500/5,000/10,000 - your actual quote (about $0.18-0.19) is the volume price; lids from $44/1,000",Web list price (indicative),https://www.biosupply.com.au/custom-coffee-cups/
+8oz/12oz/16oz,Coffee Cup Supply (starting price),,0.055,,,,,,,0.055,0.0605,"'From $0.055' ex GST for single wall - volume-tier starting price, not a quote; bands 500-1k / 1-5k / 5-20k / 20k+; lids and freight not priced; 500 min custom print; quote within the hour",Web list price (indicative),https://coffeecupsupply.com.au/
